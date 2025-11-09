@@ -1,7 +1,11 @@
-import './App.css'
+import { ThemeProvider } from './theme/ThemeProvider';
 
 function App() {
-  return ()
+    return (
+        <ThemeProvider>
+            <div>Hello App!</div>
+        </ThemeProvider>
+    );
 }
 
-export default App
+export default App;
