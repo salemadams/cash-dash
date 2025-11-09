@@ -4,11 +4,13 @@ import { Outlet } from 'react-router-dom';
 
 export default function Layout() {
     return (
-        <SidebarProvider>
+        <SidebarProvider className="h-full">
             <AppSidebar />
-            <main className="w-full">
+            <main className="w-full h-full flex flex-col overflow-hidden">
                 <SidebarTrigger />
-                <Outlet />
+                <div className="flex-1 overflow-auto">
+                    <Outlet />
+                </div>
             </main>
         </SidebarProvider>
     );

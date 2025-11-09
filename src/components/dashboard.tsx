@@ -2,8 +2,8 @@ import { Card, CardHeader } from './ui/card';
 
 const Dashboard = () => {
     return (
-        <div className="flex flex-col h-full m-5 gap-6">
-            <div className="flex flex-row gap-6 justify-between h-1/5">
+        <div className="flex flex-col h-full p-5 gap-6">
+            <div className="flex flex-row gap-6 justify-between flex-[1]">
                 <Card className="w-full h-full">
                     <CardHeader>
                         <p className="font-bold text-2xl">Income</p>
@@ -20,8 +20,8 @@ const Dashboard = () => {
                     </CardHeader>
                 </Card>
             </div>
-            <Card className="w-full h-2/5"></Card>
-            <Card className="w-full h-2/5"></Card>
+            <Card className="w-full flex-[2]"></Card>
+            <Card className="w-full flex-[2]"></Card>
         </div>
     );
 };
