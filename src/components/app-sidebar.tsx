@@ -49,18 +49,30 @@ const items = [
 export function AppSidebar() {
     return (
         <Sidebar>
-            <SidebarHeader>Cash Dash</SidebarHeader>
+            <SidebarHeader>
+                <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span className="text-xl font-bold">CD</span>
+                </div>
+                <span className="text-xl font-bold">Cash Dash</span>
+            </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
-                                <SidebarMenuItem key={item.title}>
+                                <SidebarMenuItem
+                                    className="pr-2 pl-2"
+                                    key={item.title}
+                                >
                                     <SidebarMenuButton
+                                        className="pl-8 text-md"
                                         size="lg"
                                         asChild
                                     >
-                                        <Link to={item.url}>
+                                        <Link
+                                            to={item.url}
+                                            className="space-x-2"
+                                        >
                                             <item.icon />
                                             <span className="text-md">
                                                 {item.title}
