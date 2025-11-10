@@ -1,4 +1,5 @@
-import { Card, CardHeader } from '../ui/card';
+import { Card, CardContent, CardHeader } from '../ui/card';
+import RecentTransactions from './recent-transactions/recent-transactions';
 import TransactionCards from './transaction-cards';
 
 const Dashboard = () => {
@@ -18,6 +19,9 @@ const Dashboard = () => {
                         Recent Transactions
                     </p>
                 </CardHeader>
+                <CardContent>
+                    <RecentTransactions/>
+                </CardContent>
             </Card>
         </div>
     );
