@@ -1,494 +1,494 @@
 {
-  "transactions": [
-    {
-      "id": 1,
-      "date": "2025-01-08",
-      "amount": 3500.00,
-      "type": "income",
-      "category": "salary",
-      "description": "Monthly salary",
-      "merchant": "Tech Corp Inc.",
-      "paymentMethod": "direct deposit"
-    },
-    {
-      "id": 2,
-      "date": "2025-01-07",
-      "amount": -45.50,
-      "type": "expense",
-      "category": "food",
-      "description": "Grocery shopping",
-      "merchant": "Whole Foods",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 3,
-      "date": "2025-01-07",
-      "amount": -15.99,
-      "type": "expense",
-      "category": "entertainment",
-      "description": "Netflix subscription",
-      "merchant": "Netflix",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 4,
-      "date": "2025-01-06",
-      "amount": -89.99,
-      "type": "expense",
-      "category": "entertainment",
-      "description": "Concert tickets",
-      "merchant": "Ticketmaster",
-      "paymentMethod": "debit card"
-    },
-    {
-      "id": 5,
-      "date": "2025-01-05",
-      "amount": -1200.00,
-      "type": "expense",
-      "category": "rent",
-      "description": "January rent payment",
-      "merchant": "Property Management Co.",
-      "paymentMethod": "bank transfer"
-    },
-    {
-      "id": 6,
-      "date": "2025-01-05",
-      "amount": -150.00,
-      "type": "expense",
-      "category": "utilities",
-      "description": "Electric bill",
-      "merchant": "City Power & Light",
-      "paymentMethod": "auto-pay"
-    },
-    {
-      "id": 7,
-      "date": "2025-01-04",
-      "amount": -32.50,
-      "type": "expense",
-      "category": "food",
-      "description": "Dinner with friends",
-      "merchant": "Italian Bistro",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 8,
-      "date": "2025-01-03",
-      "amount": -12.99,
-      "type": "expense",
-      "category": "entertainment",
-      "description": "Spotify Premium",
-      "merchant": "Spotify",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 9,
-      "date": "2025-01-03",
-      "amount": -65.00,
-      "type": "expense",
-      "category": "transportation",
-      "description": "Gas fill-up",
-      "merchant": "Shell",
-      "paymentMethod": "debit card"
-    },
-    {
-      "id": 10,
-      "date": "2025-01-02",
-      "amount": -250.00,
-      "type": "expense",
-      "category": "shopping",
-      "description": "Winter clothes",
-      "merchant": "H&M",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 11,
-      "date": "2025-01-01",
-      "amount": -80.00,
-      "type": "expense",
-      "category": "health",
-      "description": "Gym membership",
-      "merchant": "Planet Fitness",
-      "paymentMethod": "auto-pay"
-    },
-    {
-      "id": 12,
-      "date": "2024-12-28",
-      "amount": -156.75,
-      "type": "expense",
-      "category": "food",
-      "description": "Weekly groceries",
-      "merchant": "Trader Joe's",
-      "paymentMethod": "debit card"
-    },
-    {
-      "id": 13,
-      "date": "2024-12-27",
-      "amount": 500.00,
-      "type": "income",
-      "category": "freelance",
-      "description": "Website project payment",
-      "merchant": "Client ABC",
-      "paymentMethod": "PayPal"
-    },
-    {
-      "id": 14,
-      "date": "2024-12-26",
-      "amount": -45.00,
-      "type": "expense",
-      "category": "transportation",
-      "description": "Uber rides",
-      "merchant": "Uber",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 15,
-      "date": "2024-12-25",
-      "amount": -300.00,
-      "type": "expense",
-      "category": "shopping",
-      "description": "Christmas gifts",
-      "merchant": "Amazon",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 16,
-      "date": "2024-12-23",
-      "amount": -89.99,
-      "type": "expense",
-      "category": "utilities",
-      "description": "Internet service",
-      "merchant": "Comcast",
-      "paymentMethod": "auto-pay"
-    },
-    {
-      "id": 17,
-      "date": "2024-12-20",
-      "amount": -125.00,
-      "type": "expense",
-      "category": "health",
-      "description": "Dental checkup",
-      "merchant": "Smile Dental",
-      "paymentMethod": "insurance copay"
-    },
-    {
-      "id": 18,
-      "date": "2024-12-18",
-      "amount": -55.00,
-      "type": "expense",
-      "category": "food",
-      "description": "Restaurant lunch",
-      "merchant": "Chipotle",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 19,
-      "date": "2024-12-15",
-      "amount": 3500.00,
-      "type": "income",
-      "category": "salary",
-      "description": "Monthly salary",
-      "merchant": "Tech Corp Inc.",
-      "paymentMethod": "direct deposit"
-    },
-    {
-      "id": 20,
-      "date": "2024-12-14",
-      "amount": -42.50,
-      "type": "expense",
-      "category": "entertainment",
-      "description": "Movie tickets and snacks",
-      "merchant": "AMC Theatres",
-      "paymentMethod": "debit card"
-    },
-    {
-      "id": 21,
-      "date": "2024-12-12",
-      "amount": -175.00,
-      "type": "expense",
-      "category": "shopping",
-      "description": "New running shoes",
-      "merchant": "Nike Store",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 22,
-      "date": "2024-12-10",
-      "amount": -68.00,
-      "type": "expense",
-      "category": "food",
-      "description": "Takeout dinner",
-      "merchant": "Thai House",
-      "paymentMethod": "cash"
-    },
-    {
-      "id": 23,
-      "date": "2024-12-08",
-      "amount": -1200.00,
-      "type": "expense",
-      "category": "rent",
-      "description": "December rent payment",
-      "merchant": "Property Management Co.",
-      "paymentMethod": "bank transfer"
-    },
-    {
-      "id": 24,
-      "date": "2024-12-05",
-      "amount": -135.00,
-      "type": "expense",
-      "category": "utilities",
-      "description": "Electric bill",
-      "merchant": "City Power & Light",
-      "paymentMethod": "auto-pay"
-    },
-    {
-      "id": 25,
-      "date": "2024-12-03",
-      "amount": -95.00,
-      "type": "expense",
-      "category": "food",
-      "description": "Grocery shopping",
-      "merchant": "Safeway",
-      "paymentMethod": "debit card"
-    },
-    {
-      "id": 26,
-      "date": "2024-12-01",
-      "amount": -50.00,
-      "type": "expense",
-      "category": "transportation",
-      "description": "Gas",
-      "merchant": "Chevron",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 27,
-      "date": "2024-11-28",
-      "amount": -220.00,
-      "type": "expense",
-      "category": "shopping",
-      "description": "Black Friday shopping",
-      "merchant": "Best Buy",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 28,
-      "date": "2024-11-25",
-      "amount": -150.00,
-      "type": "expense",
-      "category": "food",
-      "description": "Thanksgiving dinner groceries",
-      "merchant": "Whole Foods",
-      "paymentMethod": "debit card"
-    },
-    {
-      "id": 29,
-      "date": "2024-11-20",
-      "amount": 3500.00,
-      "type": "income",
-      "category": "salary",
-      "description": "Monthly salary",
-      "merchant": "Tech Corp Inc.",
-      "paymentMethod": "direct deposit"
-    },
-    {
-      "id": 30,
-      "date": "2024-11-18",
-      "amount": -75.00,
-      "type": "expense",
-      "category": "entertainment",
-      "description": "Video game purchase",
-      "merchant": "Steam",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 31,
-      "date": "2024-11-15",
-      "amount": 250.00,
-      "type": "income",
-      "category": "freelance",
-      "description": "Logo design project",
-      "merchant": "Client XYZ",
-      "paymentMethod": "Venmo"
-    },
-    {
-      "id": 32,
-      "date": "2024-11-12",
-      "amount": -35.00,
-      "type": "expense",
-      "category": "food",
-      "description": "Coffee and pastries",
-      "merchant": "Starbucks",
-      "paymentMethod": "app payment"
-    },
-    {
-      "id": 33,
-      "date": "2024-11-10",
-      "amount": -1200.00,
-      "type": "expense",
-      "category": "rent",
-      "description": "November rent payment",
-      "merchant": "Property Management Co.",
-      "paymentMethod": "bank transfer"
-    },
-    {
-      "id": 34,
-      "date": "2024-11-08",
-      "amount": -120.00,
-      "type": "expense",
-      "category": "utilities",
-      "description": "Electric bill",
-      "merchant": "City Power & Light",
-      "paymentMethod": "auto-pay"
-    },
-    {
-      "id": 35,
-      "date": "2024-11-05",
-      "amount": -85.50,
-      "type": "expense",
-      "category": "food",
-      "description": "Weekly groceries",
-      "merchant": "Trader Joe's",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 36,
-      "date": "2024-11-02",
-      "amount": -60.00,
-      "type": "expense",
-      "category": "transportation",
-      "description": "Gas fill-up",
-      "merchant": "Shell",
-      "paymentMethod": "debit card"
-    },
-    {
-      "id": 37,
-      "date": "2024-11-01",
-      "amount": -29.99,
-      "type": "expense",
-      "category": "entertainment",
-      "description": "Xbox Game Pass",
-      "merchant": "Microsoft",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 38,
-      "date": "2024-10-28",
-      "amount": -145.00,
-      "type": "expense",
-      "category": "shopping",
-      "description": "Halloween decorations",
-      "merchant": "Target",
-      "paymentMethod": "debit card"
-    },
-    {
-      "id": 39,
-      "date": "2024-10-25",
-      "amount": -200.00,
-      "type": "expense",
-      "category": "health",
-      "description": "Doctor visit copay",
-      "merchant": "Family Medical",
-      "paymentMethod": "credit card"
-    },
-    {
-      "id": 40,
-      "date": "2024-10-20",
-      "amount": 3500.00,
-      "type": "income",
-      "category": "salary",
-      "description": "Monthly salary",
-      "merchant": "Tech Corp Inc.",
-      "paymentMethod": "direct deposit"
-    },
-    {
-      "id": 41,
-      "date": "2025-01-08",
-      "amount": 500.00,
-      "type": "savings",
-      "description": "Emergency fund contribution",
-      "merchant": "Savings Account",
-      "paymentMethod": "bank transfer"
-    },
-    {
-      "id": 42,
-      "date": "2025-01-05",
-      "amount": 750.00,
-      "type": "savings",
-      "description": "401(k) contribution",
-      "merchant": "Retirement Fund",
-      "paymentMethod": "direct wire"
-    },
-    {
-      "id": 43,
-      "date": "2025-01-03",
-      "amount": 300.00,
-      "type": "savings",
-      "description": "Summer vacation fund",
-      "merchant": "Savings Account",
-      "paymentMethod": "bank transfer"
-    },
-    {
-      "id": 44,
-      "date": "2024-12-28",
-      "amount": 200.00,
-      "type": "savings",
-      "description": "Stock market investment",
-      "merchant": "Brokerage Account",
-      "paymentMethod": "bank transfer"
-    },
-    {
-      "id": 45,
-      "date": "2024-12-20",
-      "amount": 400.00,
-      "type": "savings",
-      "description": "House savings fund",
-      "merchant": "Savings Account",
-      "paymentMethod": "bank transfer"
-    },
-    {
-      "id": 46,
-      "date": "2024-12-15",
-      "amount": 750.00,
-      "type": "savings",
-      "description": "401(k) contribution",
-      "merchant": "Retirement Fund",
-      "paymentMethod": "direct wire"
-    },
-    {
-      "id": 47,
-      "date": "2024-12-10",
-      "amount": 500.00,
-      "type": "savings",
-      "description": "Emergency fund contribution",
-      "merchant": "Savings Account",
-      "paymentMethod": "bank transfer"
-    },
-    {
-      "id": 48,
-      "date": "2024-11-25",
-      "amount": 250.00,
-      "type": "savings",
-      "description": "Education savings plan",
-      "merchant": "529 Plan",
-      "paymentMethod": "bank transfer"
-    },
-    {
-      "id": 49,
-      "date": "2024-11-20",
-      "amount": 750.00,
-      "type": "savings",
-      "description": "401(k) contribution",
-      "merchant": "Retirement Fund",
-      "paymentMethod": "direct wire"
-    },
-    {
-      "id": 50,
-      "date": "2024-11-15",
-      "amount": 350.00,
-      "type": "savings",
-      "description": "New car savings",
-      "merchant": "Savings Account",
-      "paymentMethod": "bank transfer"
-    }
-  ]
+    "transactions": [
+        {
+            "id": 1,
+            "date": "2025-01-08",
+            "amount": 420.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 2,
+            "date": "2025-01-07",
+            "amount": -45.5,
+            "type": "expense",
+            "category": "food",
+            "description": "Grocery shopping",
+            "merchant": "Whole Foods",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 3,
+            "date": "2025-01-07",
+            "amount": -15.99,
+            "type": "expense",
+            "category": "entertainment",
+            "description": "Netflix subscription",
+            "merchant": "Netflix",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 4,
+            "date": "2025-01-06",
+            "amount": -89.99,
+            "type": "expense",
+            "category": "entertainment",
+            "description": "Concert tickets",
+            "merchant": "Ticketmaster",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 5,
+            "date": "2025-01-05",
+            "amount": -450.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "January rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 6,
+            "date": "2025-01-05",
+            "amount": -150.0,
+            "type": "expense",
+            "category": "utilities",
+            "description": "Electric bill",
+            "merchant": "City Power & Light",
+            "paymentMethod": "auto-pay"
+        },
+        {
+            "id": 7,
+            "date": "2025-01-04",
+            "amount": -32.5,
+            "type": "expense",
+            "category": "food",
+            "description": "Dinner with friends",
+            "merchant": "Italian Bistro",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 8,
+            "date": "2025-01-03",
+            "amount": -12.99,
+            "type": "expense",
+            "category": "entertainment",
+            "description": "Spotify Premium",
+            "merchant": "Spotify",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 9,
+            "date": "2025-01-03",
+            "amount": -65.0,
+            "type": "expense",
+            "category": "transportation",
+            "description": "Gas fill-up",
+            "merchant": "Shell",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 10,
+            "date": "2025-01-02",
+            "amount": -250.0,
+            "type": "expense",
+            "category": "shopping",
+            "description": "Winter clothes",
+            "merchant": "H&M",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 11,
+            "date": "2025-01-01",
+            "amount": -80.0,
+            "type": "expense",
+            "category": "health",
+            "description": "Gym membership",
+            "merchant": "Planet Fitness",
+            "paymentMethod": "auto-pay"
+        },
+        {
+            "id": 12,
+            "date": "2024-12-28",
+            "amount": -156.75,
+            "type": "expense",
+            "category": "food",
+            "description": "Weekly groceries",
+            "merchant": "Trader Joe's",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 13,
+            "date": "2024-12-27",
+            "amount": 280.0,
+            "type": "income",
+            "category": "freelance",
+            "description": "Website project payment",
+            "merchant": "Client ABC",
+            "paymentMethod": "PayPal"
+        },
+        {
+            "id": 14,
+            "date": "2024-12-26",
+            "amount": -45.0,
+            "type": "expense",
+            "category": "transportation",
+            "description": "Uber rides",
+            "merchant": "Uber",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 15,
+            "date": "2024-12-25",
+            "amount": -300.0,
+            "type": "expense",
+            "category": "shopping",
+            "description": "Christmas gifts",
+            "merchant": "Amazon",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 16,
+            "date": "2024-12-23",
+            "amount": -89.99,
+            "type": "expense",
+            "category": "utilities",
+            "description": "Internet service",
+            "merchant": "Comcast",
+            "paymentMethod": "auto-pay"
+        },
+        {
+            "id": 17,
+            "date": "2024-12-20",
+            "amount": -125.0,
+            "type": "expense",
+            "category": "health",
+            "description": "Dental checkup",
+            "merchant": "Smile Dental",
+            "paymentMethod": "insurance copay"
+        },
+        {
+            "id": 18,
+            "date": "2024-12-18",
+            "amount": -55.0,
+            "type": "expense",
+            "category": "food",
+            "description": "Restaurant lunch",
+            "merchant": "Chipotle",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 19,
+            "date": "2024-12-15",
+            "amount": 460.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 20,
+            "date": "2024-12-14",
+            "amount": -42.5,
+            "type": "expense",
+            "category": "entertainment",
+            "description": "Movie tickets and snacks",
+            "merchant": "AMC Theatres",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 21,
+            "date": "2024-12-12",
+            "amount": -175.0,
+            "type": "expense",
+            "category": "shopping",
+            "description": "New running shoes",
+            "merchant": "Nike Store",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 22,
+            "date": "2024-12-10",
+            "amount": -68.0,
+            "type": "expense",
+            "category": "food",
+            "description": "Takeout dinner",
+            "merchant": "Thai House",
+            "paymentMethod": "cash"
+        },
+        {
+            "id": 23,
+            "date": "2024-12-08",
+            "amount": -450.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "December rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 24,
+            "date": "2024-12-05",
+            "amount": -135.0,
+            "type": "expense",
+            "category": "utilities",
+            "description": "Electric bill",
+            "merchant": "City Power & Light",
+            "paymentMethod": "auto-pay"
+        },
+        {
+            "id": 25,
+            "date": "2024-12-03",
+            "amount": -95.0,
+            "type": "expense",
+            "category": "food",
+            "description": "Grocery shopping",
+            "merchant": "Safeway",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 26,
+            "date": "2024-12-01",
+            "amount": -50.0,
+            "type": "expense",
+            "category": "transportation",
+            "description": "Gas",
+            "merchant": "Chevron",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 27,
+            "date": "2024-11-28",
+            "amount": -220.0,
+            "type": "expense",
+            "category": "shopping",
+            "description": "Black Friday shopping",
+            "merchant": "Best Buy",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 28,
+            "date": "2024-11-25",
+            "amount": -150.0,
+            "type": "expense",
+            "category": "food",
+            "description": "Thanksgiving dinner groceries",
+            "merchant": "Whole Foods",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 29,
+            "date": "2024-11-20",
+            "amount": 480.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 30,
+            "date": "2024-11-18",
+            "amount": -75.0,
+            "type": "expense",
+            "category": "entertainment",
+            "description": "Video game purchase",
+            "merchant": "Steam",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 31,
+            "date": "2024-11-15",
+            "amount": 240.0,
+            "type": "income",
+            "category": "freelance",
+            "description": "Logo design project",
+            "merchant": "Client XYZ",
+            "paymentMethod": "Venmo"
+        },
+        {
+            "id": 32,
+            "date": "2024-11-12",
+            "amount": -35.0,
+            "type": "expense",
+            "category": "food",
+            "description": "Coffee and pastries",
+            "merchant": "Starbucks",
+            "paymentMethod": "app payment"
+        },
+        {
+            "id": 33,
+            "date": "2024-11-10",
+            "amount": -450.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "November rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 34,
+            "date": "2024-11-08",
+            "amount": -120.0,
+            "type": "expense",
+            "category": "utilities",
+            "description": "Electric bill",
+            "merchant": "City Power & Light",
+            "paymentMethod": "auto-pay"
+        },
+        {
+            "id": 35,
+            "date": "2024-11-05",
+            "amount": -85.5,
+            "type": "expense",
+            "category": "food",
+            "description": "Weekly groceries",
+            "merchant": "Trader Joe's",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 36,
+            "date": "2024-11-02",
+            "amount": -60.0,
+            "type": "expense",
+            "category": "transportation",
+            "description": "Gas fill-up",
+            "merchant": "Shell",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 37,
+            "date": "2024-11-01",
+            "amount": -29.99,
+            "type": "expense",
+            "category": "entertainment",
+            "description": "Xbox Game Pass",
+            "merchant": "Microsoft",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 38,
+            "date": "2024-10-28",
+            "amount": -145.0,
+            "type": "expense",
+            "category": "shopping",
+            "description": "Halloween decorations",
+            "merchant": "Target",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 39,
+            "date": "2024-10-25",
+            "amount": -200.0,
+            "type": "expense",
+            "category": "health",
+            "description": "Doctor visit copay",
+            "merchant": "Family Medical",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 40,
+            "date": "2024-10-20",
+            "amount": 440.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 41,
+            "date": "2025-01-08",
+            "amount": 280.0,
+            "type": "savings",
+            "description": "Emergency fund contribution",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 42,
+            "date": "2025-01-05",
+            "amount": 220.0,
+            "type": "savings",
+            "description": "401(k) contribution",
+            "merchant": "Retirement Fund",
+            "paymentMethod": "direct wire"
+        },
+        {
+            "id": 43,
+            "date": "2025-01-03",
+            "amount": 180.0,
+            "type": "savings",
+            "description": "Summer vacation fund",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 44,
+            "date": "2024-12-28",
+            "amount": 150.0,
+            "type": "savings",
+            "description": "Stock market investment",
+            "merchant": "Brokerage Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 45,
+            "date": "2024-12-20",
+            "amount": 240.0,
+            "type": "savings",
+            "description": "House savings fund",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 46,
+            "date": "2024-12-15",
+            "amount": 220.0,
+            "type": "savings",
+            "description": "401(k) contribution",
+            "merchant": "Retirement Fund",
+            "paymentMethod": "direct wire"
+        },
+        {
+            "id": 47,
+            "date": "2024-12-10",
+            "amount": 200.0,
+            "type": "savings",
+            "description": "Emergency fund contribution",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 48,
+            "date": "2024-11-25",
+            "amount": 190.0,
+            "type": "savings",
+            "description": "Education savings plan",
+            "merchant": "529 Plan",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 49,
+            "date": "2024-11-20",
+            "amount": 220.0,
+            "type": "savings",
+            "description": "401(k) contribution",
+            "merchant": "Retirement Fund",
+            "paymentMethod": "direct wire"
+        },
+        {
+            "id": 50,
+            "date": "2024-11-15",
+            "amount": 260.0,
+            "type": "savings",
+            "description": "New car savings",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        }
+    ]
 }

@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const TransactionCards = () => {
     const { data: totals } = useQuery({
-        queryKey: ['transactions'],
+        queryKey: ['totals'],
         queryFn: getAllTransactions,
         select: (data) => {
             return data.reduce((acc, transaction) => {
@@ -18,7 +18,7 @@ const TransactionCards = () => {
         },
     });
     return (
-        <div className="flex flex-row gap-6 justify-between flex-[1]">
+        <div className="flex flex-row gap-6 justify-between flex-1">
             <Card className="w-full h-full shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="flex items-center h-full p-6 relative">
                     <div className="absolute left-6 flex items-center justify-center w-16 h-16 rounded-full bg-green-100">
