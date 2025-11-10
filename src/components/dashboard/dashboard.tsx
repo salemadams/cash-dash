@@ -6,14 +6,13 @@ import { getAllTransactions } from '@/api/transactions';
 import { formatLineChartData } from '@/services/charting';
 import LineChart from '../charts/LineChart';
 import { ChartOptions } from 'chart.js';
+import { USDollar } from '@/lib/format';
 
 const Dashboard = () => {
     const { data } = useQuery({
         queryKey: ['transactions'],
         queryFn: getAllTransactions,
-        select: (data) => {
-            return formatLineChartData(data);
-        },
+        select: formatLineChartData,
     });
 
     return (
@@ -54,20 +53,20 @@ const options: ChartOptions<'line'> = {
     scales: {
         y: {
             ticks: {
-                callback(tickValue) {
-                    return `$${tickValue.toLocaleString()}`;
-                },
+                callback: (tickValue) =>
+                    `$${Number(tickValue).toLocaleString('en-US', {
+                        maximumFractionDigits: 0,
+                    })}`,
             },
         },
     },
     plugins: {
         tooltip: {
             callbacks: {
-                label(context) {
-                    const label = context.dataset.label || '';
-                    const value = context.parsed.y;
-                    return `${label}: $${value!.toLocaleString('en-US')}`;
-                },
+                label: (context) =>
+                    `${context.dataset.label || ''}: ${USDollar.format(
+                        Number(context.parsed.y)
+                    )}`,
             },
         },
     },

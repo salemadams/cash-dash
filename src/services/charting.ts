@@ -1,6 +1,7 @@
 import { TransactionType } from '@/enums/transactions';
 import { Transaction } from '@/types/transaction';
 import type { ChartData } from 'chart.js';
+import { capitalize } from '@/lib/format';
 
 export const formatLineChartData = (data: Transaction[]): ChartData<'line'> => {
     // Sort transactions by date in ascending order
@@ -9,14 +10,10 @@ export const formatLineChartData = (data: Transaction[]): ChartData<'line'> => {
     );
 
     // Get unique dates for labels
-    const labels = Array.from(
-        new Set(sortedData.map((t: Transaction) => t.date))
-    );
+    const labels = Array.from(new Set(sortedData.map((t) => t.date)));
 
     // Get unique transaction types
-    const types = Array.from(
-        new Set(sortedData.map((t: Transaction) => t.type))
-    );
+    const types = Array.from(new Set(sortedData.map((t) => t.type)));
 
     // Create a dataset for each transaction type
     const datasets = types.map((type) => {
@@ -34,7 +31,7 @@ export const formatLineChartData = (data: Transaction[]): ChartData<'line'> => {
         });
 
         return {
-            label: type.charAt(0).toUpperCase() + type.slice(1).toLowerCase(),
+            label: capitalize(type),
             data: dataPoints,
             fill: false,
             borderColor: getBorderColorByType(type),
@@ -42,8 +39,8 @@ export const formatLineChartData = (data: Transaction[]): ChartData<'line'> => {
     });
 
     return {
-        labels: labels,
-        datasets: datasets,
+        labels,
+        datasets,
     };
 };
 

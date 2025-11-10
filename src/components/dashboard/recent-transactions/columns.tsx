@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { USDollar } from '@/lib/format';
+import { USDollar, capitalize } from '@/lib/format';
 import type { Transaction } from '@/types/transaction';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
@@ -60,9 +60,7 @@ export const columns: ColumnDef<Transaction>[] = [
         cell: ({ row }) => {
             const type = row.getValue<string>('type');
             if (!type) return <div>-</div>;
-            const formatted =
-                type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
-            return <div>{formatted}</div>;
+            return <div>{capitalize(type)}</div>;
         },
     },
     {
@@ -71,10 +69,7 @@ export const columns: ColumnDef<Transaction>[] = [
         cell: ({ row }) => {
             const category = row.getValue<string>('category');
             if (!category) return <div>-</div>;
-            const formatted =
-                category.charAt(0).toUpperCase() +
-                category.slice(1).toLowerCase();
-            return <div>{formatted}</div>;
+            return <div>{capitalize(category)}</div>;
         },
     },
 ];
