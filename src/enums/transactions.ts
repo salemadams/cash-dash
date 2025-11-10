@@ -13,4 +13,5 @@ export enum TransactionCategory {
 export enum TransactionType {
     Income = 'income',
     Expense = 'expense',
+    Savings = 'savings',
 }

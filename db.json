@@ -399,6 +399,96 @@
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
+    },
+    {
+      "id": 41,
+      "date": "2025-01-08",
+      "amount": 500.00,
+      "type": "savings",
+      "description": "Emergency fund contribution",
+      "merchant": "Savings Account",
+      "paymentMethod": "bank transfer"
+    },
+    {
+      "id": 42,
+      "date": "2025-01-05",
+      "amount": 750.00,
+      "type": "savings",
+      "description": "401(k) contribution",
+      "merchant": "Retirement Fund",
+      "paymentMethod": "direct wire"
+    },
+    {
+      "id": 43,
+      "date": "2025-01-03",
+      "amount": 300.00,
+      "type": "savings",
+      "description": "Summer vacation fund",
+      "merchant": "Savings Account",
+      "paymentMethod": "bank transfer"
+    },
+    {
+      "id": 44,
+      "date": "2024-12-28",
+      "amount": 200.00,
+      "type": "savings",
+      "description": "Stock market investment",
+      "merchant": "Brokerage Account",
+      "paymentMethod": "bank transfer"
+    },
+    {
+      "id": 45,
+      "date": "2024-12-20",
+      "amount": 400.00,
+      "type": "savings",
+      "description": "House savings fund",
+      "merchant": "Savings Account",
+      "paymentMethod": "bank transfer"
+    },
+    {
+      "id": 46,
+      "date": "2024-12-15",
+      "amount": 750.00,
+      "type": "savings",
+      "description": "401(k) contribution",
+      "merchant": "Retirement Fund",
+      "paymentMethod": "direct wire"
+    },
+    {
+      "id": 47,
+      "date": "2024-12-10",
+      "amount": 500.00,
+      "type": "savings",
+      "description": "Emergency fund contribution",
+      "merchant": "Savings Account",
+      "paymentMethod": "bank transfer"
+    },
+    {
+      "id": 48,
+      "date": "2024-11-25",
+      "amount": 250.00,
+      "type": "savings",
+      "description": "Education savings plan",
+      "merchant": "529 Plan",
+      "paymentMethod": "bank transfer"
+    },
+    {
+      "id": 49,
+      "date": "2024-11-20",
+      "amount": 750.00,
+      "type": "savings",
+      "description": "401(k) contribution",
+      "merchant": "Retirement Fund",
+      "paymentMethod": "direct wire"
+    },
+    {
+      "id": 50,
+      "date": "2024-11-15",
+      "amount": 350.00,
+      "type": "savings",
+      "description": "New car savings",
+      "merchant": "Savings Account",
+      "paymentMethod": "bank transfer"
     }
   ]
 }
