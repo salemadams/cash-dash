@@ -6,9 +6,9 @@ import { Interval } from '@/constants/interval';
 
 export const formatLineChartData = (
     data: Transaction[],
-    startDate: Date = new Date('2010-01-01'),
-    endDate: Date = new Date(),
-    interval: Interval = Interval.Day
+    startDate: Date,
+    endDate: Date,
+    interval: Interval
 ): ChartData<'line'> => {
     // Sort transactions by date in ascending order and filter by start/end
     const sortedData = [...data]
@@ -26,14 +26,28 @@ export const formatLineChartData = (
         }));
 
     // Get unique dates for labels
-    let labels: string[] = [];
-    let current = startDate?.getTime();
-    while (current <= endDate.getTime()) {
-        labels.push(new Date(current).toLocaleDateString());
-        current = current + interval;
+    const labels: string[] = [];
+    let current = new Date(startDate);
+    while (current.getTime() < endDate.getTime()) {
+        labels.push(current.toLocaleDateString());
+
+        // Increment based on interval type
+        if (interval === Interval.Month) {
+            // Use proper month arithmetic
+            current = new Date(
+                current.getFullYear(),
+                current.getMonth() + 1,
+                current.getDate()
+            );
+        } else {
+            // For Day/Week, add milliseconds
+            current = new Date(current.getTime() + interval);
+        }
     }
 
-    labels = labels.slice(1, labels.length);
+    // Always include the endDate as the last label
+    labels.push(endDate.toLocaleDateString());
+
     // Get unique transaction types
     const types = Array.from(new Set(sortedData.map((t) => t.type)));
 

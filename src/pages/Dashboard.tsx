@@ -1,13 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import RecentTransactions from '@/components/dashboard/RecentTransactions/RecentTransactions';
 import TransactionCards from '@/components/dashboard/SummaryCards/TransactionCardList';
 import { getAllTransactions } from '@/api/transactions';
 import { formatLineChartData } from '@/services/charting';
 import LineChart from '@/components/charts/LineChart';
-import { ChartOptions } from 'chart.js';
+import { ChartDataset, ChartOptions } from 'chart.js';
 import { USDollar } from '@/lib/format';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -17,8 +17,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Filter } from 'lucide-react';
 import { Interval } from '@/constants/interval';
+import { useGlobalDate } from '@/contexts/GlobalDate';
 
 const Dashboard = () => {
+    const globalDate = useGlobalDate();
+    const queryClient = useQueryClient();
+    const interval = Interval.Month;
     const chartRef = useRef<any>(null);
     const [visibleDatasets, setVisibleDatasets] = useState<
         Record<string, boolean>
@@ -27,21 +31,21 @@ const Dashboard = () => {
         Expense: true,
         Savings: true,
     });
+    const [baseDateRange, setBaseDateRange] = useState({
+        startDate: globalDate.startDate,
+        endDate: globalDate.endDate,
+    });
 
     const { data } = useQuery({
-        queryKey: ['transactions'],
+        queryKey: ['transactions', globalDate.startDate, globalDate.endDate],
         queryFn: getAllTransactions,
-        select: (data) => {
-            const endDate = new Date();
-            const startDate = new Date();
-            startDate.setMonth(startDate.getMonth() - 6);
-            return formatLineChartData(
+        select: (data) =>
+            formatLineChartData(
                 data,
-                startDate,
-                endDate,
-                Interval.Month
-            );
-        },
+                globalDate.startDate,
+                globalDate.endDate,
+                interval
+            ),
     });
 
     const toggleDataset = (label: string) => {
@@ -49,7 +53,7 @@ const Dashboard = () => {
 
         const chart = chartRef.current;
         const datasetIndex = chart.data.datasets.findIndex(
-            (dataset: any) => dataset.label === label
+            (dataset: ChartDataset) => dataset.label === label
         );
 
         if (datasetIndex !== -1) {
@@ -66,7 +70,86 @@ const Dashboard = () => {
 
     const handleResetZoom = () => {
         if (!chartRef.current) return;
+
+        // Reset chart zoom
         chartRef.current.resetZoom();
+
+        // Restore original date range
+        globalDate.setStartDate(baseDateRange.startDate);
+        globalDate.setEndDate(baseDateRange.endDate);
+    };
+
+    // Update base date range when data is fetched (not from zoom)
+    useEffect(() => {
+        // Only update if the chart is not zoomed
+        if (!chartRef.current || !data) return;
+
+        const chart = chartRef.current;
+        const isZoomed = chart.getZoomLevel && chart.getZoomLevel() > 1;
+
+        if (!isZoomed) {
+            setBaseDateRange({
+                startDate: globalDate.startDate,
+                endDate: globalDate.endDate,
+            });
+        }
+    }, [data]);
+
+    const options: ChartOptions<'line'> = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                ticks: {
+                    callback: (tickValue) =>
+                        `$${Number(tickValue).toLocaleString('en-US', {
+                            maximumFractionDigits: 0,
+                        })}`,
+                },
+            },
+        },
+        plugins: {
+            zoom: {
+                zoom: {
+                    drag: {
+                        enabled: true,
+                    },
+                    onZoomComplete: ({ chart }) => {
+                        const newStartDate = new Date(
+                            chart.scales.x.getLabelForValue(chart.scales.x.min)
+                        );
+                        const newEndDate = new Date(
+                            chart.scales.x.getLabelForValue(chart.scales.x.max)
+                        );
+
+                        // Preserve current data before updating dates
+                        const currentData = data;
+
+                        // Update global dates (this will change queryKey)
+                        globalDate.setStartDate(newStartDate);
+                        globalDate.setEndDate(newEndDate);
+
+                        // Immediately set the query data to prevent refetch
+                        queryClient.setQueryData(
+                            ['transactions', newStartDate, newEndDate],
+                            currentData
+                        );
+                    },
+                    mode: 'x',
+                },
+            },
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                callbacks: {
+                    label: (context) =>
+                        `${context.dataset.label || ''}: ${USDollar.format(
+                            Number(context.parsed.y)
+                        )}`,
+                },
+            },
+        },
     };
 
     return (
@@ -80,7 +163,12 @@ const Dashboard = () => {
                                 Monthly Spending Trends
                             </p>
                             <p className="text-gray-500">
-                                Last 3 months overview
+                                Last {data?.labels?.length ?? 0}{' '}
+                                {Interval[interval]}
+                                {data?.labels?.length &&
+                                    data.labels.length > 1 &&
+                                    's'}{' '}
+                                Overview
                             </p>
                         </div>
                         <div className="flex gap-2">
@@ -161,42 +249,6 @@ const Dashboard = () => {
             </Card>
         </div>
     );
-};
-
-const options: ChartOptions<'line'> = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-        y: {
-            ticks: {
-                callback: (tickValue) =>
-                    `$${Number(tickValue).toLocaleString('en-US', {
-                        maximumFractionDigits: 0,
-                    })}`,
-            },
-        },
-    },
-    plugins: {
-        zoom: {
-            zoom: {
-                drag: {
-                    enabled: true,
-                },
-                mode: 'x',
-            },
-        },
-        legend: {
-            display: false,
-        },
-        tooltip: {
-            callbacks: {
-                label: (context) =>
-                    `${context.dataset.label || ''}: ${USDollar.format(
-                        Number(context.parsed.y)
-                    )}`,
-            },
-        },
-    },
 };
 
 export default Dashboard;

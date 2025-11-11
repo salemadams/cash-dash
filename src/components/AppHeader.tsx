@@ -1,5 +1,6 @@
 import { ModeToggle } from '@/contexts/ModeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { GlobalDateSelector } from './GlobalDateSelector';
 
 const AppHeader = () => {
     return (
@@ -13,7 +14,19 @@ const AppHeader = () => {
                     </p>
                 </div>
             </div>
-            <ModeToggle />
+            <div className="flex flex-row justify-center items-center gap-2">
+                <GlobalDateSelector
+                    label="Start Date"
+                    dateType="start"
+                />
+                <GlobalDateSelector
+                    label="End Date"
+                    dateType="end"
+                />
+                <div className="pt-4.5">
+                    <ModeToggle />
+                </div>
+            </div>
         </div>
     );
 };
