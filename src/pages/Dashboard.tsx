@@ -9,10 +9,21 @@ import { ChartOptions } from 'chart.js';
 import { USDollar } from '@/lib/format';
 import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import {
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Filter } from 'lucide-react';
 
 const Dashboard = () => {
     const chartRef = useRef<any>(null);
-    const [visibleDatasets, setVisibleDatasets] = useState<Record<string, boolean>>({
+    const [visibleDatasets, setVisibleDatasets] = useState<
+        Record<string, boolean>
+    >({
         Income: true,
         Expense: true,
         Savings: true,
@@ -44,6 +55,11 @@ const Dashboard = () => {
         }
     };
 
+    const handleResetZoom = () => {
+        if (!chartRef.current) return;
+        chartRef.current.resetZoom();
+    };
+
     return (
         <div className="flex flex-col min-h-full p-5 gap-6">
             <TransactionCards />
@@ -51,31 +67,61 @@ const Dashboard = () => {
                 <CardHeader>
                     <div className="flex justify-between items-start">
                         <div>
-                            <p className="text-xl font-bold">Monthly Spending Trends</p>
-                            <p className="text-gray-500">Last 3 months overview</p>
+                            <p className="text-xl font-bold">
+                                Monthly Spending Trends
+                            </p>
+                            <p className="text-gray-500">
+                                Last 3 months overview
+                            </p>
                         </div>
                         <div className="flex gap-2">
                             <Button
-                                variant={visibleDatasets.Income ? 'default' : 'outline'}
+                                variant="default"
                                 size="sm"
-                                onClick={() => toggleDataset('Income')}
+                                onClick={handleResetZoom}
                             >
-                                Income
+                                Reset
                             </Button>
-                            <Button
-                                variant={visibleDatasets.Expense ? 'default' : 'outline'}
-                                size="sm"
-                                onClick={() => toggleDataset('Expense')}
-                            >
-                                Expense
-                            </Button>
-                            <Button
-                                variant={visibleDatasets.Savings ? 'default' : 'outline'}
-                                size="sm"
-                                onClick={() => toggleDataset('Savings')}
-                            >
-                                Savings
-                            </Button>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                    >
+                                        <Filter className="mr-2 h-4 w-4" />
+                                        Filter Data
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="center">
+                                    <DropdownMenuCheckboxItem
+                                        checked={visibleDatasets.Income}
+                                        onCheckedChange={() =>
+                                            toggleDataset('Income')
+                                        }
+                                        onSelect={(e) => e.preventDefault()}
+                                    >
+                                        Income
+                                    </DropdownMenuCheckboxItem>
+                                    <DropdownMenuCheckboxItem
+                                        checked={visibleDatasets.Expense}
+                                        onCheckedChange={() =>
+                                            toggleDataset('Expense')
+                                        }
+                                        onSelect={(e) => e.preventDefault()}
+                                    >
+                                        Expense
+                                    </DropdownMenuCheckboxItem>
+                                    <DropdownMenuCheckboxItem
+                                        checked={visibleDatasets.Savings}
+                                        onCheckedChange={() =>
+                                            toggleDataset('Savings')
+                                        }
+                                        onSelect={(e) => e.preventDefault()}
+                                    >
+                                        Savings
+                                    </DropdownMenuCheckboxItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </div>
                     </div>
                 </CardHeader>
@@ -96,7 +142,9 @@ const Dashboard = () => {
             <Card className="w-full flex-2 card-hover">
                 <CardHeader>
                     <p className="text-xl font-bold">Recent Transactions</p>
-                    <p className="text-gray-500">Your latest financial activities</p>
+                    <p className="text-gray-500">
+                        Your latest financial activities
+                    </p>
                 </CardHeader>
                 <CardContent>
                     <RecentTransactions />
@@ -120,6 +168,14 @@ const options: ChartOptions<'line'> = {
         },
     },
     plugins: {
+        zoom: {
+            zoom: {
+                drag: {
+                    enabled: true,
+                },
+                mode: 'x',
+            },
+        },
         legend: {
             display: false,
         },
