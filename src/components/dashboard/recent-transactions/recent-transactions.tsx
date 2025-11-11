@@ -2,11 +2,15 @@ import { getAllTransactions } from '@/api/transactions';
 import { useQuery } from '@tanstack/react-query';
 import { DataTable } from './data-table';
 import { columns } from './columns';
+import { Transaction } from '@/types/transaction';
 
 const RecentTransactions = () => {
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ['transactions'],
         queryFn: getAllTransactions,
+        select: (data: Transaction[]) => {
+            return data.slice(0, 6);
+        },
     });
 
     return (

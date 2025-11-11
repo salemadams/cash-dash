@@ -45,7 +45,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="flex flex-col h-full p-5 gap-6">
+        <div className="flex flex-col min-h-full p-5 gap-6">
             <TransactionCards />
             <Card className="w-full flex-2 card-hover">
                 <CardHeader>
