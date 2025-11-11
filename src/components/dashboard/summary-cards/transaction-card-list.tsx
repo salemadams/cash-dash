@@ -10,13 +10,17 @@ const TransactionCards = () => {
         select: (data) => {
             return data.reduce((acc, transaction) => {
                 const type = transaction.type;
-                acc[type] = (acc[type] || 0) + (transaction.amount < 0 ? transaction.amount * -1 : transaction.amount);
+                acc[type] =
+                    (acc[type] || 0) +
+                    (transaction.amount < 0
+                        ? transaction.amount * -1
+                        : transaction.amount);
                 return acc;
             }, {} as Record<string, number>);
         },
     });
     return (
-        <div className="flex flex-row gap-6 justify-between flex-1">
+        <div className="flex flex-wrap gap-6 justify-between">
             <TransactionCard
                 total={totals?.income}
                 type="Income"

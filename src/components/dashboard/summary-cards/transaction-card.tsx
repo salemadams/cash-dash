@@ -13,7 +13,7 @@ const TransactionCard = ({
     children: ReactNode;
 }) => {
     return (
-        <Card className="w-full h-full shadow-sm hover:shadow-md transition-shadow">
+        <Card className="flex-1 min-w-[250px] h-full shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="flex items-center h-full p-6 relative">
                 {children}
                 <div className="flex flex-col pl-20 gap-2 w-full">
