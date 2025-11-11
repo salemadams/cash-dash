@@ -489,6 +489,396 @@
             "description": "New car savings",
             "merchant": "Savings Account",
             "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 51,
+            "date": "2025-02-15",
+            "amount": 450.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 52,
+            "date": "2025-02-10",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "February rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 53,
+            "date": "2025-02-08",
+            "amount": -145.0,
+            "type": "expense",
+            "category": "utilities",
+            "description": "Electric bill",
+            "merchant": "City Power & Light",
+            "paymentMethod": "auto-pay"
+        },
+        {
+            "id": 54,
+            "date": "2025-02-05",
+            "amount": 230.0,
+            "type": "savings",
+            "description": "401(k) contribution",
+            "merchant": "Retirement Fund",
+            "paymentMethod": "direct wire"
+        },
+        {
+            "id": 55,
+            "date": "2025-03-20",
+            "amount": 465.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 56,
+            "date": "2025-03-15",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "March rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 57,
+            "date": "2025-03-10",
+            "amount": -125.0,
+            "type": "expense",
+            "category": "food",
+            "description": "Grocery shopping",
+            "merchant": "Whole Foods",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 58,
+            "date": "2025-03-05",
+            "amount": 240.0,
+            "type": "savings",
+            "description": "Emergency fund contribution",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 59,
+            "date": "2025-04-18",
+            "amount": 470.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 60,
+            "date": "2025-04-12",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "April rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 61,
+            "date": "2025-04-08",
+            "amount": -95.0,
+            "type": "expense",
+            "category": "entertainment",
+            "description": "Concert tickets",
+            "merchant": "Ticketmaster",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 62,
+            "date": "2025-04-03",
+            "amount": 250.0,
+            "type": "savings",
+            "description": "Summer vacation fund",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 63,
+            "date": "2025-05-22",
+            "amount": 485.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 64,
+            "date": "2025-05-15",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "May rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 65,
+            "date": "2025-05-10",
+            "amount": -165.0,
+            "type": "expense",
+            "category": "utilities",
+            "description": "Electric bill",
+            "merchant": "City Power & Light",
+            "paymentMethod": "auto-pay"
+        },
+        {
+            "id": 66,
+            "date": "2025-05-05",
+            "amount": 260.0,
+            "type": "savings",
+            "description": "401(k) contribution",
+            "merchant": "Retirement Fund",
+            "paymentMethod": "direct wire"
+        },
+        {
+            "id": 67,
+            "date": "2025-06-20",
+            "amount": 490.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 68,
+            "date": "2025-06-14",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "June rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 69,
+            "date": "2025-06-10",
+            "amount": -140.0,
+            "type": "expense",
+            "category": "food",
+            "description": "Grocery shopping",
+            "merchant": "Trader Joe's",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 70,
+            "date": "2025-06-05",
+            "amount": 270.0,
+            "type": "savings",
+            "description": "Emergency fund contribution",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 71,
+            "date": "2025-07-18",
+            "amount": 495.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 72,
+            "date": "2025-07-12",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "July rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 73,
+            "date": "2025-07-08",
+            "amount": -185.0,
+            "type": "expense",
+            "category": "utilities",
+            "description": "Electric bill (AC usage)",
+            "merchant": "City Power & Light",
+            "paymentMethod": "auto-pay"
+        },
+        {
+            "id": 74,
+            "date": "2025-07-04",
+            "amount": 280.0,
+            "type": "savings",
+            "description": "401(k) contribution",
+            "merchant": "Retirement Fund",
+            "paymentMethod": "direct wire"
+        },
+        {
+            "id": 75,
+            "date": "2025-08-21",
+            "amount": 500.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 76,
+            "date": "2025-08-14",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "August rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 77,
+            "date": "2025-08-10",
+            "amount": -220.0,
+            "type": "expense",
+            "category": "shopping",
+            "description": "Back to school supplies",
+            "merchant": "Target",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 78,
+            "date": "2025-08-05",
+            "amount": 290.0,
+            "type": "savings",
+            "description": "Emergency fund contribution",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 79,
+            "date": "2025-09-19",
+            "amount": 505.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 80,
+            "date": "2025-09-13",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "September rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 81,
+            "date": "2025-09-08",
+            "amount": -155.0,
+            "type": "expense",
+            "category": "utilities",
+            "description": "Electric bill",
+            "merchant": "City Power & Light",
+            "paymentMethod": "auto-pay"
+        },
+        {
+            "id": 82,
+            "date": "2025-09-03",
+            "amount": 300.0,
+            "type": "savings",
+            "description": "401(k) contribution",
+            "merchant": "Retirement Fund",
+            "paymentMethod": "direct wire"
+        },
+        {
+            "id": 83,
+            "date": "2025-10-20",
+            "amount": 510.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 84,
+            "date": "2025-10-14",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "October rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 85,
+            "date": "2025-10-10",
+            "amount": -175.0,
+            "type": "expense",
+            "category": "shopping",
+            "description": "Halloween decorations",
+            "merchant": "Party City",
+            "paymentMethod": "credit card"
+        },
+        {
+            "id": 86,
+            "date": "2025-10-05",
+            "amount": 310.0,
+            "type": "savings",
+            "description": "Emergency fund contribution",
+            "merchant": "Savings Account",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 87,
+            "date": "2025-11-10",
+            "amount": 515.0,
+            "type": "income",
+            "category": "salary",
+            "description": "Monthly salary",
+            "merchant": "Tech Corp Inc.",
+            "paymentMethod": "direct deposit"
+        },
+        {
+            "id": 88,
+            "date": "2025-11-08",
+            "amount": -480.0,
+            "type": "expense",
+            "category": "rent",
+            "description": "November rent payment",
+            "merchant": "Property Management Co.",
+            "paymentMethod": "bank transfer"
+        },
+        {
+            "id": 89,
+            "date": "2025-11-05",
+            "amount": -135.0,
+            "type": "expense",
+            "category": "food",
+            "description": "Grocery shopping",
+            "merchant": "Whole Foods",
+            "paymentMethod": "debit card"
+        },
+        {
+            "id": 90,
+            "date": "2025-11-03",
+            "amount": 320.0,
+            "type": "savings",
+            "description": "401(k) contribution",
+            "merchant": "Retirement Fund",
+            "paymentMethod": "direct wire"
         }
     ]
 }

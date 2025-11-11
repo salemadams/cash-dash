@@ -13,11 +13,10 @@ import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Filter } from 'lucide-react';
+import { Interval } from '@/constants/interval';
 
 const Dashboard = () => {
     const chartRef = useRef<any>(null);
@@ -32,7 +31,17 @@ const Dashboard = () => {
     const { data } = useQuery({
         queryKey: ['transactions'],
         queryFn: getAllTransactions,
-        select: formatLineChartData,
+        select: (data) => {
+            const endDate = new Date();
+            const startDate = new Date();
+            startDate.setMonth(startDate.getMonth() - 6);
+            return formatLineChartData(
+                data,
+                startDate,
+                endDate,
+                Interval.Month
+            );
+        },
     });
 
     const toggleDataset = (label: string) => {

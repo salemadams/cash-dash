@@ -2,15 +2,36 @@ import { TransactionType } from '@/constants/transactions';
 import { Transaction } from '@/types/transaction';
 import type { ChartData } from 'chart.js';
 import { capitalize } from '@/lib/format';
+import { Interval } from '@/constants/interval';
 
-export const formatLineChartData = (data: Transaction[]): ChartData<'line'> => {
-    // Sort transactions by date in ascending order
-    const sortedData = [...data].sort(
-        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
+export const formatLineChartData = (
+    data: Transaction[],
+    startDate: Date = new Date('2010-01-01'),
+    endDate: Date = new Date(),
+    interval: Interval = Interval.Day
+): ChartData<'line'> => {
+    // Sort transactions by date in ascending order and filter by start/end
+    const sortedData = [...data]
+        .filter((t) => {
+            const transactionDate = new Date(t.date).getTime();
+            return (
+                transactionDate >= startDate.getTime() - interval &&
+                transactionDate <= endDate.getTime()
+            );
+        })
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+        .map((t) => ({
+            ...t,
+            date: new Date(t.date).getTime(),
+        }));
 
     // Get unique dates for labels
-    const labels = Array.from(new Set(sortedData.map((t) => t.date)));
+    let labels: string[] = [];
+    let current = startDate?.getTime();
+    while (current <= endDate.getTime()) {
+        labels.push(new Date(current).toLocaleDateString());
+        current = current + interval;
+    }
 
     // Get unique transaction types
     const types = Array.from(new Set(sortedData.map((t) => t.type)));
@@ -19,13 +40,19 @@ export const formatLineChartData = (data: Transaction[]): ChartData<'line'> => {
     const datasets = types.map((type) => {
         // For each date label, find the corresponding transaction or use 0
         const dataPoints = labels.map((date) => {
-            const transaction = sortedData.find(
-                (t) => t.date === date && t.type === type
+            const dateToMs = new Date(date).getTime();
+            const transactions = sortedData.filter(
+                (t) =>
+                    t.date >= dateToMs - interval &&
+                    t.date <= dateToMs &&
+                    t.type === type
             );
-            if (transaction) {
-                return transaction.amount < 0
-                    ? transaction.amount * -1
-                    : transaction.amount;
+
+            if (transactions.length > 0) {
+                const total = transactions.reduce((acc, transaction) => {
+                    return acc + Math.abs(transaction.amount);
+                }, 0);
+                return total;
             }
             return 0;
         });
@@ -37,6 +64,9 @@ export const formatLineChartData = (data: Transaction[]): ChartData<'line'> => {
             borderColor: getBorderColorByType(type),
         };
     });
+
+    // Slice labels post aggregation
+    labels = labels.slice(1, labels.length);
 
     return {
         labels,
