@@ -33,6 +33,7 @@ export const formatLineChartData = (
         current = current + interval;
     }
 
+    labels = labels.slice(1, labels.length);
     // Get unique transaction types
     const types = Array.from(new Set(sortedData.map((t) => t.type)));
 
@@ -44,7 +45,7 @@ export const formatLineChartData = (
             const transactions = sortedData.filter(
                 (t) =>
                     t.date >= dateToMs - interval &&
-                    t.date <= dateToMs &&
+                    t.date < dateToMs &&
                     t.type === type
             );
 
@@ -66,7 +67,6 @@ export const formatLineChartData = (
     });
 
     // Slice labels post aggregation
-    labels = labels.slice(1, labels.length);
 
     return {
         labels,
