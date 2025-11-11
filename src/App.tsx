@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from './theme/ThemeProvider';
+import { ThemeProvider } from './contexts/ThemeProvider';
 import Layout from './layouts/Layout';
-import Dashboard from './components/dashboard/dashboard';
+import Dashboard from './pages/Dashboard';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();

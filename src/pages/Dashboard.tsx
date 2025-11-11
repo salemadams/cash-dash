@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { Card, CardContent, CardHeader } from '../ui/card';
-import RecentTransactions from './recent-transactions/recent-transactions';
-import TransactionCards from './summary-cards/transaction-card-list';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import RecentTransactions from '@/components/dashboard/RecentTransactions/RecentTransactions';
+import TransactionCards from '@/components/dashboard/SummaryCards/TransactionCardList';
 import { getAllTransactions } from '@/api/transactions';
 import { formatLineChartData } from '@/services/charting';
-import LineChart from '../charts/LineChart';
+import LineChart from '@/components/charts/LineChart';
 import { ChartOptions } from 'chart.js';
 import { USDollar } from '@/lib/format';
 import { useRef, useState } from 'react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 
 const Dashboard = () => {
     const chartRef = useRef<any>(null);

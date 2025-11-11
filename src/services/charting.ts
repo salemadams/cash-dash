@@ -1,4 +1,4 @@
-import { TransactionType } from '@/enums/transactions';
+import { TransactionType } from '@/constants/transactions';
 import { Transaction } from '@/types/transaction';
 import type { ChartData } from 'chart.js';
 import { capitalize } from '@/lib/format';

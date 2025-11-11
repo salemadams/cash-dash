@@ -1,4 +1,4 @@
-import { ModeToggle } from '@/theme/ModeToggle';
+import { ModeToggle } from '@/contexts/ModeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 
 const AppHeader = () => {

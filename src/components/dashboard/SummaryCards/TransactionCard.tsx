@@ -1,6 +1,6 @@
 import { USDollar } from '@/lib/format';
-import { Card, CardContent } from '../../ui/card';
-import { Skeleton } from '../../ui/skeleton';
+import { Card, CardContent } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { ReactNode } from 'react';
 
 const TransactionCard = ({

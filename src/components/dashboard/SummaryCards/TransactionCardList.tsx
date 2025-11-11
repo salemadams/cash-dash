@@ -1,7 +1,7 @@
 import { TrendingUp, TrendingDown, PiggyBank } from 'lucide-react';
 import { getAllTransactions } from '@/api/transactions';
 import { useQuery } from '@tanstack/react-query';
-import TransactionCard from './transaction-card';
+import TransactionCard from './TransactionCard';
 
 const TransactionCards = () => {
     const { data: totals } = useQuery({
