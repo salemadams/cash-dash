@@ -130,7 +130,7 @@ export const columns: ColumnDef<Transaction>[] = [
             const amount = parseFloat(row.getValue('amount'));
             const type = row.getValue<string>('type');
             return (
-                <div className={getTextColor(type)}>
+                <div className={`pl-2 ${getTextColor(type)}`}>
                     {type !== 'expense' && '+'}
                     {amount.toFixed(2)}
                 </div>
