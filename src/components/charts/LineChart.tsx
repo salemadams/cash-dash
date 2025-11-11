@@ -1,6 +1,7 @@
 import { defaults } from 'chart.js';
 import type { ChartData, ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { forwardRef } from 'react';
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
@@ -10,13 +11,16 @@ type LineChartProps = {
     options?: ChartOptions<'line'>;
 };
 
-const LineChart = ({ datasets, options = {} }: LineChartProps) => {
+const LineChart = forwardRef<any, LineChartProps>(({ datasets, options = {} }, ref) => {
     return (
         <Line
+            ref={ref}
             data={datasets}
             options={options}
         />
     );
-};
+});
+
+LineChart.displayName = 'LineChart';
 
 export default LineChart;

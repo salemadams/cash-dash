@@ -10,7 +10,7 @@ const TransactionCards = () => {
         select: (data) => {
             return data.reduce((acc, transaction) => {
                 const type = transaction.type;
-                acc[type] = (acc[type] || 0) + transaction.amount;
+                acc[type] = (acc[type] || 0) + (transaction.amount < 0 ? transaction.amount * -1 : transaction.amount);
                 return acc;
             }, {} as Record<string, number>);
         },
