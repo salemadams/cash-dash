@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader } from '../ui/card';
 import RecentTransactions from './recent-transactions/recent-transactions';
-import TransactionCards from './transaction-cards';
+import TransactionCards from './summary-cards/transaction-card-list';
 import { getAllTransactions } from '@/api/transactions';
 import { formatLineChartData } from '@/services/charting';
 import LineChart from '../charts/LineChart';
@@ -18,28 +18,28 @@ const Dashboard = () => {
     return (
         <div className="flex flex-col h-full p-5 gap-6">
             <TransactionCards />
-            <Card className="w-full flex-2">
+            <Card className="w-full flex-2 card-hover">
                 <CardHeader>
-                    <p className="text-xl font-semibold text-foreground/70 uppercase tracking-wider">
-                        Monthly Spending
-                    </p>
+                    <p className="text-xl font-bold">Monthly Spending Trends</p>
+                    <p className="text-gray-500">Last 3 months overview</p>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="h-full">
                     {data ? (
-                        <LineChart
-                            datasets={data}
-                            options={options}
-                        />
+                        <div className="w-full h-full min-h-[350px]">
+                            <LineChart
+                                datasets={data}
+                                options={options}
+                            />
+                        </div>
                     ) : (
                         <div>Loading...</div>
                     )}
                 </CardContent>
             </Card>
-            <Card className="w-full flex-2">
+            <Card className="w-full flex-2 card-hover">
                 <CardHeader>
-                    <p className="text-xl font-semibold text-foreground/70 uppercase tracking-wider">
-                        Recent Transactions
-                    </p>
+                    <p className="text-xl font-bold">Recent Transactions</p>
+                    <p className="text-gray-500">Your latest financial activities</p>
                 </CardHeader>
                 <CardContent>
                     <RecentTransactions />
@@ -50,6 +50,8 @@ const Dashboard = () => {
 };
 
 const options: ChartOptions<'line'> = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
         y: {
             ticks: {

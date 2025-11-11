@@ -16,7 +16,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const items = [
     {
@@ -47,6 +47,8 @@ const items = [
 ];
 
 export function AppSidebar() {
+    const location = useLocation();
+
     return (
         <Sidebar>
             <SidebarHeader>
@@ -65,6 +67,9 @@ export function AppSidebar() {
                                     key={item.title}
                                 >
                                     <SidebarMenuButton
+                                        isActive={
+                                            location.pathname === item.url
+                                        }
                                         className="pl-8 text-md"
                                         size="lg"
                                         asChild
@@ -94,7 +99,7 @@ export function AppSidebar() {
                     ></img>
                     <div className="flex flex-col">
                         <h2 className="font-semibold">Salem Adams</h2>
-                        <p className="text-sm text-gray-400">
+                        <p className="text-sm text-gray-500">
                             salemadams@gmail.com
                         </p>
                     </div>

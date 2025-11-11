@@ -2,7 +2,7 @@ import { defaults } from 'chart.js';
 import type { ChartData, ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-defaults.maintainAspectRatio = true;
+defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
 type LineChartProps = {
@@ -11,7 +11,12 @@ type LineChartProps = {
 };
 
 const LineChart = ({ datasets, options = {} }: LineChartProps) => {
-    return <Line data={datasets} options={options} />;
+    return (
+        <Line
+            data={datasets}
+            options={options}
+        />
+    );
 };
 
 export default LineChart;
