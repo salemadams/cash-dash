@@ -23,7 +23,6 @@ import { useGlobalDate } from '@/contexts/GlobalDate';
 const Dashboard = () => {
     const globalDate = useGlobalDate();
     const queryClient = useQueryClient();
-    const interval = Interval.Month;
     const chartRef = useRef<any>(null);
     const [visibleDatasets, setVisibleDatasets] = useState<
         Record<string, boolean>
@@ -38,15 +37,15 @@ const Dashboard = () => {
     });
 
     const { data } = useQuery({
-        queryKey: ['transactions', globalDate.startDate, globalDate.endDate],
+        queryKey: ['transactions', globalDate.startDate, globalDate.endDate, globalDate.interval],
         queryFn: () =>
-            getAllTransactions(globalDate.startDate, globalDate.endDate),
+            getAllTransactions(globalDate.startDate, globalDate.endDate, globalDate.interval),
         select: (data: Transaction[]) =>
             formatLineChartData(
                 data,
                 globalDate.startDate,
                 globalDate.endDate,
-                interval
+                globalDate.interval
             ),
     });
 
@@ -133,7 +132,7 @@ const Dashboard = () => {
 
                         // Immediately set the query data to prevent refetch
                         queryClient.setQueryData(
-                            ['transactions', newStartDate, newEndDate],
+                            ['transactions', newStartDate, newEndDate, globalDate.interval],
                             currentData
                         );
                     },
@@ -166,7 +165,7 @@ const Dashboard = () => {
                             </p>
                             <p className="text-gray-500">
                                 Last {data?.labels?.length ?? 0}{' '}
-                                {Interval[interval]}
+                                {Interval[globalDate.interval]}
                                 {data?.labels?.length &&
                                     data.labels.length > 1 &&
                                     's'}{' '}

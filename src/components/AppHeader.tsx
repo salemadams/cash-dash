@@ -1,6 +1,7 @@
 import { ModeToggle } from '@/contexts/ModeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { GlobalDateSelector } from './GlobalDateSelector';
+import { IntervalSelector } from './IntervalSelector';
 
 const AppHeader = () => {
     return (
@@ -23,6 +24,9 @@ const AppHeader = () => {
                     label="End Date"
                     dateType="end"
                 />
+                <div className="pt-4.5">
+                    <IntervalSelector />
+                </div>
                 <div className="pt-4.5">
                     <ModeToggle />
                 </div>
