@@ -7,26 +7,37 @@ const TransactionCard = ({
     total,
     type,
     children,
+    formatter = (value: number) => USDollar.format(value),
+    labelPosition = 'bottom',
 }: {
     total: number | undefined;
     type: string;
-    children: ReactNode;
+    children?: ReactNode;
+    formatter?: (value: number) => string;
+    labelPosition?: 'top' | 'bottom';
 }) => {
     return (
         <Card className="flex-1 min-w-[250px] h-full shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="flex items-center h-full p-6 relative">
                 {children}
-                <div className="flex flex-col pl-20 gap-2 w-full">
+                <div className={`flex flex-col gap-2 w-full ${children ? 'pl-20' : ''}`}>
+                    {labelPosition === 'top' && (
+                        <p className="text-sm text-left text-gray-500">
+                            {type}
+                        </p>
+                    )}
                     <div className="text-3xl font-bold">
-                        {total ? (
-                            USDollar.format(total)
+                        {total !== undefined ? (
+                            formatter(total)
                         ) : (
                             <Skeleton className="h-9 w-32" />
                         )}
                     </div>
-                    <p className="text-sm text-left text-gray-500">
-                        Total {type}
-                    </p>
+                    {labelPosition === 'bottom' && (
+                        <p className="text-sm text-left text-gray-500">
+                            {type}
+                        </p>
+                    )}
                 </div>
             </CardContent>
         </Card>

@@ -285,7 +285,7 @@ const Dashboard = () => {
                     </p>
                 </CardHeader>
                 <CardContent>
-                    <RecentTransactions />
+                    <RecentTransactions limit={6} />
                 </CardContent>
             </Card>
         </div>

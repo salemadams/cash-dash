@@ -3,6 +3,7 @@ import { ThemeProvider } from './contexts/ThemeProvider';
 import Layout from './layouts/Layout';
 import Dashboard from './pages/Dashboard';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Transactions from './pages/Transactions';
 
 const queryClient = new QueryClient();
 
@@ -21,7 +22,7 @@ function App() {
                         />
                         <Route
                             path="transactions"
-                            element={<div>Transactions</div>}
+                            element={<Transactions />}
                         />
                         <Route
                             path="analytics"

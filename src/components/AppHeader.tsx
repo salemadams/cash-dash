@@ -1,7 +1,7 @@
 import { ModeToggle } from '@/contexts/ModeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { GlobalDateSelector } from './GlobalDateSelector';
-import { IntervalSelector } from './IntervalSelector';
+import { GlobalDateSelector } from './ui/global-date-selector';
+import { IntervalSelector } from './ui/interval-selector';
 
 const AppHeader = () => {
     return (

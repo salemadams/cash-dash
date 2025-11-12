@@ -1,5 +1,5 @@
 import { useGlobalDate } from '@/contexts/GlobalDate';
-import { DateSelector } from './ui/date-selector';
+import { DateSelector } from './date-selector';
 
 type GlobalDateSelectorProps = {
     label: string;
