@@ -19,6 +19,7 @@ import {
 import { Filter } from 'lucide-react';
 import { Interval } from '@/constants/interval';
 import { useGlobalDate } from '@/contexts/GlobalDate';
+import { interval } from 'date-fns';
 
 const Dashboard = () => {
     const globalDate = useGlobalDate();
@@ -37,9 +38,18 @@ const Dashboard = () => {
     });
 
     const { data } = useQuery({
-        queryKey: ['transactions', globalDate.startDate, globalDate.endDate, globalDate.interval],
+        queryKey: [
+            'transactions',
+            globalDate.startDate,
+            globalDate.endDate,
+            globalDate.interval,
+        ],
         queryFn: () =>
-            getAllTransactions(globalDate.startDate, globalDate.endDate, globalDate.interval),
+            getAllTransactions(
+                globalDate.startDate,
+                globalDate.endDate,
+                globalDate.interval
+            ),
         select: (data: Transaction[]) =>
             formatLineChartData(
                 data,
@@ -116,6 +126,17 @@ const Dashboard = () => {
                         enabled: true,
                     },
                     onZoomComplete: ({ chart }) => {
+                        // Calculate the number of data points in the zoomed range
+                        const minIndex = Math.floor(chart.scales.x.min);
+                        const maxIndex = Math.ceil(chart.scales.x.max);
+                        const selectedRange = maxIndex - minIndex;
+
+                        // Reject zoom if 2 or fewer intervals selected
+                        if (selectedRange < 2) {
+                            chart.resetZoom();
+                            return;
+                        }
+
                         const newStartDate = new Date(
                             chart.scales.x.getLabelForValue(chart.scales.x.min)
                         );
@@ -132,7 +153,12 @@ const Dashboard = () => {
 
                         // Immediately set the query data to prevent refetch
                         queryClient.setQueryData(
-                            ['transactions', newStartDate, newEndDate, globalDate.interval],
+                            [
+                                'transactions',
+                                newStartDate,
+                                newEndDate,
+                                globalDate.interval,
+                            ],
                             currentData
                         );
                     },
