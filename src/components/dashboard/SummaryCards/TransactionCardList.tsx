@@ -8,9 +8,18 @@ const TransactionCards = () => {
     const globalDate = useGlobalDate();
 
     const { data: totals } = useQuery({
-        queryKey: ['totals', globalDate.startDate, globalDate.endDate],
+        queryKey: [
+            'transactions',
+            globalDate.startDate,
+            globalDate.endDate,
+            globalDate.interval,
+        ],
         queryFn: () =>
-            getAllTransactions(globalDate.startDate, globalDate.endDate),
+            getAllTransactions(
+                globalDate.startDate,
+                globalDate.endDate,
+                globalDate.interval
+            ),
         select: (data) => {
             return data.reduce((acc, transaction) => {
                 const type = transaction.type;

@@ -10,20 +10,11 @@ export const formatLineChartData = (
     endDate: Date,
     interval: Interval
 ): ChartData<'line'> => {
-    // Sort transactions by date in ascending order and filter by start/end
-    const sortedData = [...data]
-        .filter((t) => {
-            const transactionDate = new Date(t.date).getTime();
-            return (
-                transactionDate >= startDate.getTime() - interval &&
-                transactionDate <= endDate.getTime()
-            );
-        })
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-        .map((t) => ({
-            ...t,
-            date: new Date(t.date).getTime(),
-        }));
+    // Server already filtered and sorted data by date ascending
+    const sortedData = data.map((t) => ({
+        ...t,
+        date: new Date(t.date).getTime(),
+    }));
 
     // Get unique dates for labels
     const labels: string[] = [];

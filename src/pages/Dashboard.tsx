@@ -19,7 +19,6 @@ import {
 import { Filter } from 'lucide-react';
 import { Interval } from '@/constants/interval';
 import { useGlobalDate } from '@/contexts/GlobalDate';
-import { interval } from 'date-fns';
 
 const Dashboard = () => {
     const globalDate = useGlobalDate();
@@ -36,6 +35,7 @@ const Dashboard = () => {
         startDate: globalDate.startDate,
         endDate: globalDate.endDate,
     });
+    const isZoomingRef = useRef(false);
 
     const { data } = useQuery({
         queryKey: [
@@ -82,12 +82,20 @@ const Dashboard = () => {
     const handleResetZoom = () => {
         if (!chartRef.current) return;
 
+        // Set flag to prevent onZoomComplete from firing
+        isZoomingRef.current = true;
+
         // Reset chart zoom
         chartRef.current.resetZoom();
 
         // Restore original date range
         globalDate.setStartDate(baseDateRange.startDate);
         globalDate.setEndDate(baseDateRange.endDate);
+
+        // Reset flag after a short delay
+        setTimeout(() => {
+            isZoomingRef.current = false;
+        }, 100);
     };
 
     // Update base date range when data is fetched (not from zoom)
@@ -97,7 +105,6 @@ const Dashboard = () => {
 
         const chart = chartRef.current;
         const isZoomed = chart.getZoomLevel && chart.getZoomLevel() > 1;
-
         if (!isZoomed) {
             setBaseDateRange({
                 startDate: globalDate.startDate,
@@ -126,6 +133,11 @@ const Dashboard = () => {
                         enabled: true,
                     },
                     onZoomComplete: ({ chart }) => {
+                        // Ignore if we're in the middle of a reset
+                        if (isZoomingRef.current) {
+                            return;
+                        }
+
                         // Calculate the number of data points in the zoomed range
                         const minIndex = Math.floor(chart.scales.x.min);
                         const maxIndex = Math.ceil(chart.scales.x.max);
@@ -133,7 +145,9 @@ const Dashboard = () => {
 
                         // Reject zoom if 2 or fewer intervals selected
                         if (selectedRange < 2) {
+                            isZoomingRef.current = true;
                             chart.resetZoom();
+                            isZoomingRef.current = false;
                             return;
                         }
 
