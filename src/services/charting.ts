@@ -56,13 +56,13 @@ export const formatLineChartData = (
         // For each date label, find the corresponding transaction or use 0
         const dataPoints = labels.map((date) => {
             const dateToMs = new Date(date).getTime();
-            const transactions = sortedData.filter(
-                (t) =>
+            const transactions = sortedData.filter((t) => {
+                return (
                     t.date >= dateToMs - interval &&
                     t.date < dateToMs &&
                     t.type === type
-            );
-
+                );
+            });
             if (transactions.length > 0) {
                 const total = transactions.reduce((acc, transaction) => {
                     return acc + Math.abs(transaction.amount);

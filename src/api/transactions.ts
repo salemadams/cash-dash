@@ -1,19 +1,27 @@
+import { Interval } from '@/constants/interval';
 import type { Transaction } from '@/types/transaction';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const getAllTransactions = async (startDate?: Date, endDate?: Date) => {
+export const getAllTransactions = async (
+    startDate?: Date,
+    endDate?: Date,
+    interval: Interval = Interval.Month
+) => {
     const res = await fetch(`${API_URL}/transactions`);
     if (!res.ok) throw new Error('Failed to retrieve transactions');
 
-    let data = await res.json() as Transaction[];
+    let data = (await res.json()) as Transaction[];
 
     // Filter by date range on the client side
     if (startDate || endDate) {
-        data = data.filter(transaction => {
+        data = data.filter((transaction) => {
             const transactionDate = new Date(transaction.date);
 
-            if (startDate && transactionDate < startDate) {
+            if (
+                startDate &&
+                transactionDate < new Date(startDate.getTime() - interval)
+            ) {
                 return false;
             }
 

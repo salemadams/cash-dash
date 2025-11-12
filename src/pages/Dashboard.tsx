@@ -39,7 +39,8 @@ const Dashboard = () => {
 
     const { data } = useQuery({
         queryKey: ['transactions', globalDate.startDate, globalDate.endDate],
-        queryFn: () => getAllTransactions(globalDate.startDate, globalDate.endDate),
+        queryFn: () =>
+            getAllTransactions(globalDate.startDate, globalDate.endDate),
         select: (data: Transaction[]) =>
             formatLineChartData(
                 data,
