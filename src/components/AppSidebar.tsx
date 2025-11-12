@@ -1,11 +1,4 @@
 import {
-    Home,
-    Settings,
-    DollarSign,
-    TrendingUp,
-    CreditCard,
-} from 'lucide-react';
-import {
     Sidebar,
     SidebarContent,
     SidebarFooter,
@@ -16,35 +9,8 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { Routes } from '@/constants/routes';
 import { Link, useLocation } from 'react-router-dom';
-
-const items = [
-    {
-        title: 'Dashboard',
-        url: '/',
-        icon: Home,
-    },
-    {
-        title: 'Transactions',
-        url: '/transactions',
-        icon: DollarSign,
-    },
-    {
-        title: 'Analytics',
-        url: '/analytics',
-        icon: TrendingUp,
-    },
-    {
-        title: 'Cards',
-        url: '/cards',
-        icon: CreditCard,
-    },
-    {
-        title: 'Settings',
-        url: '/settings',
-        icon: Settings,
-    },
-];
 
 export function AppSidebar() {
     const location = useLocation();
@@ -61,7 +27,7 @@ export function AppSidebar() {
                 <SidebarGroup>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {items.map((item) => (
+                            {Routes.map((item) => (
                                 <SidebarMenuItem
                                     className="pr-2 pl-2"
                                     key={item.title}

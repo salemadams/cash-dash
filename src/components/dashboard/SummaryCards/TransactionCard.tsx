@@ -5,13 +5,13 @@ import { ReactNode } from 'react';
 
 const TransactionCard = ({
     total,
-    type,
+    label: type,
     children,
     formatter = (value: number) => USDollar.format(value),
     labelPosition = 'bottom',
 }: {
     total: number | undefined;
-    type: string;
+    label: string;
     children?: ReactNode;
     formatter?: (value: number) => string;
     labelPosition?: 'top' | 'bottom';
@@ -20,7 +20,11 @@ const TransactionCard = ({
         <Card className="flex-1 min-w-[250px] h-full shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="flex items-center h-full p-6 relative">
                 {children}
-                <div className={`flex flex-col gap-2 w-full ${children ? 'pl-20' : ''}`}>
+                <div
+                    className={`flex flex-col gap-2 w-full ${
+                        children ? 'pl-20' : ''
+                    }`}
+                >
                     {labelPosition === 'top' && (
                         <p className="text-sm text-left text-gray-500">
                             {type}

@@ -59,6 +59,11 @@ const Dashboard = () => {
             ),
     });
 
+    const { data: recentTransactionsData } = useQuery({
+        queryKey: ['transactions', 'recent'],
+        queryFn: () => getAllTransactions(undefined, undefined, undefined, 6),
+    });
+
     const toggleDataset = (label: string) => {
         if (!chartRef.current) return;
 
@@ -285,7 +290,11 @@ const Dashboard = () => {
                     </p>
                 </CardHeader>
                 <CardContent>
-                    <RecentTransactions limit={6} />
+                    {recentTransactionsData ? (
+                        <RecentTransactions data={recentTransactionsData} />
+                    ) : (
+                        <div>Loading...</div>
+                    )}
                 </CardContent>
             </Card>
         </div>

@@ -1,33 +1,20 @@
-import { getAllTransactions } from '@/api/transactions';
-import { useQuery } from '@tanstack/react-query';
+import { Transaction } from '@/types/transaction';
 import { DataTable } from './DataTable';
 import { columns } from './columns';
 
 const RecentTransactions = ({
-    limit,
+    data,
     enablePagination = false,
 }: {
-    limit?: number;
+    data: Transaction[];
     enablePagination?: boolean;
 }) => {
-    const { data } = useQuery({
-        queryKey: ['transactions', 'recent'],
-        queryFn: () =>
-            getAllTransactions(undefined, undefined, undefined, limit),
-    });
-
     return (
-        <>
-            {data ? (
-                <DataTable
-                    enablePagination={enablePagination}
-                    columns={columns}
-                    data={data}
-                />
-            ) : (
-                <div>Loading</div>
-            )}
-        </>
+        <DataTable
+            enablePagination={enablePagination}
+            columns={columns}
+            data={data}
+        />
     );
 };
 

@@ -32,7 +32,7 @@ const TransactionCards = () => {
         <div className="flex flex-wrap gap-6 justify-between">
             <TransactionCard
                 total={totals?.income}
-                type="Income"
+                label="Income"
             >
                 <div className="absolute left-6 flex items-center justify-center w-16 h-16 rounded-lg bg-green-100">
                     <TrendingUp className="w-8 h-8 text-green-600" />
@@ -41,7 +41,7 @@ const TransactionCards = () => {
 
             <TransactionCard
                 total={totals?.expense}
-                type="Expenses"
+                label="Expenses"
             >
                 <div className="absolute left-6 flex items-center justify-center w-16 h-16 rounded-lg bg-red-100">
                     <TrendingDown className="w-8 h-8 text-red-600" />
@@ -49,7 +49,7 @@ const TransactionCards = () => {
             </TransactionCard>
             <TransactionCard
                 total={totals?.savings}
-                type="Savings"
+                label="Savings"
             >
                 <div className="absolute left-6 flex items-center justify-center w-16 h-16 rounded-lg bg-blue-100">
                     <PiggyBank className="w-8 h-8 text-blue-600" />

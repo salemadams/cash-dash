@@ -1,12 +1,20 @@
 import { getAllTransactions } from '@/api/transactions';
 import RecentTransactions from '@/components/dashboard/RecentTransactions/RecentTransactions';
 import TransactionCard from '@/components/dashboard/SummaryCards/TransactionCard';
+import { Input } from '@/components/ui/input';
 import { TransactionType } from '@/constants/transactions';
 import { useGlobalDate } from '@/contexts/GlobalDate';
+import { Transaction } from '@/types/transaction';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { IoMdSearch } from 'react-icons/io';
 
 const Transactions = () => {
     const globalDate = useGlobalDate();
+    const [searchInput, setSearchInput] = useState('');
+    const [filteredData, setFilteredData] = useState<Transaction[] | undefined>(
+        undefined
+    );
 
     const { data } = useQuery({
         queryKey: [
@@ -23,6 +31,22 @@ const Transactions = () => {
             ),
     });
 
+    useEffect(() => {
+        setFilteredData(
+            data?.filter((t) => {
+                return (
+                    t.category
+                        ?.toLowerCase()
+                        .includes(searchInput.toLocaleLowerCase()) ||
+                    t.description
+                        .toLowerCase()
+                        .includes(searchInput.toLocaleLowerCase()) ||
+                    t.merchant.includes(searchInput.toLocaleLowerCase())
+                );
+            })
+        );
+    }, [searchInput, data]);
+
     const income = data?.reduce((acc, t) => {
         return t.type === TransactionType.Income ? acc + t.amount : acc;
     }, 0);
@@ -38,30 +62,49 @@ const Transactions = () => {
 
     return (
         <div className="flex flex-col min-h-full p-5 gap-6">
+            <div className="relative">
+                <IoMdSearch
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    size={20}
+                />
+                <Input
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    placeholder="Search transactions, merchants, description..."
+                    className="pl-10"
+                />
+            </div>
             <div className="flex flex-wrap gap-6 justify-between">
                 <TransactionCard
                     total={data?.length}
-                    type="Total Transactions"
+                    label="Total Transactions"
                     formatter={(value) => value.toLocaleString()}
                     labelPosition="top"
                 />
                 <TransactionCard
                     total={income}
-                    type="Total Income"
+                    label="Total Income"
                     labelPosition="top"
                 />
                 <TransactionCard
                     total={expenses}
-                    type="Total Expenses"
+                    label="Total Expenses"
                     labelPosition="top"
                 />
                 <TransactionCard
                     total={net}
-                    type="Net"
+                    label={`Net ${net && net > 0 ? 'Gain' : 'Loss'}`}
                     labelPosition="top"
                 />
             </div>
-            <RecentTransactions enablePagination={true} />
+            {filteredData ? (
+                <RecentTransactions
+                    data={filteredData}
+                    enablePagination={true}
+                />
+            ) : (
+                <div>Loading...</div>
+            )}
         </div>
     );
 };
