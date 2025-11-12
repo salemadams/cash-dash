@@ -7,7 +7,7 @@ import { Transaction } from '@/types/transaction';
 const RecentTransactions = () => {
     const { data } = useQuery({
         queryKey: ['transactions'],
-        queryFn: getAllTransactions,
+        queryFn: () => getAllTransactions(),
         select: (data: Transaction[]) => {
             return data.slice(0, 6);
         },

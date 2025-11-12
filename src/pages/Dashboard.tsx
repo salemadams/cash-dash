@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import RecentTransactions from '@/components/dashboard/RecentTransactions/RecentTransactions';
 import TransactionCards from '@/components/dashboard/SummaryCards/TransactionCardList';
 import { getAllTransactions } from '@/api/transactions';
+import { Transaction } from '@/types/transaction';
 import { formatLineChartData } from '@/services/charting';
 import LineChart from '@/components/charts/LineChart';
 import { ChartDataset, ChartOptions } from 'chart.js';
@@ -38,8 +39,8 @@ const Dashboard = () => {
 
     const { data } = useQuery({
         queryKey: ['transactions', globalDate.startDate, globalDate.endDate],
-        queryFn: getAllTransactions,
-        select: (data) =>
+        queryFn: () => getAllTransactions(globalDate.startDate, globalDate.endDate),
+        select: (data: Transaction[]) =>
             formatLineChartData(
                 data,
                 globalDate.startDate,
