@@ -2,19 +2,19 @@ import { TrendingUp, TrendingDown, PiggyBank } from 'lucide-react';
 import { getAllTransactions } from '@/api/transactions';
 import { useQuery } from '@tanstack/react-query';
 import TransactionCard from './TransactionCard';
+import { useGlobalDate } from '@/contexts/GlobalDate';
 
 const TransactionCards = () => {
+    const globalDate = useGlobalDate();
+
     const { data: totals } = useQuery({
-        queryKey: ['totals'],
-        queryFn: getAllTransactions,
+        queryKey: ['totals', globalDate.startDate, globalDate.endDate],
+        queryFn: () =>
+            getAllTransactions(globalDate.startDate, globalDate.endDate),
         select: (data) => {
             return data.reduce((acc, transaction) => {
                 const type = transaction.type;
-                acc[type] =
-                    (acc[type] || 0) +
-                    (transaction.amount < 0
-                        ? transaction.amount * -1
-                        : transaction.amount);
+                acc[type] = (acc[type] || 0) + Math.abs(transaction.amount);
                 return acc;
             }, {} as Record<string, number>);
         },
