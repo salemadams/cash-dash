@@ -26,10 +26,10 @@ export const Routes = [
         description: 'Analyze your spending patterns and financial trends',
     },
     {
-        title: 'Cards',
-        url: '/cards',
+        title: 'Budget',
+        url: '/budget',
         icon: CreditCard,
-        description: 'Manage your credit and debit cards',
+        description: 'Manage and adjust your personal budgets',
     },
     {
         title: 'Settings',

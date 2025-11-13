@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { IoMdSearch } from 'react-icons/io';
 
-const Transactions = () => {
+const TransactionsPage = () => {
     const globalDate = useGlobalDate();
     const [searchInput, setSearchInput] = useState('');
     const [typeFilter, setTypeFilter] = useState(TransactionType.All);
@@ -176,4 +176,4 @@ const Transactions = () => {
         </div>
     );
 };
-export default Transactions;
+export default TransactionsPage;

@@ -7,7 +7,6 @@ import { Routes } from '@/constants/routes';
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuLabel,
     DropdownMenuTrigger,
 } from './ui/dropdown-menu';
 import { Button } from './ui/button';
@@ -23,7 +22,7 @@ const AppHeader = () => {
     const setDateRange = (months: number) => {
         const endDate = new Date();
         const startDate = new Date();
-        startDate.setMonth(startDate.getMonth() - months);
+        startDate.setMonth(startDate.getMonth() - months + 1);
         globalDate.setStartDate(startDate);
         globalDate.setEndDate(endDate);
     };

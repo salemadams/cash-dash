@@ -16,11 +16,12 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Filter } from 'lucide-react';
+import { Filter, ArrowRight } from 'lucide-react';
 import { Interval } from '@/constants/interval';
 import { useGlobalDate } from '@/contexts/GlobalDate';
+import { Link } from 'react-router-dom';
 
-const Dashboard = () => {
+const DashboardPage = () => {
     const globalDate = useGlobalDate();
     const queryClient = useQueryClient();
     const chartRef = useRef<any>(null);
@@ -284,10 +285,23 @@ const Dashboard = () => {
             </Card>
             <Card className="w-full flex-2 card-hover">
                 <CardHeader>
-                    <p className="text-xl font-bold">Recent Transactions</p>
-                    <p className="text-gray-500">
-                        Your latest financial activities
-                    </p>
+                    <div className="flex justify-between items-start">
+                        <div>
+                            <p className="text-xl font-bold">
+                                Recent Transactions
+                            </p>
+                            <p className="text-gray-500">
+                                Your latest financial activities
+                            </p>
+                        </div>
+                        <Link
+                            to="/transactions"
+                            className="flex items-center gap-1 pt-1 text-blue-600 hover:text-blue-700 text-sm font-medium"
+                        >
+                            View All Transactions
+                            <ArrowRight className="h-4 w-4" />
+                        </Link>
+                    </div>
                 </CardHeader>
                 <CardContent>
                     {recentTransactionsData ? (
@@ -301,4 +315,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default DashboardPage;

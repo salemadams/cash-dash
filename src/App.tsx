@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeProvider';
 import Layout from './layouts/Layout';
-import Dashboard from './pages/Dashboard';
+import DashboardPage from './pages/Dashboard';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Transactions from './pages/Transactions';
+import TransactionsPage from './pages/Transactions';
+import BudgetPage from './pages/Budget';
 
 const queryClient = new QueryClient();
 
@@ -18,19 +19,19 @@ function App() {
                     >
                         <Route
                             index
-                            element={<Dashboard />}
+                            element={<DashboardPage />}
                         />
                         <Route
                             path="transactions"
-                            element={<Transactions />}
+                            element={<TransactionsPage />}
                         />
                         <Route
                             path="analytics"
                             element={<div>Analytics</div>}
                         />
                         <Route
-                            path="cards"
-                            element={<div>Cards</div>}
+                            path="budget"
+                            element={<BudgetPage></BudgetPage>}
                         />
                         <Route
                             path="settings"

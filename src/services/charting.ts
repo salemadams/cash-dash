@@ -19,7 +19,8 @@ export const formatLineChartData = (
     // Get unique dates for labels
     const labels: string[] = [];
     let current = new Date(startDate);
-    while (current.getTime() < endDate.getTime()) {
+
+    while (current.getTime() <= endDate.getTime()) {
         labels.push(current.toLocaleDateString());
 
         // Increment based on interval type
@@ -34,10 +35,19 @@ export const formatLineChartData = (
             // For Day/Week, add milliseconds
             current = new Date(current.getTime() + interval);
         }
-    }
 
-    // Always include the endDate as the last label
-    labels.push(endDate.toLocaleDateString());
+        // If the next increment would exactly equal endDate, we're done
+        // If it would exceed endDate, add endDate as final label for leftover time
+        if (current.getTime() > endDate.getTime()) {
+            const lastLabel = labels[labels.length - 1];
+            const endDateLabel = endDate.toLocaleDateString();
+            // Only add endDate if it's different from the last label
+            if (lastLabel !== endDateLabel) {
+                labels.push(endDateLabel);
+            }
+            break;
+        }
+    }
 
     // Get unique transaction types
     const types = Array.from(new Set(sortedData.map((t) => t.type)));
