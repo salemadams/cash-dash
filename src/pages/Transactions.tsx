@@ -41,7 +41,9 @@ const Transactions = () => {
                     t.description
                         .toLowerCase()
                         .includes(searchInput.toLocaleLowerCase()) ||
-                    t.merchant.includes(searchInput.toLocaleLowerCase())
+                    t.merchant
+                        .toLowerCase()
+                        .includes(searchInput.toLocaleLowerCase())
                 );
             })
         );
@@ -70,7 +72,7 @@ const Transactions = () => {
                 <Input
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
-                    placeholder="Search transactions, merchants, description..."
+                    placeholder="Search categories, merchants, description..."
                     className="pl-10"
                 />
             </div>
