@@ -11,13 +11,13 @@ export const Routes = [
         title: 'Dashboard',
         url: '/',
         icon: Home,
-        description: 'Welcome back Salem! Here\'s your financial summary!'
+        description: "Welcome back Salem! Here's your financial summary!",
     },
     {
         title: 'Transactions',
         url: '/transactions',
         icon: DollarSign,
-        description: 'View and search all your financial transactions',
+        description: 'View and search all of your financial transactions',
     },
     {
         title: 'Analytics',

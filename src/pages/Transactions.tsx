@@ -1,6 +1,7 @@
 import { getAllTransactions } from '@/api/transactions';
 import RecentTransactions from '@/components/dashboard/RecentTransactions/RecentTransactions';
 import TransactionCard from '@/components/dashboard/SummaryCards/TransactionCard';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { TransactionType } from '@/constants/transactions';
 import { useGlobalDate } from '@/contexts/GlobalDate';
@@ -12,6 +13,7 @@ import { IoMdSearch } from 'react-icons/io';
 const Transactions = () => {
     const globalDate = useGlobalDate();
     const [searchInput, setSearchInput] = useState('');
+    const [typeFilter, setTypeFilter] = useState(TransactionType.All);
     const [filteredData, setFilteredData] = useState<Transaction[] | undefined>(
         undefined
     );
@@ -34,7 +36,7 @@ const Transactions = () => {
     useEffect(() => {
         setFilteredData(
             data?.filter((t) => {
-                return (
+                const matchesSearch =
                     t.category
                         ?.toLowerCase()
                         .includes(searchInput.toLocaleLowerCase()) ||
@@ -43,11 +45,13 @@ const Transactions = () => {
                         .includes(searchInput.toLocaleLowerCase()) ||
                     t.merchant
                         .toLowerCase()
-                        .includes(searchInput.toLocaleLowerCase())
-                );
+                        .includes(searchInput.toLocaleLowerCase());
+                if (typeFilter === TransactionType.All) return matchesSearch;
+                const matchesType = t.type === typeFilter;
+                return matchesSearch && matchesType;
             })
         );
-    }, [searchInput, data]);
+    }, [searchInput, data, typeFilter]);
 
     const income = data?.reduce((acc, t) => {
         return t.type === TransactionType.Income ? acc + t.amount : acc;
@@ -75,6 +79,68 @@ const Transactions = () => {
                     placeholder="Search categories, merchants, description..."
                     className="pl-10"
                 />
+            </div>
+            <div className="flex flex-row gap-2">
+                <Button
+                    onClick={() => setTypeFilter(TransactionType.All)}
+                    variant={
+                        typeFilter === TransactionType.All
+                            ? 'default'
+                            : 'outline'
+                    }
+                    className={`rounded-full w-13 ${
+                        typeFilter === TransactionType.All
+                            ? 'bg-purple-600 hover:bg-purple-700'
+                            : 'border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white'
+                    }`}
+                >
+                    All
+                </Button>
+                <Button
+                    onClick={() => setTypeFilter(TransactionType.Income)}
+                    variant={
+                        typeFilter === TransactionType.Income
+                            ? 'default'
+                            : 'outline'
+                    }
+                    className={`rounded-full w-20 ${
+                        typeFilter === TransactionType.Income
+                            ? 'bg-green-600 hover:bg-green-700'
+                            : 'border-green-600 text-green-600 hover:bg-green-600 hover:text-white'
+                    }`}
+                >
+                    Income
+                </Button>
+                <Button
+                    onClick={() => setTypeFilter(TransactionType.Expense)}
+                    variant={
+                        typeFilter === TransactionType.Expense
+                            ? 'default'
+                            : 'outline'
+                    }
+                    className={`rounded-full w-20 ${
+                        typeFilter === TransactionType.Expense
+                            ? 'bg-red-600 hover:bg-red-700'
+                            : 'border-red-600 text-red-600 hover:bg-red-600 hover:text-white'
+                    }`}
+                >
+                    Expenses
+                </Button>
+                <Button
+                    onClick={() => setTypeFilter(TransactionType.Savings)}
+                    variant={
+                        typeFilter === TransactionType.Savings
+                            ? 'default'
+                            : 'outline'
+                    }
+                    className={`rounded-full w-20 ${
+                        typeFilter === TransactionType.Savings
+                            ? 'bg-blue-600 hover:bg-blue-700'
+                            : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+                    }`}
+                >
+                    Savings
+                </Button>
             </div>
             <div className="flex flex-wrap gap-6 justify-between">
                 <TransactionCard
