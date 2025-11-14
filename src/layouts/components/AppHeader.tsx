@@ -1,15 +1,15 @@
-import { ModeToggle } from '@/contexts/ModeToggle';
+import { ModeToggle } from '@/components/theme/ModeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { GlobalDateSelector } from './ui/global-date-selector';
-import { IntervalSelector } from './ui/interval-selector';
+import { GlobalDateSelector } from '@/components/features/global-date-selector';
+import { IntervalSelector } from '@/components/features/interval-selector';
 import { useLocation } from 'react-router-dom';
 import { Routes } from '@/constants/routes';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuTrigger,
-} from './ui/dropdown-menu';
-import { Button } from './ui/button';
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 import { Calendar } from 'lucide-react';
 import { useGlobalDate } from '@/contexts/GlobalDate';
 

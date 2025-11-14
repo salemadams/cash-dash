@@ -1,7 +1,7 @@
 import { SidebarProvider } from '@/components/ui/sidebar';
-import { AppSidebar } from '@/components/AppSidebar';
+import { AppSidebar } from '@/layouts/components/AppSidebar';
 import { Outlet } from 'react-router-dom';
-import AppHeader from '@/components/AppHeader';
+import AppHeader from '@/layouts/components/AppHeader';
 import { GlobalDateProvider } from '@/contexts/GlobalDate';
 
 export default function Layout() {
