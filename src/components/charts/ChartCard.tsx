@@ -1,0 +1,60 @@
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import LineChart from '@/components/charts/LineChart';
+import ChartControls from '@/components/charts/ChartControls';
+import { Interval } from '@/constants/interval';
+import { ChartOptions } from 'chart.js';
+
+type ChartCardProps = {
+    title: string;
+    subtitle: string;
+    chartRef: React.RefObject<any>;
+    data: any;
+    options: ChartOptions<'line'>;
+    visibleDatasets: Record<string, boolean>;
+    onResetZoom: () => void;
+    onToggleDataset: (label: string) => void;
+};
+
+const ChartCard = ({
+    title,
+    subtitle,
+    chartRef,
+    data,
+    options,
+    visibleDatasets,
+    onResetZoom,
+    onToggleDataset,
+}: ChartCardProps) => {
+    return (
+        <Card className="w-full flex-2 card-hover">
+            <CardHeader>
+                <div className="flex justify-between items-start">
+                    <div>
+                        <p className="text-xl font-bold">{title}</p>
+                        <p className="text-gray-500">{subtitle}</p>
+                    </div>
+                    <ChartControls
+                        onResetZoom={onResetZoom}
+                        visibleDatasets={visibleDatasets}
+                        onToggleDataset={onToggleDataset}
+                    />
+                </div>
+            </CardHeader>
+            <CardContent className="h-full">
+                {data ? (
+                    <div className="w-full h-full min-h-[350px]">
+                        <LineChart
+                            ref={chartRef}
+                            datasets={data}
+                            options={options}
+                        />
+                    </div>
+                ) : (
+                    <div>Loading...</div>
+                )}
+            </CardContent>
+        </Card>
+    );
+};
+
+export default ChartCard;

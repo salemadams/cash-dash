@@ -1,7 +1,6 @@
 import { getAllTransactions } from '@/api/transactions';
 import RecentTransactions from '@/components/dashboard/RecentTransactions/RecentTransactions';
 import TransactionCard from '@/components/dashboard/SummaryCards/TransactionCard';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { TransactionType } from '@/constants/transactions';
 import { useGlobalDate } from '@/contexts/GlobalDate';
@@ -9,6 +8,14 @@ import { Transaction } from '@/types/transaction';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { IoMdSearch } from 'react-icons/io';
+import TransactionTypeFilter from '@/components/transactions/TransactionTypeFilter';
+
+const filterOptions = [
+    { type: TransactionType.All, label: 'All', color: 'purple' as const },
+    { type: TransactionType.Income, label: 'Income', color: 'green' as const },
+    { type: TransactionType.Expense, label: 'Expenses', color: 'red' as const },
+    { type: TransactionType.Savings, label: 'Savings', color: 'blue' as const },
+];
 
 const TransactionsPage = () => {
     const globalDate = useGlobalDate();
@@ -81,66 +88,15 @@ const TransactionsPage = () => {
                 />
             </div>
             <div className="flex flex-row gap-2">
-                <Button
-                    onClick={() => setTypeFilter(TransactionType.All)}
-                    variant={
-                        typeFilter === TransactionType.All
-                            ? 'default'
-                            : 'outline'
-                    }
-                    className={`rounded-full w-13 ${
-                        typeFilter === TransactionType.All
-                            ? 'bg-purple-600 hover:bg-purple-700'
-                            : 'border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white'
-                    }`}
-                >
-                    All
-                </Button>
-                <Button
-                    onClick={() => setTypeFilter(TransactionType.Income)}
-                    variant={
-                        typeFilter === TransactionType.Income
-                            ? 'default'
-                            : 'outline'
-                    }
-                    className={`rounded-full w-20 ${
-                        typeFilter === TransactionType.Income
-                            ? 'bg-green-600 hover:bg-green-700'
-                            : 'border-green-600 text-green-600 hover:bg-green-600 hover:text-white'
-                    }`}
-                >
-                    Income
-                </Button>
-                <Button
-                    onClick={() => setTypeFilter(TransactionType.Expense)}
-                    variant={
-                        typeFilter === TransactionType.Expense
-                            ? 'default'
-                            : 'outline'
-                    }
-                    className={`rounded-full w-20 ${
-                        typeFilter === TransactionType.Expense
-                            ? 'bg-red-600 hover:bg-red-700'
-                            : 'border-red-600 text-red-600 hover:bg-red-600 hover:text-white'
-                    }`}
-                >
-                    Expenses
-                </Button>
-                <Button
-                    onClick={() => setTypeFilter(TransactionType.Savings)}
-                    variant={
-                        typeFilter === TransactionType.Savings
-                            ? 'default'
-                            : 'outline'
-                    }
-                    className={`rounded-full w-20 ${
-                        typeFilter === TransactionType.Savings
-                            ? 'bg-blue-600 hover:bg-blue-700'
-                            : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
-                    }`}
-                >
-                    Savings
-                </Button>
+                {filterOptions.map((option) => (
+                    <TransactionTypeFilter
+                        key={option.type}
+                        label={option.label}
+                        isActive={typeFilter === option.type}
+                        onClick={() => setTypeFilter(option.type)}
+                        color={option.color}
+                    />
+                ))}
             </div>
             <div className="flex flex-wrap gap-6 justify-between">
                 <TransactionCard
