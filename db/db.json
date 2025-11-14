@@ -880,5 +880,46 @@
             "merchant": "Retirement Fund",
             "paymentMethod": "direct wire"
         }
+    ],
+    "budgets": [
+        {
+            "id": 1,
+            "name": "Grocery & Dining",
+            "categories": ["food"],
+            "amount": 600,
+            "startMonth": "2025-01",
+            "recurring": true,
+            "rollover": false,
+            "alertThreshold": 85,
+            "isActive": true,
+            "createdAt": "2025-01-01T00:00:00Z",
+            "updatedAt": "2025-01-01T00:00:00Z"
+        },
+        {
+            "id": 2,
+            "name": "Fun & Leisure",
+            "categories": ["entertainment", "shopping"],
+            "amount": 400,
+            "startMonth": "2025-01",
+            "recurring": true,
+            "rollover": true,
+            "alertThreshold": 80,
+            "isActive": true,
+            "createdAt": "2025-01-01T00:00:00Z",
+            "updatedAt": "2025-01-01T00:00:00Z"
+        },
+        {
+            "id": 3,
+            "name": "Fixed Expenses",
+            "categories": ["rent", "utilities"],
+            "amount": 650,
+            "startMonth": "2025-01",
+            "recurring": true,
+            "rollover": false,
+            "alertThreshold": 90,
+            "isActive": true,
+            "createdAt": "2025-01-01T00:00:00Z",
+            "updatedAt": "2025-01-01T00:00:00Z"
+        }
     ]
 }
