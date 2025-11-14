@@ -66,6 +66,12 @@ const BudgetPage = () => {
     const percentageUsed =
         totalBudgeted > 0 ? (totalSpent / totalBudgeted) * 100 : 0;
 
+    const getBarColor = (percentage: number) => {
+        if (percentage >= 90) return 'bg-red-600';
+        if (percentage >= 80) return 'bg-yellow-600';
+        return '';
+    };
+
     return (
         <div className="flex flex-col h-full gap-7 p-4">
             <Card className="w-full">
@@ -80,6 +86,7 @@ const BudgetPage = () => {
                 <CardContent>
                     <Progress
                         className="h-5"
+                        indicatorClassName={getBarColor(percentageUsed)}
                         value={percentageUsed}
                     />
                 </CardContent>
@@ -150,6 +157,9 @@ const BudgetPage = () => {
                                         </span>
                                         <Progress
                                             className="h-3 w-4/5 justify-self-end"
+                                            indicatorClassName={getBarColor(
+                                                percentageUsed
+                                            )}
                                             value={percentageUsed}
                                         />
                                     </AccordionTrigger>
