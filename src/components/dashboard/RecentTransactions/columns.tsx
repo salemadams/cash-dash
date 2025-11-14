@@ -3,34 +3,7 @@ import { capitalize } from '@/lib/format';
 import type { Transaction } from '@/types/transaction';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
-import { MdAttachMoney } from 'react-icons/md';
-import { FaRegCreditCard } from 'react-icons/fa';
-import { AiOutlineBank } from 'react-icons/ai';
-
-// Helper functions for transaction type styling
-const getBackgroundColor = (type: string) => {
-    if (type === 'income') return 'bg-green-100';
-    if (type === 'expense') return 'bg-red-100';
-    return 'bg-blue-100';
-};
-
-const getTextColor = (type: string) => {
-    if (type === 'income') return 'text-green-600';
-    if (type === 'expense') return 'text-red-600';
-    return 'text-blue-600';
-};
-
-const getBadgeStyles = (type: string) => {
-    if (type === 'income') return 'bg-green-100 text-green-800';
-    if (type === 'expense') return 'bg-red-100 text-red-800';
-    return 'bg-blue-100 text-blue-800';
-};
-
-const getTypeIcon = (type: string) => {
-    if (type === 'income') return <MdAttachMoney size={20} />;
-    if (type === 'expense') return <FaRegCreditCard size={20} />;
-    return <AiOutlineBank size={20} />;
-};
+import { getBackgroundColor, getTextColor, getBadgeStyles, getTypeIcon } from '@/services/transactionStyles';
 
 export const columns: ColumnDef<Transaction>[] = [
     {

@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import TransactionTypeFilter from '@/components/transactions/TransactionTypeFilter';
+import { filterTransactions, calculateTransactionTotals } from '@/services/transactions';
 
 const filterOptions = [
     { type: TransactionType.All, label: 'All', color: 'purple' as const },
@@ -41,37 +42,15 @@ const TransactionsPage = () => {
     });
 
     useEffect(() => {
-        setFilteredData(
-            data?.filter((t) => {
-                const matchesSearch =
-                    t.category
-                        ?.toLowerCase()
-                        .includes(searchInput.toLocaleLowerCase()) ||
-                    t.description
-                        .toLowerCase()
-                        .includes(searchInput.toLocaleLowerCase()) ||
-                    t.merchant
-                        .toLowerCase()
-                        .includes(searchInput.toLocaleLowerCase());
-                if (typeFilter === TransactionType.All) return matchesSearch;
-                const matchesType = t.type === typeFilter;
-                return matchesSearch && matchesType;
-            })
-        );
+        if (data) {
+            setFilteredData(filterTransactions(data, searchInput, typeFilter));
+        }
     }, [searchInput, data, typeFilter]);
 
-    const income = data?.reduce((acc, t) => {
-        return t.type === TransactionType.Income ? acc + t.amount : acc;
-    }, 0);
-
-    const expenses = data?.reduce((acc, t) => {
-        return t.type === TransactionType.Expense ? acc + t.amount : acc;
-    }, 0);
-
-    const net =
-        income !== undefined && expenses !== undefined
-            ? income - Math.abs(expenses)
-            : undefined;
+    const totals = data ? calculateTransactionTotals(data) : undefined;
+    const income = totals?.income;
+    const expenses = totals?.expenses;
+    const net = totals?.net;
 
     return (
         <div className="flex flex-col min-h-full p-5 gap-6">

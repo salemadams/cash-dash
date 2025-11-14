@@ -3,6 +3,7 @@ import { getAllTransactions } from '@/api/transactions';
 import { useQuery } from '@tanstack/react-query';
 import TransactionCard from './TransactionCard';
 import { useGlobalDate } from '@/contexts/GlobalDate';
+import { aggregateByType } from '@/services/transactions';
 
 const TransactionCards = () => {
     const globalDate = useGlobalDate();
@@ -20,13 +21,7 @@ const TransactionCards = () => {
                 globalDate.endDate,
                 globalDate.interval
             ),
-        select: (data) => {
-            return data.reduce((acc, transaction) => {
-                const type = transaction.type;
-                acc[type] = (acc[type] || 0) + Math.abs(transaction.amount);
-                return acc;
-            }, {} as Record<string, number>);
-        },
+        select: (data) => aggregateByType(data),
     });
     return (
         <div className="flex flex-wrap gap-6 justify-between">

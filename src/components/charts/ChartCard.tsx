@@ -1,13 +1,12 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import LineChart from '@/components/charts/LineChart';
 import ChartControls from '@/components/charts/ChartControls';
-import { Interval } from '@/constants/interval';
 import { ChartOptions } from 'chart.js';
 
 type ChartCardProps = {
     title: string;
     subtitle: string;
-    chartRef: React.RefObject<any>;
+    chartRef: React.RefObject<unknown>;
     data: any;
     options: ChartOptions<'line'>;
     visibleDatasets: Record<string, boolean>;
