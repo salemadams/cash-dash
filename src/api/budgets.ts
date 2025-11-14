@@ -2,8 +2,13 @@ import { Budget } from '@/types/budget';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const getAllBudgets = async () => {
-    const res = await fetch(`${API_URL}/budgets`);
+export const getAllBudgets = async (month?: string) => {
+    const params = new URLSearchParams();
+
+    if (month) params.append('month', month);
+
+    const url = `${API_URL}/budgets${params.toString() ? `?${params}` : ''}`;
+    const res = await fetch(url);
 
     if (!res.ok) throw new Error('Failed to retrieve budgets');
 

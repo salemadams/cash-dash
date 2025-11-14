@@ -16,20 +16,21 @@ import { getAllBudgets } from '@/api/budgets';
 import { getAllTransactions } from '@/api/transactions';
 import type { Budget } from '@/types/budget';
 import type { Transaction } from '@/types/transaction';
+import { useMemo } from 'react';
 
 const BudgetPage = () => {
+    // Get current month in YYYY-MM format
+    const currentMonth = new Date().toISOString().slice(0, 7);
+
     const { data: budgets } = useQuery({
-        queryKey: ['budgets'],
-        queryFn: getAllBudgets,
+        queryKey: ['budgets', currentMonth],
+        queryFn: () => getAllBudgets(currentMonth),
     });
 
     const { data: transactions } = useQuery({
         queryKey: ['transactions'],
         queryFn: () => getAllTransactions(),
     });
-
-    // Get current month in YYYY-MM format
-    const currentMonth = new Date().toISOString().slice(0, 7);
 
     // Calculate spent amount for a budget
     const calculateSpent = (budget: Budget): number => {
@@ -42,19 +43,28 @@ const BudgetPage = () => {
                     t.type === 'expense' &&
                     t.date.toString().startsWith(currentMonth)
             )
-            .reduce((sum: number, t: Transaction) => sum + Math.abs(t.amount), 0);
+            .reduce((sum, t) => sum + Math.abs(t.amount), 0);
     };
 
-    // Check if budget is active for current month
-    const isBudgetActive = (budget: Budget): boolean => {
-        if (!budget.isActive) return false;
-        if (budget.startMonth > currentMonth) return false;
-        if (!budget.recurring && budget.startMonth !== currentMonth) return false;
-        return true;
-    };
+    // Filter and calculate budget totals
+    const activeBudgets = useMemo(
+        () => budgets?.filter((b) => b.isActive) || [],
+        [budgets]
+    );
 
-    // Filter active budgets
-    const activeBudgets = budgets?.filter(isBudgetActive) || [];
+    const totalBudgeted = useMemo(
+        () => activeBudgets.reduce((sum, b) => sum + b.amount, 0),
+        [activeBudgets]
+    );
+
+    const totalSpent = useMemo(
+        () => activeBudgets.reduce((sum, b) => sum + calculateSpent(b), 0),
+        [activeBudgets, transactions, currentMonth]
+    );
+
+    const totalRemaining = totalBudgeted - totalSpent;
+    const percentageUsed =
+        totalBudgeted > 0 ? (totalSpent / totalBudgeted) * 100 : 0;
 
     return (
         <div className="flex flex-col h-full gap-7 p-4">
@@ -68,25 +78,42 @@ const BudgetPage = () => {
                     </div>
                 </CardHeader>
                 <CardContent>
-                    <Progress className="h-5"></Progress>
+                    <Progress
+                        className="h-5"
+                        value={percentageUsed}
+                    />
                 </CardContent>
                 <CardFooter>
                     <div className="flex flex-row justify-between items-center w-full text-sm">
                         <div className="flex flex-col">
                             <span className="text-gray-500">Remaining</span>
-                            <span className="font-semibold text-lg">$0.00</span>
+                            <span className="font-semibold text-lg">
+                                ${totalRemaining.toFixed(2)}
+                            </span>
                         </div>
                         <div className="flex flex-row gap-6">
                             <div className="flex flex-col items-start">
-                                <span className="text-gray-500">Monthly Income</span>
+                                <span className="text-gray-500">
+                                    Monthly Income
+                                </span>
                                 <span className="font-semibold">$0.00</span>
                             </div>
                             <div className="flex flex-col items-start">
                                 <span className="text-gray-500">Budgeted</span>
-                                <span className="font-semibold">$0.00</span>
+                                <span className="font-semibold">
+                                    ${totalBudgeted.toFixed(2)}
+                                </span>
                             </div>
                             <div className="flex flex-col items-start">
-                                <span className="text-gray-500">Month-over-Month</span>
+                                <span className="text-gray-500">Spent</span>
+                                <span className="font-semibold">
+                                    ${totalSpent.toFixed(2)}
+                                </span>
+                            </div>
+                            <div className="flex flex-col items-start">
+                                <span className="text-gray-500">
+                                    Month-over-Month
+                                </span>
                                 <span className="font-semibold">0%</span>
                             </div>
                         </div>
@@ -143,7 +170,9 @@ const BudgetPage = () => {
                                             <div className="mt-4 space-y-2">
                                                 <p className="text-sm text-gray-600">
                                                     Remaining: $
-                                                    {(budget.amount - spent).toFixed(2)}
+                                                    {(
+                                                        budget.amount - spent
+                                                    ).toFixed(2)}
                                                 </p>
                                                 <p className="text-sm text-gray-600">
                                                     {budget.recurring

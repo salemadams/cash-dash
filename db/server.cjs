@@ -18,7 +18,9 @@ server.get('/transactions', function (req, res) {
 
             // Filter out transactions before startDate (adjusted by interval)
             if (startDate) {
-                const adjustedStartDate = new Date(new Date(startDate).getTime() - (parseInt(interval) || 0));
+                const adjustedStartDate = new Date(
+                    new Date(startDate).getTime() - (parseInt(interval) || 0)
+                );
                 if (txDate < adjustedStartDate) return false;
             }
 
@@ -42,6 +44,24 @@ server.get('/transactions', function (req, res) {
     }
 
     res.json(transactions);
+});
+
+server.get('/budgets', function (req, res) {
+    const db = router.db;
+    let budgets = db.get('budgets').value();
+    const { month } = req.query;
+
+    // Only filter by month if provided
+    if (month) {
+        budgets = budgets.filter((b) => {
+            // Include if budget could apply to this month
+            if (b.startMonth > month) return false; // hasn't started yet
+            if (!b.recurring && b.startMonth !== month) return false; // one-time for different month
+            return true;
+        });
+    }
+
+    res.json(budgets);
 });
 
 server.use(router);

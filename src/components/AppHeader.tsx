@@ -39,51 +39,56 @@ const AppHeader = () => {
                 </div>
             </div>
             <div className="flex flex-row justify-center items-center gap-2">
-                <Button
-                    variant="outline"
-                    onClick={() => setDateRange(3)}
-                >
-                    3 Months
-                </Button>
-                <Button
-                    variant="outline"
-                    onClick={() => setDateRange(6)}
-                >
-                    6 Months
-                </Button>
-                <Button
-                    variant="outline"
-                    onClick={() => setDateRange(12)}
-                >
-                    1 Year
-                </Button>
-
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                {(activeRoute?.url === '/transactions' ||
+                    activeRoute?.url === '/') && (
+                    <>
                         <Button
                             variant="outline"
-                            className="gap-2"
+                            onClick={() => setDateRange(3)}
                         >
-                            <Calendar className="h-4 w-4" />
-                            Custom Range
+                            3 Months
                         </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                        className="space-y-3 pt-2"
-                        align="end"
-                    >
-                        <GlobalDateSelector
-                            label="Start Date"
-                            dateType="start"
-                        />
-                        <GlobalDateSelector
-                            label="End Date"
-                            dateType="end"
-                        />
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                        <Button
+                            variant="outline"
+                            onClick={() => setDateRange(6)}
+                        >
+                            6 Months
+                        </Button>
+                        <Button
+                            variant="outline"
+                            onClick={() => setDateRange(12)}
+                        >
+                            1 Year
+                        </Button>
 
-                <IntervalSelector />
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button
+                                    variant="outline"
+                                    className="gap-2"
+                                >
+                                    <Calendar className="h-4 w-4" />
+                                    Custom Range
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                                className="space-y-3 pt-2"
+                                align="end"
+                            >
+                                <GlobalDateSelector
+                                    label="Start Date"
+                                    dateType="start"
+                                />
+                                <GlobalDateSelector
+                                    label="End Date"
+                                    dateType="end"
+                                />
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+
+                        <IntervalSelector />
+                    </>
+                )}
                 <ModeToggle />
             </div>
         </div>
