@@ -15,10 +15,22 @@ import { useGlobalDate } from '@/contexts/GlobalDate';
 import { FaPlus } from 'react-icons/fa';
 import FormDialog from '@/components/common/FormDialog';
 import BudgetForm from '@/components/budget/BudgetForm';
+import { useBudgetMonth } from '@/contexts/BudgetMonthProvider';
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover';
+import { MonthPicker } from '@/components/ui/monthpicker';
+import { useState } from 'react';
+import { parse, format } from 'date-fns';
+import { cn } from '@/lib/utils';
 
 const AppHeader = () => {
     const location = useLocation();
     const globalDate = useGlobalDate();
+    const { selectedMonth, setSelectedMonth } = useBudgetMonth();
+    const [monthPickerOpen, setMonthPickerOpen] = useState(false);
     const activeRoute = Routes.find((r) => r.url === location.pathname);
 
     const setDateRange = (months: number) => {
@@ -42,18 +54,65 @@ const AppHeader = () => {
             </div>
             <div className="flex flex-row justify-center items-center gap-2">
                 {activeRoute?.url === '/budget' && (
-                    <FormDialog
-                        trigger={
-                            <Button className="gap-2">
-                                <FaPlus />
-                                Add Budget
-                            </Button>
-                        }
-                        title="Create New Budget"
-                        description="Create a budget to track spending across categories and set monthly limits"
-                    >
-                        <BudgetForm formMode="create" />
-                    </FormDialog>
+                    <>
+                        <Popover
+                            open={monthPickerOpen}
+                            onOpenChange={setMonthPickerOpen}
+                        >
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant="outline"
+                                    className={cn(
+                                        'gap-2',
+                                        !selectedMonth &&
+                                            'text-muted-foreground'
+                                    )}
+                                >
+                                    <Calendar className="h-4 w-4" />
+                                    {selectedMonth
+                                        ? format(
+                                              parse(
+                                                  selectedMonth,
+                                                  'yyyy-MM',
+                                                  new Date()
+                                              ),
+                                              'MMMM yyyy'
+                                          )
+                                        : 'Pick a month'}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent
+                                className="w-auto p-0"
+                                align="end"
+                            >
+                                <MonthPicker
+                                    selectedMonth={parse(
+                                        selectedMonth,
+                                        'yyyy-MM',
+                                        new Date()
+                                    )}
+                                    onMonthSelect={(date) => {
+                                        setSelectedMonth(
+                                            format(date, 'yyyy-MM')
+                                        );
+                                        setMonthPickerOpen(false);
+                                    }}
+                                />
+                            </PopoverContent>
+                        </Popover>
+                        <FormDialog
+                            trigger={
+                                <Button className="gap-2">
+                                    <FaPlus />
+                                    Add Budget
+                                </Button>
+                            }
+                            title="Create New Budget"
+                            description="Create a budget to track spending across categories and set monthly limits"
+                        >
+                            <BudgetForm formMode="create" />
+                        </FormDialog>
+                    </>
                 )}
                 {(activeRoute?.url === '/transactions' ||
                     activeRoute?.url === '/') && (

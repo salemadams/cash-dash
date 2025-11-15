@@ -4,10 +4,10 @@ import { useMemo } from 'react';
 import BudgetSummaryCard from '@/components/budget/BudgetSummaryCard';
 import BudgetList from '@/components/budget/BudgetList';
 import { calculateBudgetHealth, getBarColor } from '@/services/budgets';
+import { useBudgetMonth } from '@/contexts/BudgetMonthProvider';
 
 const BudgetPage = () => {
-    // Get current month in YYYY-MM format
-    const currentMonth = new Date().toISOString().slice(0, 7);
+    const { selectedMonth: currentMonth } = useBudgetMonth();
 
     const { data: budgets } = useQuery({
         queryKey: ['budgets', currentMonth],
@@ -37,11 +37,7 @@ const BudgetPage = () => {
     );
 
     const budgetHealth = useMemo(
-        () =>
-            calculateBudgetHealth(
-                activeBudgets,
-                budgetTransactions || {}
-            ),
+        () => calculateBudgetHealth(activeBudgets, budgetTransactions || {}),
         [activeBudgets, budgetTransactions]
     );
 
