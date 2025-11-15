@@ -10,6 +10,9 @@ import { Button } from '../ui/button';
 import { FaEdit } from 'react-icons/fa';
 import FormDialog from '../common/FormDialog';
 import BudgetForm from './BudgetForm';
+import RecentTransactions from '../dashboard/RecentTransactions/RecentTransactions';
+import { useQuery } from '@tanstack/react-query';
+import { getAllTransactions } from '@/api/transactions';
 
 type BudgetItemProps = {
     budget: Budget;
@@ -24,6 +27,11 @@ const BudgetItem = ({
     percentageUsed,
     getBarColor,
 }: BudgetItemProps) => {
+    const { data: transactions } = useQuery({
+        queryKey: ['transactions'],
+        queryFn: () => getAllTransactions(),
+    });
+
     return (
         <Card>
             <AccordionItem
@@ -45,40 +53,50 @@ const BudgetItem = ({
                     />
                 </AccordionTrigger>
                 <AccordionContent>
-                    <div className="flex flex-row justify-between p-4">
-                        {budget.categories.map((category) => (
-                            <span
-                                key={category}
-                                className="w-20 h-9 text-center pt-2 bg-gray-100 rounded-full text-sm"
-                            >
-                                {category}
-                            </span>
-                        ))}
-                        <p className="text-sm text-gray-600">
-                            Remaining: ${(budget.amount - spent).toFixed(2)}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                            {budget.recurring
-                                ? 'Recurring monthly'
-                                : 'One-time budget'}
-                        </p>
-                        {budget.rollover && (
+                    <div className="flex flex-col">
+                        <div className="flex flex-row justify-between p-4">
+                            <div className="flex flex-row gap-2">
+                                {budget.categories.map((category) => (
+                                    <span
+                                        key={category}
+                                        className="w-20 h-9 text-center pt-2 bg-gray-100 rounded-full text-sm"
+                                    >
+                                        {category}
+                                    </span>
+                                ))}
+                            </div>
                             <p className="text-sm text-gray-600">
-                                Rollover enabled
+                                Remaining: ${(budget.amount - spent).toFixed(2)}
                             </p>
+                            <p className="text-sm text-gray-600">
+                                {budget.recurring
+                                    ? 'Recurring monthly'
+                                    : 'One-time budget'}
+                            </p>
+                            {budget.rollover && (
+                                <p className="text-sm text-gray-600">
+                                    Rollover enabled
+                                </p>
+                            )}
+                            <FormDialog
+                                trigger={
+                                    <Button>
+                                        <FaEdit />
+                                        Edit Budget
+                                    </Button>
+                                }
+                                title={'Edit Budget'}
+                                description="Update your budget settings, adjust spending limits, or modify tracked categories"
+                            >
+                                <BudgetForm formMode="edit" />
+                            </FormDialog>
+                        </div>
+                        {transactions && (
+                            <RecentTransactions
+                                data={transactions}
+                                enablePagination={false}
+                            ></RecentTransactions>
                         )}
-                        <FormDialog
-                            trigger={
-                                <Button>
-                                    <FaEdit />
-                                    Edit Budget
-                                </Button>
-                            }
-                            title={'Edit Budget'}
-                            description="Update your budget settings, adjust spending limits, or modify tracked categories"
-                        >
-                            <BudgetForm formMode="edit" />
-                        </FormDialog>
                     </div>
                 </AccordionContent>
             </AccordionItem>

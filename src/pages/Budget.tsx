@@ -1,15 +1,10 @@
-import { Accordion } from '@/components/ui/accordion';
 import { useQuery } from '@tanstack/react-query';
 import { getAllBudgets } from '@/api/budgets';
 import { getAllTransactions } from '@/api/transactions';
 import { useMemo } from 'react';
 import BudgetSummaryCard from '@/components/budget/BudgetSummaryCard';
-import BudgetItem from '@/components/budget/BudgetItem';
-import {
-    calculateSpent,
-    calculateBudgetHealth,
-    getBarColor,
-} from '@/services/budgets';
+import BudgetList from '@/components/budget/BudgetList';
+import { calculateBudgetHealth, getBarColor } from '@/services/budgets';
 
 const BudgetPage = () => {
     // Get current month in YYYY-MM format
@@ -29,6 +24,17 @@ const BudgetPage = () => {
     const activeBudgets = useMemo(
         () => budgets?.filter((b) => b.isActive) || [],
         [budgets]
+    );
+
+    // Split budgets into recurring and one-time
+    const recurringBudgets = useMemo(
+        () => activeBudgets.filter((b) => b.recurring),
+        [activeBudgets]
+    );
+    console.log(activeBudgets);
+    const oneTimeBudgets = useMemo(
+        () => activeBudgets.filter((b) => !b.recurring),
+        [activeBudgets]
     );
 
     const budgetHealth = useMemo(
@@ -53,34 +59,23 @@ const BudgetPage = () => {
                 percentageUsed={percentageUsed}
                 getBarColor={getBarColor}
             />
-            <div className="p-2">
-                <h2 className="text-xl font-bold mb-4">
-                    Detailed Category Budgets
-                </h2>
-                <Accordion
-                    type="multiple"
-                    className="w-full space-y-2"
-                >
-                    {activeBudgets.map((budget) => {
-                        const spent = calculateSpent(
-                            budget,
-                            transactions || [],
-                            currentMonth
-                        );
-                        const percentageUsed = (spent / budget.amount) * 100;
+            <BudgetList
+                title="Recurring Monthly Budgets"
+                description="These budgets reset every month"
+                budgets={recurringBudgets}
+                transactions={transactions || []}
+                currentMonth={currentMonth}
+                emptyMessage="No recurring budgets yet"
+            />
 
-                        return (
-                            <BudgetItem
-                                key={budget.id}
-                                budget={budget}
-                                spent={spent}
-                                percentageUsed={percentageUsed}
-                                getBarColor={getBarColor}
-                            />
-                        );
-                    })}
-                </Accordion>
-            </div>
+            <BudgetList
+                title="One-Time Budgets"
+                description="These budgets apply to a specific month only"
+                budgets={oneTimeBudgets}
+                transactions={transactions || []}
+                currentMonth={currentMonth}
+                emptyMessage="No one-time budgets yet"
+            />
         </div>
     );
 };
