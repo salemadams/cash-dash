@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { ModeToggle } from '@/components/theme/ModeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { GlobalDateSelector } from '@/components/features/global-date-selector';
@@ -181,7 +181,7 @@ const AppHeader = () => {
                                         name="startMonth"
                                         render={({ field }) => {
                                             const [open, setOpen] =
-                                                React.useState(false);
+                                                useState(false);
                                             const selectedDate = field.value
                                                 ? parse(
                                                       field.value,

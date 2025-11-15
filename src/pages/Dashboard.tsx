@@ -5,7 +5,7 @@ import TransactionCards from '@/components/dashboard/SummaryCards/TransactionCar
 import { getAllTransactions } from '@/api/transactions';
 import { Transaction } from '@/types/transaction';
 import { formatLineChartData } from '@/services/charting';
-import { ChartDataset, ChartOptions } from 'chart.js';
+import type { ChartOptions } from 'chart.js';
 import { USDollar } from '@/lib/format';
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
@@ -61,7 +61,7 @@ const DashboardPage = () => {
 
         const chart = chartRef.current;
         const datasetIndex = chart.data.datasets.findIndex(
-            (dataset: ChartDataset) => dataset.label === label
+            (dataset: { label?: string }) => dataset.label === label
         );
 
         if (datasetIndex !== -1) {

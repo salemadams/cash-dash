@@ -2,7 +2,6 @@ import {
     CreditCard,
     DollarSign,
     Home,
-    Settings,
     TrendingUp,
 } from 'lucide-react';
 
@@ -30,11 +29,5 @@ export const Routes = [
         url: '/budget',
         icon: CreditCard,
         description: 'Manage and adjust your personal budgets',
-    },
-    {
-        title: 'Settings',
-        url: '/settings',
-        icon: Settings,
-        description: 'Customize your preferences and account settings',
     },
 ];

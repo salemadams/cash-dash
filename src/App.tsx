@@ -33,10 +33,6 @@ function App() {
                             path="budget"
                             element={<BudgetPage></BudgetPage>}
                         />
-                        <Route
-                            path="settings"
-                            element={<div>Settings</div>}
-                        />
                     </Route>
                 </Routes>
             </QueryClientProvider>
