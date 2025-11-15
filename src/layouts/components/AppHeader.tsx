@@ -50,9 +50,9 @@ const AppHeader = () => {
                             </Button>
                         }
                         title="Create New Budget"
-                        description="Create a budget to track spending across categories and set monthly limits."
+                        description="Create a budget to track spending across categories and set monthly limits"
                     >
-                        <BudgetForm />
+                        <BudgetForm formMode="create" />
                     </FormDialog>
                 )}
                 {(activeRoute?.url === '/transactions' ||

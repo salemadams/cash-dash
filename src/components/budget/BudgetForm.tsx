@@ -1,33 +1,41 @@
 import { cn } from '@/lib/utils';
-import { Checkbox } from '@radix-ui/react-checkbox';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-} from '@radix-ui/react-popover';
+} from '@/components/ui/popover';
 import { parse, format } from 'date-fns';
 import { Calendar } from 'lucide-react';
 import { useState } from 'react';
-import { Form } from 'react-router-dom';
 import {
+    Form,
     FormField,
     FormItem,
     FormLabel,
     FormControl,
     FormMessage,
     FormDescription,
-} from '../ui/form';
+} from '@/components/ui/form';
 import { Input } from '../ui/input';
 import { MonthPicker } from '../ui/monthpicker';
 import { MultiSelect } from '../ui/multi-select';
 import { useBudgetForm } from '@/hooks/useBudgetForm';
 import { TransactionCategory } from '@/constants/transactions';
 import { Button } from '../ui/button';
+import { Budget } from '@/types/budget';
 
-const BudgetForm = () => {
+const BudgetForm = ({
+    formMode,
+    initialData,
+}: {
+    formMode: string;
+    initialData?: Budget;
+}) => {
     const [open, setOpen] = useState(false);
     const { form, onSubmit } = useBudgetForm({
-        mode: 'create',
+        mode: formMode,
+        initialData: initialData,
         onSuccess: () => console.log('Budget created successfully!'),
     });
 
@@ -230,8 +238,12 @@ const BudgetForm = () => {
                     disabled={form.formState.isSubmitting}
                 >
                     {form.formState.isSubmitting
-                        ? 'Creating...'
-                        : 'Create Budget'}
+                        ? formMode === 'create'
+                            ? 'Creating...'
+                            : 'Updating...'
+                        : formMode === 'create'
+                        ? 'Create Budget'
+                        : 'Update Budget'}
                 </Button>
             </form>
         </Form>

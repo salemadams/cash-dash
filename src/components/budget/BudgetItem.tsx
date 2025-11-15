@@ -6,6 +6,10 @@ import {
 } from '@/components/ui/accordion';
 import { Progress } from '@/components/ui/progress';
 import type { Budget } from '@/types/budget';
+import { Button } from '../ui/button';
+import { FaEdit } from 'react-icons/fa';
+import FormDialog from '../common/FormDialog';
+import BudgetForm from './BudgetForm';
 
 type BudgetItemProps = {
     budget: Budget;
@@ -41,32 +45,40 @@ const BudgetItem = ({
                     />
                 </AccordionTrigger>
                 <AccordionContent>
-                    <div className="p-4">
-                        <div className="flex flex-row gap-4 flex-wrap">
-                            {budget.categories.map((category) => (
-                                <span
-                                    key={category}
-                                    className="px-3 py-1 bg-gray-100 rounded-full text-sm"
-                                >
-                                    {category}
-                                </span>
-                            ))}
-                        </div>
-                        <div className="mt-4 space-y-2">
+                    <div className="flex flex-row justify-between p-4">
+                        {budget.categories.map((category) => (
+                            <span
+                                key={category}
+                                className="w-20 h-9 text-center pt-2 bg-gray-100 rounded-full text-sm"
+                            >
+                                {category}
+                            </span>
+                        ))}
+                        <p className="text-sm text-gray-600">
+                            Remaining: ${(budget.amount - spent).toFixed(2)}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                            {budget.recurring
+                                ? 'Recurring monthly'
+                                : 'One-time budget'}
+                        </p>
+                        {budget.rollover && (
                             <p className="text-sm text-gray-600">
-                                Remaining: ${(budget.amount - spent).toFixed(2)}
+                                Rollover enabled
                             </p>
-                            <p className="text-sm text-gray-600">
-                                {budget.recurring
-                                    ? 'Recurring monthly'
-                                    : 'One-time budget'}
-                            </p>
-                            {budget.rollover && (
-                                <p className="text-sm text-gray-600">
-                                    Rollover enabled
-                                </p>
-                            )}
-                        </div>
+                        )}
+                        <FormDialog
+                            trigger={
+                                <Button>
+                                    <FaEdit />
+                                    Edit Budget
+                                </Button>
+                            }
+                            title={'Edit Budget'}
+                            description="Update your budget settings, adjust spending limits, or modify tracked categories"
+                        >
+                            <BudgetForm formMode="edit" />
+                        </FormDialog>
                     </div>
                 </AccordionContent>
             </AccordionItem>

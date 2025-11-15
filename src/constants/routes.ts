@@ -1,9 +1,4 @@
-import {
-    CreditCard,
-    DollarSign,
-    Home,
-    TrendingUp,
-} from 'lucide-react';
+import { CreditCard, DollarSign, Home, TrendingUp } from 'lucide-react';
 
 export const Routes = [
     {
@@ -19,15 +14,15 @@ export const Routes = [
         description: 'View and search all of your financial transactions',
     },
     {
-        title: 'Analytics',
-        url: '/analytics',
-        icon: TrendingUp,
-        description: 'Analyze your spending patterns and financial trends',
-    },
-    {
         title: 'Budget',
         url: '/budget',
         icon: CreditCard,
         description: 'Manage and adjust your personal budgets',
+    },
+    {
+        title: 'Analytics',
+        url: '/analytics',
+        icon: TrendingUp,
+        description: 'Analyze your spending patterns and financial trends',
     },
 ];
