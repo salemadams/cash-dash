@@ -32,12 +32,14 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     enablePagination: boolean;
+    noDataLabel: string;
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
     enablePagination,
+    noDataLabel,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -98,7 +100,7 @@ export function DataTable<TData, TValue>({
                                 colSpan={columns.length}
                                 className="h-24 text-center"
                             >
-                                No results.
+                                {noDataLabel}
                             </TableCell>
                         </TableRow>
                     )}

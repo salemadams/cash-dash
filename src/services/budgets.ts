@@ -27,8 +27,7 @@ export const calculateSpent = (
  */
 export const calculateBudgetHealth = (
   activeBudgets: Budget[],
-  transactions: Transaction[],
-  currentMonth: string
+  budgetTransactions: Record<string, Transaction[]>
 ): {
   totalBudgeted: number;
   totalSpent: number;
@@ -36,10 +35,11 @@ export const calculateBudgetHealth = (
   percentageUsed: number;
 } => {
   const totalBudgeted = activeBudgets.reduce((sum, b) => sum + b.amount, 0);
-  const totalSpent = activeBudgets.reduce(
-    (sum, b) => sum + calculateSpent(b, transactions, currentMonth),
-    0
-  );
+  const totalSpent = activeBudgets.reduce((sum, b) => {
+    const transactions = budgetTransactions[b.id] || [];
+    const spent = transactions.reduce((acc, t) => acc + Math.abs(t.amount), 0);
+    return sum + spent;
+  }, 0);
   const totalRemaining = totalBudgeted - totalSpent;
   const percentageUsed = totalBudgeted > 0 ? (totalSpent / totalBudgeted) * 100 : 0;
 

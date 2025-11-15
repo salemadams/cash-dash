@@ -64,5 +64,43 @@ server.get('/budgets', function (req, res) {
     res.json(budgets);
 });
 
+server.get('/budgets/transactions', function (req, res) {
+    const db = router.db;
+    const { month } = req.query;
+
+    if (!month) {
+        return res.status(400).json({ error: 'month parameter is required' });
+    }
+
+    // Get budgets that apply to this month
+    let budgets = db
+        .get('budgets')
+        .value()
+        .filter((b) => {
+            if (b.startMonth > month) return false;
+            if (!b.recurring && b.startMonth !== month) return false;
+            return true;
+        });
+
+    // Get all expense transactions for this month
+    const transactions = db
+        .get('transactions')
+        .value()
+        .filter((t) => {
+            return t.type === 'expense' && t.date.startsWith(month);
+        });
+
+    // Group transactions by budget ID
+    const transactionsByBudget = {};
+
+    budgets.forEach((budget) => {
+        transactionsByBudget[budget.id] = transactions.filter((t) =>
+            budget.categories.includes(t.category)
+        );
+    });
+
+    res.json(transactionsByBudget);
+});
+
 server.use(router);
 server.listen(8000);

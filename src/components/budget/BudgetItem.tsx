@@ -6,19 +6,19 @@ import {
 } from '@/components/ui/accordion';
 import { Progress } from '@/components/ui/progress';
 import type { Budget } from '@/types/budget';
+import type { Transaction } from '@/types/transaction';
 import { Button } from '../ui/button';
 import { FaEdit } from 'react-icons/fa';
 import FormDialog from '../common/FormDialog';
 import BudgetForm from './BudgetForm';
 import RecentTransactions from '../dashboard/RecentTransactions/RecentTransactions';
-import { useQuery } from '@tanstack/react-query';
-import { getAllTransactions } from '@/api/transactions';
 
 type BudgetItemProps = {
     budget: Budget;
     spent: number;
     percentageUsed: number;
     getBarColor: (percentage: number) => string;
+    transactions: Transaction[];
 };
 
 const BudgetItem = ({
@@ -26,11 +26,8 @@ const BudgetItem = ({
     spent,
     percentageUsed,
     getBarColor,
+    transactions,
 }: BudgetItemProps) => {
-    const { data: transactions } = useQuery({
-        queryKey: ['transactions'],
-        queryFn: () => getAllTransactions(),
-    });
 
     return (
         <Card>
@@ -91,12 +88,10 @@ const BudgetItem = ({
                                 <BudgetForm formMode="edit" />
                             </FormDialog>
                         </div>
-                        {transactions && (
-                            <RecentTransactions
-                                data={transactions}
-                                enablePagination={false}
-                            ></RecentTransactions>
-                        )}
+                        <RecentTransactions
+                            data={transactions}
+                            enablePagination={false}
+                        />
                     </div>
                 </AccordionContent>
             </AccordionItem>

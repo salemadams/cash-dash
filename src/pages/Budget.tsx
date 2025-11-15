@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAllBudgets } from '@/api/budgets';
-import { getAllTransactions } from '@/api/transactions';
+import { getAllBudgets, getBudgetTransactions } from '@/api/budgets';
 import { useMemo } from 'react';
 import BudgetSummaryCard from '@/components/budget/BudgetSummaryCard';
 import BudgetList from '@/components/budget/BudgetList';
@@ -15,9 +14,9 @@ const BudgetPage = () => {
         queryFn: () => getAllBudgets(currentMonth),
     });
 
-    const { data: transactions } = useQuery({
-        queryKey: ['transactions'],
-        queryFn: () => getAllTransactions(),
+    const { data: budgetTransactions } = useQuery({
+        queryKey: ['budgetTransactions', currentMonth],
+        queryFn: () => getBudgetTransactions(currentMonth),
     });
 
     // Filter and calculate budget totals
@@ -31,7 +30,7 @@ const BudgetPage = () => {
         () => activeBudgets.filter((b) => b.recurring),
         [activeBudgets]
     );
-    console.log(activeBudgets);
+
     const oneTimeBudgets = useMemo(
         () => activeBudgets.filter((b) => !b.recurring),
         [activeBudgets]
@@ -41,10 +40,9 @@ const BudgetPage = () => {
         () =>
             calculateBudgetHealth(
                 activeBudgets,
-                transactions || [],
-                currentMonth
+                budgetTransactions || {}
             ),
-        [activeBudgets, transactions, currentMonth]
+        [activeBudgets, budgetTransactions]
     );
 
     const { totalBudgeted, totalSpent, totalRemaining, percentageUsed } =
@@ -63,8 +61,7 @@ const BudgetPage = () => {
                 title="Recurring Monthly Budgets"
                 description="These budgets reset every month"
                 budgets={recurringBudgets}
-                transactions={transactions || []}
-                currentMonth={currentMonth}
+                budgetTransactions={budgetTransactions || {}}
                 emptyMessage="No recurring budgets yet"
             />
 
@@ -72,8 +69,7 @@ const BudgetPage = () => {
                 title="One-Time Budgets"
                 description="These budgets apply to a specific month only"
                 budgets={oneTimeBudgets}
-                transactions={transactions || []}
-                currentMonth={currentMonth}
+                budgetTransactions={budgetTransactions || {}}
                 emptyMessage="No one-time budgets yet"
             />
         </div>

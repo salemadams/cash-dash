@@ -2,14 +2,13 @@ import { Accordion } from '@/components/ui/accordion';
 import { Budget } from '@/types/budget';
 import { Transaction } from '@/types/transaction';
 import BudgetItem from './BudgetItem';
-import { calculateSpent, getBarColor } from '@/services/budgets';
+import { getBarColor } from '@/services/budgets';
 
 interface BudgetListProps {
     title: string;
     description: string;
     budgets: Budget[];
-    transactions: Transaction[];
-    currentMonth: string;
+    budgetTransactions: Record<string, Transaction[]>;
     emptyMessage?: string;
 }
 
@@ -17,8 +16,7 @@ const BudgetList = ({
     title,
     description,
     budgets,
-    transactions,
-    currentMonth,
+    budgetTransactions,
     emptyMessage = 'No budgets yet',
 }: BudgetListProps) => {
     return (
@@ -28,10 +26,10 @@ const BudgetList = ({
             {budgets.length > 0 ? (
                 <Accordion type="multiple" className="w-full space-y-2">
                     {budgets.map((budget) => {
-                        const spent = calculateSpent(
-                            budget,
-                            transactions,
-                            currentMonth
+                        const transactions = budgetTransactions[budget.id] || [];
+                        const spent = transactions.reduce(
+                            (sum, t) => sum + Math.abs(t.amount),
+                            0
                         );
                         const percentageUsed = (spent / budget.amount) * 100;
 
@@ -42,6 +40,7 @@ const BudgetList = ({
                                 spent={spent}
                                 percentageUsed={percentageUsed}
                                 getBarColor={getBarColor}
+                                transactions={transactions}
                             />
                         );
                     })}
