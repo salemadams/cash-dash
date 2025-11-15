@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ModeToggle } from '@/components/theme/ModeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { GlobalDateSelector } from '@/components/features/global-date-selector';
@@ -14,52 +13,12 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from 'lucide-react';
 import { useGlobalDate } from '@/contexts/GlobalDate';
 import { FaPlus } from 'react-icons/fa';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from '@/components/ui/popover';
-import { useBudgetForm } from '@/hooks/useBudgetForm';
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
-import { MonthPicker } from '@/components/ui/monthpicker';
-import { MultiSelect } from '@/components/ui/multi-select';
-import { format, parse } from 'date-fns';
-import { cn } from '@/lib/utils';
-import { TransactionCategory } from '@/constants/transactions';
+import FormDialog from '@/components/common/FormDialog';
+import BudgetForm from '@/components/budget/BudgetForm';
 
 const AppHeader = () => {
     const location = useLocation();
     const globalDate = useGlobalDate();
-    const { form, onSubmit } = useBudgetForm({
-        mode: 'create',
-        onSuccess: () => console.log('Budget created successfully!'),
-    });
-
-    const categoryOptions = Object.values(TransactionCategory).map(
-        (category) => ({
-            label: category,
-            value: category,
-        })
-    );
-
     const activeRoute = Routes.find((r) => r.url === location.pathname);
 
     const setDateRange = (months: number) => {
@@ -83,269 +42,18 @@ const AppHeader = () => {
             </div>
             <div className="flex flex-row justify-center items-center gap-2">
                 {activeRoute?.url === '/budget' && (
-                    <Dialog>
-                        <DialogTrigger asChild>
+                    <FormDialog
+                        trigger={
                             <Button className="gap-2">
                                 <FaPlus />
                                 Add Budget
                             </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                            <DialogHeader>
-                                <DialogTitle>Create New Budget</DialogTitle>
-                                <DialogDescription>
-                                    Create a budget to track spending across
-                                    categories and set monthly limits.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <Form {...form}>
-                                <form
-                                    onSubmit={onSubmit}
-                                    className="space-y-4"
-                                >
-                                    <FormField
-                                        control={form.control}
-                                        name="name"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>
-                                                    Budget Name
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Monthly Groceries"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                    <FormField
-                                        control={form.control}
-                                        name="categories"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Categories</FormLabel>
-                                                <FormControl>
-                                                    <MultiSelect
-                                                        options={categoryOptions}
-                                                        selected={field.value}
-                                                        onChange={field.onChange}
-                                                        placeholder="Select categories..."
-                                                    />
-                                                </FormControl>
-                                                <FormDescription>
-                                                    Select the categories this
-                                                    budget applies to
-                                                </FormDescription>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                    <FormField
-                                        control={form.control}
-                                        name="amount"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Amount</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        type="number"
-                                                        placeholder="500"
-                                                        {...field}
-                                                        value={
-                                                            field.value || ''
-                                                        }
-                                                        onChange={(e) => {
-                                                            const val =
-                                                                e.target
-                                                                    .valueAsNumber;
-                                                            field.onChange(
-                                                                isNaN(val)
-                                                                    ? 0
-                                                                    : val
-                                                            );
-                                                        }}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                    <FormField
-                                        control={form.control}
-                                        name="startMonth"
-                                        render={({ field }) => {
-                                            const [open, setOpen] =
-                                                useState(false);
-                                            const selectedDate = field.value
-                                                ? parse(
-                                                      field.value,
-                                                      'yyyy-MM',
-                                                      new Date()
-                                                  )
-                                                : undefined;
-
-                                            return (
-                                                <FormItem>
-                                                    <FormLabel>
-                                                        Start Month
-                                                    </FormLabel>
-                                                    <FormControl>
-                                                        <Popover
-                                                            open={open}
-                                                            onOpenChange={
-                                                                setOpen
-                                                            }
-                                                        >
-                                                            <PopoverTrigger
-                                                                asChild
-                                                            >
-                                                                <Button
-                                                                    variant="outline"
-                                                                    className={cn(
-                                                                        'w-full justify-start text-left font-normal',
-                                                                        !field.value &&
-                                                                            'text-muted-foreground'
-                                                                    )}
-                                                                >
-                                                                    <Calendar className="mr-2 h-4 w-4" />
-                                                                    {field.value
-                                                                        ? format(
-                                                                              selectedDate!,
-                                                                              'MMMM yyyy'
-                                                                          )
-                                                                        : 'Pick a month'}
-                                                                </Button>
-                                                            </PopoverTrigger>
-                                                            <PopoverContent
-                                                                className="w-auto p-0"
-                                                                align="start"
-                                                            >
-                                                                <MonthPicker
-                                                                    selectedMonth={
-                                                                        selectedDate
-                                                                    }
-                                                                    onMonthSelect={(
-                                                                        date
-                                                                    ) => {
-                                                                        field.onChange(
-                                                                            format(
-                                                                                date,
-                                                                                'yyyy-MM'
-                                                                            )
-                                                                        );
-                                                                        setOpen(
-                                                                            false
-                                                                        );
-                                                                    }}
-                                                                />
-                                                            </PopoverContent>
-                                                        </Popover>
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            );
-                                        }}
-                                    />
-
-                                    <FormField
-                                        control={form.control}
-                                        name="alertThreshold"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>
-                                                    Alert Threshold (%)
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        type="number"
-                                                        placeholder="80"
-                                                        {...field}
-                                                        value={
-                                                            field.value || ''
-                                                        }
-                                                        onChange={(e) => {
-                                                            const val =
-                                                                e.target
-                                                                    .valueAsNumber;
-                                                            field.onChange(
-                                                                isNaN(val)
-                                                                    ? 0
-                                                                    : val
-                                                            );
-                                                        }}
-                                                    />
-                                                </FormControl>
-                                                <FormDescription>
-                                                    Get alerted when spending
-                                                    reaches this percentage
-                                                </FormDescription>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                    <FormField
-                                        control={form.control}
-                                        name="recurring"
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={
-                                                            field.onChange
-                                                        }
-                                                    />
-                                                </FormControl>
-                                                <div className="space-y-1 leading-none">
-                                                    <FormLabel>
-                                                        Recurring Monthly
-                                                    </FormLabel>
-                                                </div>
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                    <FormField
-                                        control={form.control}
-                                        name="rollover"
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={
-                                                            field.onChange
-                                                        }
-                                                    />
-                                                </FormControl>
-                                                <div className="space-y-1 leading-none">
-                                                    <FormLabel>
-                                                        Rollover Unused Amount
-                                                    </FormLabel>
-                                                </div>
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                    <Button
-                                        type="submit"
-                                        disabled={form.formState.isSubmitting}
-                                    >
-                                        {form.formState.isSubmitting
-                                            ? 'Creating...'
-                                            : 'Create Budget'}
-                                    </Button>
-                                </form>
-                            </Form>
-                        </DialogContent>
-                    </Dialog>
+                        }
+                        title="Create New Budget"
+                        description="Create a budget to track spending across categories and set monthly limits."
+                    >
+                        <BudgetForm />
+                    </FormDialog>
                 )}
                 {(activeRoute?.url === '/transactions' ||
                     activeRoute?.url === '/') && (
