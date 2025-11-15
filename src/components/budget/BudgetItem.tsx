@@ -7,11 +7,8 @@ import {
 import { Progress } from '@/components/ui/progress';
 import type { Budget } from '@/types/budget';
 import type { Transaction } from '@/types/transaction';
-import { Button } from '../ui/button';
-import { FaEdit } from 'react-icons/fa';
-import FormDialog from '../common/FormDialog';
-import BudgetForm from './BudgetForm';
 import RecentTransactions from '../dashboard/RecentTransactions/RecentTransactions';
+import BudgetDetails from './BudgetDetails';
 
 type BudgetItemProps = {
     budget: Budget;
@@ -50,46 +47,11 @@ const BudgetItem = ({
                 </AccordionTrigger>
                 <AccordionContent>
                     <div className="flex flex-col">
-                        <div className="flex flex-row justify-between p-4">
-                            <div className="flex flex-row gap-2">
-                                {budget.categories.map((category) => (
-                                    <span
-                                        key={category}
-                                        className="w-20 h-9 text-center pt-2 bg-gray-100 rounded-full text-sm"
-                                    >
-                                        {category}
-                                    </span>
-                                ))}
-                            </div>
-                            <p className="text-sm text-gray-600">
-                                Remaining: ${(budget.amount - spent).toFixed(2)}
-                            </p>
-                            <p className="text-sm text-gray-600">
-                                {budget.recurring
-                                    ? 'Recurring monthly'
-                                    : 'One-time budget'}
-                            </p>
-                            {budget.rollover && (
-                                <p className="text-sm text-gray-600">
-                                    Rollover enabled
-                                </p>
-                            )}
-                            <FormDialog
-                                trigger={
-                                    <Button>
-                                        <FaEdit />
-                                        Edit Budget
-                                    </Button>
-                                }
-                                title={'Edit Budget'}
-                                description="Update your budget settings, adjust spending limits, or modify tracked categories"
-                            >
-                                <BudgetForm
-                                    formMode="edit"
-                                    initialData={budget}
-                                />
-                            </FormDialog>
-                        </div>
+                        <BudgetDetails
+                            budget={budget}
+                            spent={spent}
+                            remaining={budget.amount - spent}
+                        />
                         <RecentTransactions
                             data={transactions}
                             enablePagination={false}
