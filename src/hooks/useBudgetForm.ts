@@ -51,7 +51,9 @@ export function useBudgetForm({
     const createMutation = useMutation({
         mutationFn: createBudget,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['budgets'] });
+            queryClient.invalidateQueries({
+                queryKey: ['budgets', 'budgetTransactions'],
+            });
             if (onSuccess) onSuccess();
             form.reset();
         },
