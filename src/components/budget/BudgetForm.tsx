@@ -24,6 +24,7 @@ import { useBudgetForm } from '@/hooks/useBudgetForm';
 import { TransactionCategory } from '@/constants/transactions';
 import { Button } from '../ui/button';
 import { Budget } from '@/types/budget';
+import { useFormDialog } from '@/hooks/useFormDialog';
 
 const BudgetForm = ({
     formMode,
@@ -33,10 +34,14 @@ const BudgetForm = ({
     initialData?: Budget;
 }) => {
     const [open, setOpen] = useState(false);
-    const { form, onSubmit } = useBudgetForm({
+    const { closeDialog } = useFormDialog();
+
+    const { form, onSubmit, isLoading, isError, error } = useBudgetForm({
         mode: formMode,
         initialData: initialData,
-        onSuccess: () => console.log('Budget created successfully!'),
+        onSuccess: () => {
+            closeDialog();
+        },
     });
 
     const categoryOptions = Object.values(TransactionCategory).map(
@@ -233,11 +238,24 @@ const BudgetForm = ({
                     )}
                 />
 
+                {isError && (
+                    <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+                        <p className="font-semibold">
+                            {formMode === 'create'
+                                ? 'Failed to create budget'
+                                : 'Failed to update budget'}
+                        </p>
+                        <p className="mt-1">
+                            {error?.message || 'An unexpected error occurred'}
+                        </p>
+                    </div>
+                )}
+
                 <Button
                     type="submit"
-                    disabled={form.formState.isSubmitting}
+                    disabled={isLoading}
                 >
-                    {form.formState.isSubmitting
+                    {isLoading
                         ? formMode === 'create'
                             ? 'Creating...'
                             : 'Updating...'

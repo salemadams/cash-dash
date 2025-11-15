@@ -11,3 +11,14 @@ export type Budget = {
     createdAt: string;
     updatedAt: string;
 };
+
+export type CreateUpdateBudget = {
+    name: string;
+    categories: string[];
+    amount: number;
+    startMonth: string;
+    recurring: boolean;
+    rollover: boolean;
+    alertThreshold: number;
+    isActive: boolean;
+};

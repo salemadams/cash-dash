@@ -28,7 +28,6 @@ const BudgetItem = ({
     getBarColor,
     transactions,
 }: BudgetItemProps) => {
-
     return (
         <Card>
             <AccordionItem
@@ -85,7 +84,10 @@ const BudgetItem = ({
                                 title={'Edit Budget'}
                                 description="Update your budget settings, adjust spending limits, or modify tracked categories"
                             >
-                                <BudgetForm formMode="edit" />
+                                <BudgetForm
+                                    formMode="edit"
+                                    initialData={budget}
+                                />
                             </FormDialog>
                         </div>
                         <RecentTransactions

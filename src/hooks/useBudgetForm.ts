@@ -2,6 +2,8 @@ import { Budget } from '@/types/budget';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createBudget, updateBudget } from '@/api/budgets';
 
 const budgetSchema = z.object({
     name: z.string().min(1, 'Name is required'),
@@ -30,6 +32,8 @@ export function useBudgetForm({
     initialData,
     onSuccess,
 }: UseBudgetFormProps) {
+    const queryClient = useQueryClient();
+
     const form = useForm<BudgetSchema>({
         resolver: zodResolver(budgetSchema),
         defaultValues: {
@@ -44,21 +48,41 @@ export function useBudgetForm({
         },
     });
 
+    const createMutation = useMutation({
+        mutationFn: createBudget,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['budgets'] });
+            if (onSuccess) onSuccess();
+            form.reset();
+        },
+    });
+
+    const updateMutation = useMutation({
+        mutationFn: (data: BudgetSchema) => {
+            if (!initialData?.id) {
+                throw new Error('Budget ID is required for update');
+            }
+            return updateBudget(initialData.id, data);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['budgets'] });
+            if (onSuccess) onSuccess();
+        },
+    });
+
     const onSubmit = async (data: BudgetSchema) => {
-        console.log('Submitting');
         if (mode === 'create') {
-            console.log('Created: ', data);
-            // TODO: Add API call to create budget
+            createMutation.mutate(data);
         } else {
-            console.log('Edited: ', data);
-            // TODO: Add API call to update budget
+            updateMutation.mutate(data);
         }
-        if (onSuccess) onSuccess();
-        form.reset();
     };
 
     return {
         form,
         onSubmit: form.handleSubmit(onSubmit),
+        isLoading: createMutation.isPending || updateMutation.isPending,
+        isError: createMutation.isError || updateMutation.isError,
+        error: createMutation.error || updateMutation.error,
     };
 }
