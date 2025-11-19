@@ -115,7 +115,8 @@ const AppHeader = () => {
                     </>
                 )}
                 {(activeRoute?.url === '/transactions' ||
-                    activeRoute?.url === '/') && (
+                    activeRoute?.url === '/' ||
+                    activeRoute?.url === '/analytics') && (
                     <>
                         <Button
                             variant="outline"

@@ -3,6 +3,7 @@ import type { ChartData } from 'chart.js';
 import { capitalize } from '@/lib/format';
 import { Interval } from '@/constants/interval';
 import { TransactionType } from '@/constants/transactions';
+import { SummaryMetric } from '@/components/charts/SummaryCard';
 
 export const formatLineChartData = (
     data: Transaction[],
@@ -36,7 +37,7 @@ export const formatLineChartData = (
 
     // Get unique transaction types
     const types = getUniqueTypes(sortedData, mapFn);
-    console.log(types);
+
     // Create a dataset for each transaction type
     const datasets = createDataSets(labels, types, sortedData, interval, mapFn);
 
@@ -155,3 +156,115 @@ function generateColorFromString(str: string): string {
 
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
+
+export const formatDoughnutChartData = (
+    data: Transaction[]
+): ChartData<'doughnut'> => {
+    // Filter for expenses only
+    const expenses = data.filter((t) => t.type === TransactionType.Expense);
+
+    // Group by category
+    const categoryTotals: Record<string, number> = {};
+    expenses.forEach((t) => {
+        const category = t.category;
+        if (!categoryTotals[category]) {
+            categoryTotals[category] = 0;
+        }
+        categoryTotals[category] += Math.abs(t.amount);
+    });
+
+    const labels = Object.keys(categoryTotals).map(capitalize);
+    const values = Object.values(categoryTotals);
+    const colors = Object.keys(categoryTotals).map((cat) =>
+        getColorForCategory(cat)
+    );
+
+    return {
+        labels,
+        datasets: [
+            {
+                data: values,
+                backgroundColor: colors,
+                borderWidth: 2,
+            },
+        ],
+    };
+};
+
+export const formatBarChartData = (
+    data: Transaction[],
+    limit: number = 6
+): ChartData<'bar'> => {
+    // Filter for expenses only
+    const expenses = data.filter((t) => t.type === TransactionType.Expense);
+
+    // Group by category
+    const categoryTotals: Record<string, number> = {};
+    expenses.forEach((t) => {
+        const category = t.category;
+        if (!categoryTotals[category]) {
+            categoryTotals[category] = 0;
+        }
+        categoryTotals[category] += Math.abs(t.amount);
+    });
+
+    // Sort by amount descending and limit
+    const sorted = Object.entries(categoryTotals)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, limit);
+
+    const labels = sorted.map(([category]) => capitalize(category));
+    const values = sorted.map(([, amount]) => amount);
+    const colors = sorted.map(([category]) => getColorForCategory(category));
+
+    return {
+        labels,
+        datasets: [
+            {
+                data: values,
+                backgroundColor: colors,
+                borderRadius: 4,
+            },
+        ],
+    };
+};
+
+export const calculateSummaryMetrics = (
+    data: Transaction[]
+): SummaryMetric[] => {
+    const totalIncome = data
+        .filter((t) => t.type === TransactionType.Income)
+        .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+
+    const totalExpense = data
+        .filter((t) => t.type === TransactionType.Expense)
+        .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+
+    const totalSavings = data
+        .filter((t) => t.type === TransactionType.Savings)
+        .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+
+    const netChange = totalIncome - totalExpense - totalSavings;
+    const savingsRate = totalIncome > 0 ? (totalSavings / totalIncome) * 100 : 0;
+
+    return [
+        {
+            label: 'Savings Rate',
+            value: savingsRate,
+            format: 'percentage',
+            trend: savingsRate >= 20 ? 'up' : savingsRate >= 10 ? 'neutral' : 'down',
+        },
+        {
+            label: 'Net Change',
+            value: netChange,
+            format: 'currency',
+            trend: netChange > 0 ? 'up' : netChange < 0 ? 'down' : 'neutral',
+        },
+        {
+            label: 'Total Savings',
+            value: totalSavings,
+            format: 'currency',
+            trend: totalSavings > 0 ? 'up' : 'neutral',
+        },
+    ];
+};

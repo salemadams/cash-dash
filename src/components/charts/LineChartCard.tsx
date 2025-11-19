@@ -25,7 +25,7 @@ const LineChartCard = ({
     onToggleDataset,
 }: ChartCardProps) => {
     return (
-        <Card className="w-full flex-2 card-hover">
+        <Card className="w-full h-full flex-2 card-hover">
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <div>
