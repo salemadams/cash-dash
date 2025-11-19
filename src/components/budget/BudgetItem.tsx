@@ -10,7 +10,6 @@ import type { Transaction } from '@/types/transaction';
 import RecentTransactions from '../dashboard/RecentTransactions/RecentTransactions';
 import BudgetDetails from './BudgetDetails';
 import FormDialog from '../common/FormDialog';
-import { Button } from '../ui/button';
 import BudgetForm from './BudgetForm';
 import {
     DropdownMenu,
@@ -68,13 +67,13 @@ const BudgetItem = ({
                     <div onClick={(e) => e.stopPropagation()}>
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="h-8 w-8"
+                                <div
+                                    role="button"
+                                    tabIndex={0}
+                                    className="inline-flex items-center justify-center h-8 w-8 rounded-md hover:bg-accent hover:text-accent-foreground cursor-pointer"
                                 >
                                     <EllipsisVertical className="h-4 w-4" />
-                                </Button>
+                                </div>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                                 <FormDialog

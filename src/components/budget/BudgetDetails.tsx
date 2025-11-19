@@ -71,7 +71,7 @@ const BudgetDetails = ({ budget, spent, remaining }: BudgetDetailsProps) => {
                 <div className="flex items-center gap-6">
                     <div className="flex items-center gap-2">
                         <FaCalendarAlt className="text-muted-foreground" />
-                        <span className="text-sm">
+                        <span className="text-sm space-x-1">
                             <span className="text-muted-foreground">
                                 Start:
                             </span>
