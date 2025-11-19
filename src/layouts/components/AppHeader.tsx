@@ -28,7 +28,8 @@ import { cn } from '@/lib/utils';
 
 const AppHeader = () => {
     const location = useLocation();
-    const globalDate = useGlobalDate();
+    const { setStartDate, setEndDate, startDateError, endDateError } =
+        useGlobalDate();
     const { selectedMonth, setSelectedMonth } = useBudgetMonth();
     const [monthPickerOpen, setMonthPickerOpen] = useState(false);
     const activeRoute = Routes.find((r) => r.url === location.pathname);
@@ -37,8 +38,8 @@ const AppHeader = () => {
         const endDate = new Date();
         const startDate = new Date();
         startDate.setMonth(startDate.getMonth() - months + 1);
-        globalDate.setStartDate(startDate);
-        globalDate.setEndDate(endDate);
+        setStartDate(startDate);
+        setEndDate(endDate);
     };
 
     return (
@@ -150,14 +151,28 @@ const AppHeader = () => {
                                 className="space-y-3 pt-2"
                                 align="end"
                             >
-                                <GlobalDateSelector
-                                    label="Start Date"
-                                    dateType="start"
-                                />
-                                <GlobalDateSelector
-                                    label="End Date"
-                                    dateType="end"
-                                />
+                                <div>
+                                    <GlobalDateSelector
+                                        label="Start Date"
+                                        dateType="start"
+                                    />
+                                    {startDateError && (
+                                        <p className="text-destructive text-sm px-2 pt-1">
+                                            {startDateError}
+                                        </p>
+                                    )}
+                                </div>
+                                <div>
+                                    <GlobalDateSelector
+                                        label="End Date"
+                                        dateType="end"
+                                    />
+                                    {endDateError && (
+                                        <p className="text-destructive text-sm px-2 pt-1">
+                                            {endDateError}
+                                        </p>
+                                    )}
+                                </div>
                             </DropdownMenuContent>
                         </DropdownMenu>
 
