@@ -28,18 +28,17 @@ import { cn } from '@/lib/utils';
 
 const AppHeader = () => {
     const location = useLocation();
-    const { setStartDate, setEndDate, startDateError, endDateError } =
+    const { setDateRange, startDateError, endDateError } =
         useGlobalDate();
     const { selectedMonth, setSelectedMonth } = useBudgetMonth();
     const [monthPickerOpen, setMonthPickerOpen] = useState(false);
     const activeRoute = Routes.find((r) => r.url === location.pathname);
 
-    const setDateRange = (months: number) => {
+    const handleDateRangeClick = (months: number) => {
         const endDate = new Date();
         const startDate = new Date();
         startDate.setMonth(startDate.getMonth() - months + 1);
-        setStartDate(startDate);
-        setEndDate(endDate);
+        setDateRange(startDate, endDate);
     };
 
     return (
@@ -120,19 +119,19 @@ const AppHeader = () => {
                     <>
                         <Button
                             variant="outline"
-                            onClick={() => setDateRange(3)}
+                            onClick={() => handleDateRangeClick(3)}
                         >
                             3 Months
                         </Button>
                         <Button
                             variant="outline"
-                            onClick={() => setDateRange(6)}
+                            onClick={() => handleDateRangeClick(6)}
                         >
                             6 Months
                         </Button>
                         <Button
                             variant="outline"
-                            onClick={() => setDateRange(12)}
+                            onClick={() => handleDateRangeClick(12)}
                         >
                             1 Year
                         </Button>

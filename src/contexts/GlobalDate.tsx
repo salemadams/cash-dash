@@ -15,6 +15,7 @@ type GlobalDateState = {
     endDateError: string | null;
     setStartDate: (date: Date) => void;
     setEndDate: (date: Date) => void;
+    setDateRange: (startDate: Date, endDate: Date) => void;
     setInterval: (interval: Interval) => void;
     clearErrors: () => void;
 };
@@ -43,6 +44,7 @@ const initialState: GlobalDateState = {
     endDateError: null,
     setStartDate: () => null,
     setEndDate: () => null,
+    setDateRange: () => null,
     setInterval: () => null,
     clearErrors: () => null,
 };
@@ -119,6 +121,29 @@ export function GlobalDateProvider({ children }: GlobalDateProviderProps) {
             localStorage.setItem('prevStartDate', newPrevStartDate.getTime().toString());
             localStorage.setItem('prevEndDate', newPrevEndDate.getTime().toString());
 
+            setEndDate(newEndDate);
+            setPrevStartDate(newPrevStartDate);
+            setPrevEndDate(newPrevEndDate);
+        },
+        setDateRange: (newStartDate: Date, newEndDate: Date) => {
+            if (newStartDate > newEndDate) {
+                setStartDateError('Start date cannot be after end date');
+                return;
+            }
+            setStartDateError(null);
+            setEndDateError(null);
+
+            // Calculate previous interval (same duration, shifted back)
+            const duration = newEndDate.getTime() - newStartDate.getTime();
+            const newPrevEndDate = newStartDate;
+            const newPrevStartDate = new Date(newStartDate.getTime() - duration);
+
+            localStorage.setItem('startDate', newStartDate.getTime().toString());
+            localStorage.setItem('endDate', newEndDate.getTime().toString());
+            localStorage.setItem('prevStartDate', newPrevStartDate.getTime().toString());
+            localStorage.setItem('prevEndDate', newPrevEndDate.getTime().toString());
+
+            setStartDate(newStartDate);
             setEndDate(newEndDate);
             setPrevStartDate(newPrevStartDate);
             setPrevEndDate(newPrevEndDate);

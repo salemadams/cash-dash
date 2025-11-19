@@ -5,6 +5,7 @@ import DashboardPage from './pages/Dashboard';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import TransactionsPage from './pages/Transactions';
 import BudgetPage from './pages/Budget';
+import AnalyticsPage from './pages/Analytics';
 
 const queryClient = new QueryClient();
 
@@ -27,11 +28,11 @@ function App() {
                         />
                         <Route
                             path="analytics"
-                            element={<div>Analytics</div>}
+                            element={<AnalyticsPage />}
                         />
                         <Route
                             path="budget"
-                            element={<BudgetPage></BudgetPage>}
+                            element={<BudgetPage />}
                         />
                     </Route>
                 </Routes>

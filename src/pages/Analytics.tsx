@@ -1,21 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import RecentTransactions from '@/components/dashboard/RecentTransactions/RecentTransactions';
-import TransactionCards from '@/components/dashboard/SummaryCards/TransactionCardList';
 import { getAllTransactions } from '@/api/transactions';
-import { Transaction } from '@/types/transaction';
-import { formatLineChartData } from '@/services/charting';
-import type { ChartOptions } from 'chart.js';
-import { USDollar } from '@/lib/format';
-import { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useChartZoom } from '@/components/charts/hooks/useChartZoom';
+import LineChartCard from '@/components/charts/LineChartCard';
 import { Interval } from '@/constants/interval';
 import { useGlobalDate } from '@/contexts/GlobalDate';
-import { Link } from 'react-router-dom';
-import LineChartCard from '@/components/charts/LineChartCard';
-import { useChartZoom } from '@/components/charts/hooks/useChartZoom';
+import { USDollar } from '@/lib/format';
+import { formatLineChartData } from '@/services/charting';
+import { Transaction } from '@/types/transaction';
+import { useQuery } from '@tanstack/react-query';
+import { ChartOptions } from 'chart.js';
+import { useState } from 'react';
 
-const DashboardPage = () => {
+const AnalyticsPage = () => {
     const globalDate = useGlobalDate();
 
     const [visibleDatasets, setVisibleDatasets] = useState<
@@ -45,13 +40,8 @@ const DashboardPage = () => {
                 globalDate.startDate,
                 globalDate.endDate,
                 globalDate.interval,
-                'type'
+                'category'
             ),
-    });
-
-    const { data: recentTransactionsData } = useQuery({
-        queryKey: ['transactions', 'recent'],
-        queryFn: () => getAllTransactions(undefined, undefined, undefined, 6),
     });
 
     const { chartRef, handleResetZoom, handleZoomComplete } =
@@ -115,11 +105,10 @@ const DashboardPage = () => {
     };
 
     return (
-        <div className="flex flex-col min-h-full p-5 gap-6">
-            <TransactionCards />
+        <>
             {data ? (
                 <LineChartCard
-                    title="Monthly Spending Trends"
+                    title="Expense Spending Trends"
                     subtitle={`Last ${data?.labels?.length ?? 0} ${
                         Interval[globalDate.interval]
                     }${
@@ -137,36 +126,8 @@ const DashboardPage = () => {
             ) : (
                 <span>Loading...</span>
             )}
-            <Card className="w-full flex-2 card-hover">
-                <CardHeader>
-                    <div className="flex justify-between items-start">
-                        <div>
-                            <p className="text-xl font-bold">
-                                Recent Transactions
-                            </p>
-                            <p className="text-gray-500">
-                                Your latest financial activities
-                            </p>
-                        </div>
-                        <Link
-                            to="/transactions"
-                            className="flex items-center gap-1 pt-1 text-blue-600 hover:text-blue-700 text-sm font-medium"
-                        >
-                            View All Transactions
-                            <ArrowRight className="h-4 w-4" />
-                        </Link>
-                    </div>
-                </CardHeader>
-                <CardContent>
-                    {recentTransactionsData ? (
-                        <RecentTransactions data={recentTransactionsData} />
-                    ) : (
-                        <div>Loading...</div>
-                    )}
-                </CardContent>
-            </Card>
-        </div>
+        </>
     );
 };
 
-export default DashboardPage;
+export default AnalyticsPage;

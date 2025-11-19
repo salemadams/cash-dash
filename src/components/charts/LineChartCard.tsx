@@ -14,7 +14,7 @@ type ChartCardProps = {
     onToggleDataset: (label: string) => void;
 };
 
-const ChartCard = ({
+const LineChartCard = ({
     title,
     subtitle,
     chartRef,
@@ -56,4 +56,4 @@ const ChartCard = ({
     );
 };
 
-export default ChartCard;
+export default LineChartCard;

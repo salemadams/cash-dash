@@ -39,7 +39,6 @@ const TransactionCards = () => {
             ),
         select: (data) => aggregateByType(data),
     });
-
     return (
         <div className="flex flex-wrap gap-6 justify-between">
             <TransactionCard

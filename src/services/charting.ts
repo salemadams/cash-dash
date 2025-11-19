@@ -1,14 +1,15 @@
-import { TransactionType } from '@/constants/transactions';
 import { Transaction } from '@/types/transaction';
 import type { ChartData } from 'chart.js';
 import { capitalize } from '@/lib/format';
 import { Interval } from '@/constants/interval';
+import { TransactionType } from '@/constants/transactions';
 
 export const formatLineChartData = (
     data: Transaction[],
     startDate: Date,
     endDate: Date,
-    interval: Interval
+    interval: Interval,
+    typeAggregator: keyof Transaction
 ): ChartData<'line'> => {
     // Server already filtered and sorted data by date ascending
     const sortedData = data.map((t) => ({
@@ -16,14 +17,28 @@ export const formatLineChartData = (
         date: new Date(t.date).getTime(),
     }));
 
+    const mapFn = (t: Transaction) => {
+        const value = t[typeAggregator];
+        // Ignore Income and Savings when aggregating by category
+        if (
+            typeAggregator === 'category' &&
+            (t.type === TransactionType.Income ||
+                t.type === TransactionType.Savings)
+        ) {
+            return;
+        }
+
+        return value;
+    };
+
     // Get unique dates for labels
     const labels = getUniqueLabels(startDate, endDate, interval);
 
     // Get unique transaction types
-    const types = getUniqueTypes(sortedData, (t) => t.type);
-
+    const types = getUniqueTypes(sortedData, mapFn);
+    console.log(types);
     // Create a dataset for each transaction type
-    const datasets = createDataSets(labels, types, sortedData, interval);
+    const datasets = createDataSets(labels, types, sortedData, interval, mapFn);
 
     return {
         labels,
@@ -33,36 +48,37 @@ export const formatLineChartData = (
 
 function getUniqueTypes<T>(
     sortedData: Transaction[],
-    mapFn: (t: Transaction) => T
+    mapFn: (t: Transaction) => T | undefined
 ): T[] {
-    return Array.from(new Set(sortedData.map(mapFn)));
+    return Array.from(new Set(sortedData.map(mapFn))).filter(
+        (type): type is T => type !== undefined
+    );
 }
 
 function createDataSets<T>(
     labels: string[],
     types: T[],
     sortedData: Transaction[],
-    interval: Interval
+    interval: Interval,
+    mapFn: (t: Transaction) => T
 ) {
     return types.map((type) => {
-        // For each date label, find the corresponding transaction or use 0
         const dataPoints = labels.map((date: string) => {
             const dateToMs = new Date(date).getTime();
+
             const transactions = sortedData.filter((t: Transaction) => {
                 return (
                     Number(t.date) >= dateToMs - interval &&
                     Number(t.date) < dateToMs &&
-                    (t.type as unknown) === type
+                    mapFn(t) === type // <-- generic comparison
                 );
             });
+
             if (transactions.length > 0) {
-                const total = transactions.reduce(
-                    (acc, transaction: Transaction) => {
-                        return acc + Math.abs(transaction.amount);
-                    },
+                return transactions.reduce(
+                    (acc, transaction) => acc + Math.abs(transaction.amount),
                     0
                 );
-                return total;
             }
             return 0;
         });
@@ -71,7 +87,7 @@ function createDataSets<T>(
             label: capitalize(String(type)),
             data: dataPoints,
             fill: false,
-            borderColor: getBorderColorByType(String(type)),
+            borderColor: getColorForCategory(String(type)),
         };
     });
 }
@@ -110,16 +126,32 @@ function getUniqueLabels(startDate: Date, endDate: Date, interval: Interval) {
     }
     return labels;
 }
+const SPECIAL_COLORS: Record<string, string> = {
+    income: '#00a63e',
+    expense: '#e7000b',
+    savings: '#155dfc',
+};
 
-function getBorderColorByType(type: string) {
-    switch (type) {
-        case TransactionType.Income:
-            return '#00a63e';
-        case TransactionType.Expense:
-            return '#e7000b';
-        case TransactionType.Savings:
-            return '#155dfc';
-        default:
-            return '#155dfc';
+function getColorForCategory(type: string): string {
+    const key = type.toLowerCase();
+
+    if (SPECIAL_COLORS[key]) {
+        return SPECIAL_COLORS[key];
     }
+
+    return generateColorFromString(key);
+}
+
+function generateColorFromString(str: string): string {
+    let hash = 0;
+
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    const hue = Math.abs(hash) % 360;
+    const saturation = 60;
+    const lightness = 55;
+
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
