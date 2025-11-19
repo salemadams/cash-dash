@@ -12,7 +12,7 @@ import { ArrowRight } from 'lucide-react';
 import { Interval } from '@/constants/interval';
 import { useGlobalDate } from '@/contexts/GlobalDate';
 import { Link } from 'react-router-dom';
-import ChartCard from '@/components/charts/ChartCard';
+import ChartCard from '@/components/charts/LineChartCard';
 import { useChartZoom } from '@/components/charts/hooks/useChartZoom';
 
 const DashboardPage = () => {

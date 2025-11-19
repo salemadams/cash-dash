@@ -29,13 +29,17 @@ const TransactionCard = ({
     return (
         <Card className="flex-1 min-w-[250px] h-full shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="flex items-center h-full p-6 relative">
-                {previousTotal !== undefined && (
-                    percentChange !== null ? (
+                {previousTotal !== undefined &&
+                    (percentChange !== null ? (
                         <div
                             className={`absolute top-0.5 right-3 flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-                                percentChange >= 0
-                                    ? 'bg-green-100 text-green-700'
-                                    : 'bg-red-100 text-red-700'
+                                type !== 'Expenses'
+                                    ? percentChange >= 0
+                                        ? 'bg-green-100 text-green-700'
+                                        : 'bg-red-100 text-red-700'
+                                    : percentChange >= 0
+                                    ? 'bg-red-100 text-red-700'
+                                    : 'bg-green-100 text-green-700'
                             }`}
                         >
                             {percentChange >= 0 ? (
@@ -47,8 +51,7 @@ const TransactionCard = ({
                         </div>
                     ) : (
                         <Skeleton className="absolute top-0.5 right-3 h-6 w-14 rounded-full" />
-                    )
-                )}
+                    ))}
                 {children}
                 <div
                     className={`flex flex-col gap-2 w-full ${
