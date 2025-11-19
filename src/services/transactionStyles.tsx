@@ -35,7 +35,7 @@ export const getBadgeStyles = (type: string): string => {
  * Returns the appropriate icon component for a transaction type
  */
 export const getTypeIcon = (type: string): ReactElement => {
-  if (type === 'income') return <MdAttachMoney size={20} />;
-  if (type === 'expense') return <FaRegCreditCard size={20} />;
-  return <AiOutlineBank size={20} />;
+  if (type === 'income') return <MdAttachMoney size={20} className={TRANSACTION_COLORS.income.icon} />;
+  if (type === 'expense') return <FaRegCreditCard size={20} className={TRANSACTION_COLORS.expense.icon} />;
+  return <AiOutlineBank size={20} className={TRANSACTION_COLORS.savings.icon} />;
 };
