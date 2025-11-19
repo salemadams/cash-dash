@@ -40,9 +40,6 @@ const TransactionCards = () => {
         select: (data) => aggregateByType(data),
     });
 
-    console.log(globalDate.startDate, globalDate.endDate);
-    console.log(globalDate.prevStartDate, globalDate.prevEndDate);
-
     return (
         <div className="flex flex-wrap gap-6 justify-between">
             <TransactionCard
