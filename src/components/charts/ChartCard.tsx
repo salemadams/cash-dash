@@ -7,7 +7,7 @@ type ChartCardProps = {
     title: string;
     subtitle: string;
     chartRef: React.RefObject<unknown>;
-    data: any;
+    data: ChartData<'line'>;
     options: ChartOptions<'line'>;
     visibleDatasets: Record<string, boolean>;
     onResetZoom: () => void;
