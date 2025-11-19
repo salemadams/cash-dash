@@ -11,18 +11,21 @@ type ChartControlsProps = {
     visibleDatasets: Record<string, boolean>;
     onToggleDataset: (label: string) => void;
     onResetZoom?: () => void;
+    showFilter?: boolean;
 };
 
 const ChartControls = ({
     visibleDatasets,
     onToggleDataset,
     onResetZoom,
+    showFilter = true,
 }: ChartControlsProps) => {
     return (
         <div className="flex gap-2">
             <Button variant="default" size="sm" onClick={onResetZoom}>
                 Reset
             </Button>
+            {showFilter && (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="outline" size="sm">
@@ -54,6 +57,7 @@ const ChartControls = ({
                     </DropdownMenuCheckboxItem>
                 </DropdownMenuContent>
             </DropdownMenu>
+            )}
         </div>
     );
 };

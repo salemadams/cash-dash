@@ -9,9 +9,10 @@ type ChartCardProps = {
     chartRef: React.RefObject<unknown>;
     data: ChartData<'line'>;
     options: ChartOptions<'line'>;
-    visibleDatasets: Record<string, boolean>;
+    visibleDatasets?: Record<string, boolean>;
     onResetZoom?: () => void;
-    onToggleDataset: (label: string) => void;
+    onToggleDataset?: (label: string) => void;
+    showFilter?: boolean;
 };
 
 const LineChartCard = ({
@@ -20,9 +21,10 @@ const LineChartCard = ({
     chartRef,
     data,
     options,
-    visibleDatasets,
+    visibleDatasets = {},
     onResetZoom,
-    onToggleDataset,
+    onToggleDataset = () => {},
+    showFilter = true,
 }: ChartCardProps) => {
     return (
         <Card className="w-full h-full flex-2 card-hover">
@@ -36,6 +38,7 @@ const LineChartCard = ({
                         onResetZoom={onResetZoom ? onResetZoom : () => {}}
                         visibleDatasets={visibleDatasets}
                         onToggleDataset={onToggleDataset}
+                        showFilter={showFilter}
                     />
                 </div>
             </CardHeader>

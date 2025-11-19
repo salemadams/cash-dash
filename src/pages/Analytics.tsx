@@ -22,18 +22,10 @@ import {
 import { Transaction } from '@/types/transaction';
 import { useQuery } from '@tanstack/react-query';
 import { ChartOptions } from 'chart.js';
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 
 const AnalyticsPage = () => {
     const globalDate = useGlobalDate();
-
-    const [visibleDatasets, setVisibleDatasets] = useState<
-        Record<string, boolean>
-    >({
-        Income: true,
-        Expense: true,
-        Savings: true,
-    });
 
     // Query with select for line chart (compatible with zoom caching)
     const { data: lineChartData } = useQuery({
@@ -94,26 +86,6 @@ const AnalyticsPage = () => {
     const { chartRef, handleResetZoom, handleZoomComplete } =
         useChartZoom(lineChartData);
 
-    const toggleDataset = (label: string) => {
-        if (!chartRef.current) return;
-
-        const chart = chartRef.current;
-        const datasetIndex = chart.data.datasets.findIndex(
-            (dataset: { label?: string }) => dataset.label === label
-        );
-
-        if (datasetIndex !== -1) {
-            const isVisible = chart.isDatasetVisible(datasetIndex);
-            chart.setDatasetVisibility(datasetIndex, !isVisible);
-            chart.update();
-
-            setVisibleDatasets((prev) => ({
-                ...prev,
-                [label]: !isVisible,
-            }));
-        }
-    };
-
     const options: ChartOptions<'line'> = {
         responsive: true,
         maintainAspectRatio: false,
@@ -170,9 +142,8 @@ const AnalyticsPage = () => {
                             chartRef={chartRef}
                             data={lineChartData}
                             options={options}
-                            visibleDatasets={visibleDatasets}
                             onResetZoom={handleResetZoom}
-                            onToggleDataset={toggleDataset}
+                            showFilter={false}
                         />
                     ) : (
                         <ChartCardSkeleton />
