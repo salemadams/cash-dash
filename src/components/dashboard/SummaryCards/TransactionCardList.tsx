@@ -23,10 +23,31 @@ const TransactionCards = () => {
             ),
         select: (data) => aggregateByType(data),
     });
+    const { data: previousTotals } = useQuery({
+        queryKey: [
+            'transactions',
+            'previous',
+            globalDate.prevStartDate,
+            globalDate.prevEndDate,
+            globalDate.interval,
+        ],
+        queryFn: () =>
+            getAllTransactions(
+                globalDate.prevStartDate,
+                globalDate.prevEndDate,
+                globalDate.interval
+            ),
+        select: (data) => aggregateByType(data),
+    });
+
+    console.log(globalDate.startDate, globalDate.endDate);
+    console.log(globalDate.prevStartDate, globalDate.prevEndDate);
+
     return (
         <div className="flex flex-wrap gap-6 justify-between">
             <TransactionCard
                 total={totals?.income}
+                previousTotal={previousTotals?.income}
                 label="Income"
             >
                 <div className="absolute left-6 flex items-center justify-center w-16 h-16 rounded-lg bg-green-100">
@@ -36,6 +57,7 @@ const TransactionCards = () => {
 
             <TransactionCard
                 total={totals?.expense}
+                previousTotal={previousTotals?.expense}
                 label="Expenses"
             >
                 <div className="absolute left-6 flex items-center justify-center w-16 h-16 rounded-lg bg-red-100">
@@ -44,6 +66,7 @@ const TransactionCards = () => {
             </TransactionCard>
             <TransactionCard
                 total={totals?.savings}
+                previousTotal={previousTotals?.savings}
                 label="Savings"
             >
                 <div className="absolute left-6 flex items-center justify-center w-16 h-16 rounded-lg bg-blue-100">
