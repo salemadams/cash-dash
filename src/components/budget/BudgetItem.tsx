@@ -9,6 +9,19 @@ import type { Budget } from '@/types/budget';
 import type { Transaction } from '@/types/transaction';
 import RecentTransactions from '../dashboard/RecentTransactions/RecentTransactions';
 import BudgetDetails from './BudgetDetails';
+import FormDialog from '../common/FormDialog';
+import { Button } from '../ui/button';
+import BudgetForm from './BudgetForm';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+import { EllipsisVertical } from 'lucide-react';
+import DeleteDialog from '../features/delete-dialog';
+import { deleteBudget } from '@/api/budgets';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type BudgetItemProps = {
     budget: Budget;
@@ -25,13 +38,21 @@ const BudgetItem = ({
     getBarColor,
     transactions,
 }: BudgetItemProps) => {
+    const queryClient = useQueryClient();
+    const deleteMutation = useMutation({
+        mutationFn: deleteBudget,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['budgets'] });
+            queryClient.invalidateQueries({ queryKey: ['budgetTransactions'] });
+        },
+    });
     return (
         <Card>
             <AccordionItem
                 className="pr-5 pl-5 py-0 border-0"
                 value={budget.id.toString()}
             >
-                <AccordionTrigger className="grid grid-cols-[1fr_0.3fr_auto_1fr_auto] gap-6 items-center w-full hover:no-underline py-2">
+                <AccordionTrigger className="grid grid-cols-[1fr_0.3fr_auto_1fr_auto_auto] gap-6 items-center w-full hover:no-underline py-2">
                     <h3 className="text-lg font-semibold">{budget.name}</h3>
                     <span className="text-gray-500">
                         Budget: ${budget.amount}
@@ -44,6 +65,50 @@ const BudgetItem = ({
                         indicatorClassName={getBarColor(percentageUsed)}
                         value={percentageUsed}
                     />
+                    <div onClick={(e) => e.stopPropagation()}>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-8 w-8"
+                                >
+                                    <EllipsisVertical className="h-4 w-4" />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                <FormDialog
+                                    trigger={
+                                        <DropdownMenuItem
+                                            onSelect={(e) => e.preventDefault()}
+                                        >
+                                            Edit Budget
+                                        </DropdownMenuItem>
+                                    }
+                                    title="Edit Budget"
+                                    description="Update your budget settings, adjust spending limits, or modify tracked categories"
+                                >
+                                    <BudgetForm
+                                        formMode="edit"
+                                        initialData={budget}
+                                    />
+                                </FormDialog>
+                                <DeleteDialog
+                                    itemType="budget"
+                                    onConfirm={() =>
+                                        deleteMutation.mutate(budget.id)
+                                    }
+                                    trigger={
+                                        <DropdownMenuItem
+                                            onSelect={(e) => e.preventDefault()}
+                                        >
+                                            Delete
+                                        </DropdownMenuItem>
+                                    }
+                                />
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
                 </AccordionTrigger>
                 <AccordionContent>
                     <div className="flex flex-col">

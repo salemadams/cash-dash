@@ -1,8 +1,15 @@
 import { Budget } from '@/types/budget';
 import { Button } from '../ui/button';
-import { FaEdit, FaDollarSign, FaCalendarAlt, FaRedo, FaBell, FaCheckCircle, FaTimesCircle, FaTags } from 'react-icons/fa';
-import FormDialog from '../common/FormDialog';
-import BudgetForm from './BudgetForm';
+import {
+    FaEdit,
+    FaDollarSign,
+    FaCalendarAlt,
+    FaRedo,
+    FaBell,
+    FaCheckCircle,
+    FaTimesCircle,
+    FaTags,
+} from 'react-icons/fa';
 import BudgetMetricCard from './BudgetMetricCard';
 
 type BudgetDetailsProps = {
@@ -36,9 +43,21 @@ const BudgetDetails = ({ budget, spent, remaining }: BudgetDetailsProps) => {
                     icon={<FaDollarSign />}
                     label="Remaining"
                     value={`$${remaining.toFixed(2)}`}
-                    iconColor={isLowBudget ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}
-                    iconBgColor={isLowBudget ? 'bg-red-100 dark:bg-red-900/30' : 'bg-green-100 dark:bg-green-900/30'}
-                    valueColor={isLowBudget ? 'text-red-600 dark:text-red-400' : undefined}
+                    iconColor={
+                        isLowBudget
+                            ? 'text-red-600 dark:text-red-400'
+                            : 'text-green-600 dark:text-green-400'
+                    }
+                    iconBgColor={
+                        isLowBudget
+                            ? 'bg-red-100 dark:bg-red-900/30'
+                            : 'bg-green-100 dark:bg-green-900/30'
+                    }
+                    valueColor={
+                        isLowBudget
+                            ? 'text-red-600 dark:text-red-400'
+                            : undefined
+                    }
                 />
                 <BudgetMetricCard
                     icon={<FaBell />}
@@ -55,71 +74,66 @@ const BudgetDetails = ({ budget, spent, remaining }: BudgetDetailsProps) => {
                     <div className="flex items-center gap-2">
                         <FaCalendarAlt className="text-muted-foreground" />
                         <span className="text-sm">
-                            <span className="text-muted-foreground">Start:</span>{' '}
-                            <span className="font-medium">{budget.startMonth}</span>
+                            <span className="text-muted-foreground">
+                                Start:
+                            </span>
+                            <span className="font-medium">
+                                {budget.startMonth}
+                            </span>
                         </span>
                     </div>
-
                     <div className="flex items-center gap-2">
                         <FaRedo className="text-muted-foreground" />
-                        <span className={`px-2 py-1 rounded-md text-sm font-medium ${
-                            budget.recurring
-                                ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
-                                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
-                        }`}>
+                        <span
+                            className={`px-2 py-1 rounded-md text-sm font-medium ${
+                                budget.recurring
+                                    ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
+                                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
+                            }`}
+                        >
                             {budget.recurring ? 'Recurring' : 'One-time'}
                         </span>
                     </div>
-
                     {budget.rollover && (
                         <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-md text-sm font-medium">
                             Rollover Enabled
                         </span>
                     )}
-
                     <div className="flex items-center gap-2">
                         {budget.isActive ? (
                             <FaCheckCircle className="text-green-600 dark:text-green-400" />
                         ) : (
                             <FaTimesCircle className="text-gray-400" />
                         )}
-                        <span className={`text-sm font-medium ${
-                            budget.isActive ? 'text-green-600 dark:text-green-400' : 'text-gray-400'
-                        }`}>
+                        <span
+                            className={`text-sm font-medium ${
+                                budget.isActive
+                                    ? 'text-green-600 dark:text-green-400'
+                                    : 'text-gray-400'
+                            }`}
+                        >
                             {budget.isActive ? 'Active' : 'Inactive'}
                         </span>
                     </div>
-                </div>
-
-                <FormDialog
-                    trigger={
-                        <Button className="gap-2">
-                            <FaEdit />
-                            Edit Budget
-                        </Button>
-                    }
-                    title="Edit Budget"
-                    description="Update your budget settings, adjust spending limits, or modify tracked categories"
-                >
-                    <BudgetForm formMode="edit" initialData={budget} />
-                </FormDialog>
-            </div>
-
-            {/* Categories */}
-            <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                    <FaTags />
-                    <span className="text-sm font-medium">Categories:</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                    {budget.categories.map((category) => (
-                        <span
-                            key={category}
-                            className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20"
-                        >
-                            {category}
-                        </span>
-                    ))}
+                    {/* Categories */}
+                    <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                            <FaTags />
+                            <span className="text-sm font-medium">
+                                Categories:
+                            </span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {budget.categories.map((category) => (
+                                <span
+                                    key={category}
+                                    className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20"
+                                >
+                                    {category}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

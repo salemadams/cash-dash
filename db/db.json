@@ -5,7 +5,7 @@
       "date": "2024-10-20",
       "amount": 440,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -15,7 +15,7 @@
       "date": "2024-10-25",
       "amount": -200,
       "type": "expense",
-      "category": "health",
+      "category": "Health",
       "description": "Doctor visit copay",
       "merchant": "Family Medical",
       "paymentMethod": "credit card"
@@ -25,7 +25,7 @@
       "date": "2024-10-28",
       "amount": -145,
       "type": "expense",
-      "category": "shopping",
+      "category": "Shopping",
       "description": "Halloween decorations",
       "merchant": "Target",
       "paymentMethod": "debit card"
@@ -35,7 +35,7 @@
       "date": "2024-11-01",
       "amount": -29.99,
       "type": "expense",
-      "category": "entertainment",
+      "category": "Entertainment",
       "description": "Xbox Game Pass",
       "merchant": "Microsoft",
       "paymentMethod": "credit card"
@@ -45,7 +45,7 @@
       "date": "2024-11-02",
       "amount": -60,
       "type": "expense",
-      "category": "transportation",
+      "category": "Transportation",
       "description": "Gas fill-up",
       "merchant": "Shell",
       "paymentMethod": "debit card"
@@ -55,7 +55,7 @@
       "date": "2024-11-05",
       "amount": -85.5,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Weekly groceries",
       "merchant": "Trader Joe's",
       "paymentMethod": "credit card"
@@ -65,7 +65,7 @@
       "date": "2024-11-08",
       "amount": -120,
       "type": "expense",
-      "category": "utilities",
+      "category": "Utilities",
       "description": "Electric bill",
       "merchant": "City Power & Light",
       "paymentMethod": "auto-pay"
@@ -75,7 +75,7 @@
       "date": "2024-11-10",
       "amount": -450,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "November rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -85,7 +85,7 @@
       "date": "2024-11-12",
       "amount": -35,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Coffee and pastries",
       "merchant": "Starbucks",
       "paymentMethod": "app payment"
@@ -95,7 +95,7 @@
       "date": "2024-11-15",
       "amount": 240,
       "type": "income",
-      "category": "freelance",
+      "category": "Freelance",
       "description": "Logo design project",
       "merchant": "Client XYZ",
       "paymentMethod": "Venmo"
@@ -114,7 +114,7 @@
       "date": "2024-11-18",
       "amount": -75,
       "type": "expense",
-      "category": "entertainment",
+      "category": "Entertainment",
       "description": "Video game purchase",
       "merchant": "Steam",
       "paymentMethod": "credit card"
@@ -124,7 +124,7 @@
       "date": "2024-11-20",
       "amount": 480,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -143,7 +143,7 @@
       "date": "2024-11-25",
       "amount": -150,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Thanksgiving dinner groceries",
       "merchant": "Whole Foods",
       "paymentMethod": "debit card"
@@ -162,7 +162,7 @@
       "date": "2024-11-28",
       "amount": -220,
       "type": "expense",
-      "category": "shopping",
+      "category": "Shopping",
       "description": "Black Friday shopping",
       "merchant": "Best Buy",
       "paymentMethod": "credit card"
@@ -172,7 +172,7 @@
       "date": "2024-12-01",
       "amount": -50,
       "type": "expense",
-      "category": "transportation",
+      "category": "Transportation",
       "description": "Gas",
       "merchant": "Chevron",
       "paymentMethod": "credit card"
@@ -182,7 +182,7 @@
       "date": "2024-12-03",
       "amount": -95,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Grocery shopping",
       "merchant": "Safeway",
       "paymentMethod": "debit card"
@@ -192,7 +192,7 @@
       "date": "2024-12-05",
       "amount": -135,
       "type": "expense",
-      "category": "utilities",
+      "category": "Utilities",
       "description": "Electric bill",
       "merchant": "City Power & Light",
       "paymentMethod": "auto-pay"
@@ -202,7 +202,7 @@
       "date": "2024-12-08",
       "amount": -450,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "December rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -212,7 +212,7 @@
       "date": "2024-12-10",
       "amount": -68,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Takeout dinner",
       "merchant": "Thai House",
       "paymentMethod": "cash"
@@ -231,7 +231,7 @@
       "date": "2024-12-12",
       "amount": -175,
       "type": "expense",
-      "category": "shopping",
+      "category": "Shopping",
       "description": "New running shoes",
       "merchant": "Nike Store",
       "paymentMethod": "credit card"
@@ -241,7 +241,7 @@
       "date": "2024-12-14",
       "amount": -42.5,
       "type": "expense",
-      "category": "entertainment",
+      "category": "Entertainment",
       "description": "Movie tickets and snacks",
       "merchant": "AMC Theatres",
       "paymentMethod": "debit card"
@@ -251,7 +251,7 @@
       "date": "2024-12-15",
       "amount": 460,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -270,7 +270,7 @@
       "date": "2024-12-18",
       "amount": -55,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Restaurant lunch",
       "merchant": "Chipotle",
       "paymentMethod": "credit card"
@@ -280,7 +280,7 @@
       "date": "2024-12-20",
       "amount": -125,
       "type": "expense",
-      "category": "health",
+      "category": "Health",
       "description": "Dental checkup",
       "merchant": "Smile Dental",
       "paymentMethod": "insurance copay"
@@ -299,7 +299,7 @@
       "date": "2024-12-23",
       "amount": -89.99,
       "type": "expense",
-      "category": "utilities",
+      "category": "Utilities",
       "description": "Internet service",
       "merchant": "Comcast",
       "paymentMethod": "auto-pay"
@@ -309,7 +309,7 @@
       "date": "2024-12-25",
       "amount": -300,
       "type": "expense",
-      "category": "shopping",
+      "category": "Shopping",
       "description": "Christmas gifts",
       "merchant": "Amazon",
       "paymentMethod": "credit card"
@@ -319,7 +319,7 @@
       "date": "2024-12-26",
       "amount": -45,
       "type": "expense",
-      "category": "transportation",
+      "category": "Transportation",
       "description": "Uber rides",
       "merchant": "Uber",
       "paymentMethod": "credit card"
@@ -329,7 +329,7 @@
       "date": "2024-12-27",
       "amount": 280,
       "type": "income",
-      "category": "freelance",
+      "category": "Freelance",
       "description": "Website project payment",
       "merchant": "Client ABC",
       "paymentMethod": "PayPal"
@@ -339,7 +339,7 @@
       "date": "2024-12-28",
       "amount": -156.75,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Weekly groceries",
       "merchant": "Trader Joe's",
       "paymentMethod": "debit card"
@@ -358,7 +358,7 @@
       "date": "2025-01-01",
       "amount": -80,
       "type": "expense",
-      "category": "health",
+      "category": "Health",
       "description": "Gym membership",
       "merchant": "Planet Fitness",
       "paymentMethod": "auto-pay"
@@ -368,7 +368,7 @@
       "date": "2025-01-02",
       "amount": -250,
       "type": "expense",
-      "category": "shopping",
+      "category": "Shopping",
       "description": "Winter clothes",
       "merchant": "H&M",
       "paymentMethod": "credit card"
@@ -378,7 +378,7 @@
       "date": "2025-01-03",
       "amount": -12.99,
       "type": "expense",
-      "category": "entertainment",
+      "category": "Entertainment",
       "description": "Spotify Premium",
       "merchant": "Spotify",
       "paymentMethod": "credit card"
@@ -388,7 +388,7 @@
       "date": "2025-01-03",
       "amount": -65,
       "type": "expense",
-      "category": "transportation",
+      "category": "Transportation",
       "description": "Gas fill-up",
       "merchant": "Shell",
       "paymentMethod": "debit card"
@@ -407,7 +407,7 @@
       "date": "2025-01-04",
       "amount": -32.5,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Dinner with friends",
       "merchant": "Italian Bistro",
       "paymentMethod": "credit card"
@@ -417,7 +417,7 @@
       "date": "2025-01-05",
       "amount": -450,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "January rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -427,7 +427,7 @@
       "date": "2025-01-05",
       "amount": -150,
       "type": "expense",
-      "category": "utilities",
+      "category": "Utilities",
       "description": "Electric bill",
       "merchant": "City Power & Light",
       "paymentMethod": "auto-pay"
@@ -446,7 +446,7 @@
       "date": "2025-01-06",
       "amount": -89.99,
       "type": "expense",
-      "category": "entertainment",
+      "category": "Entertainment",
       "description": "Concert tickets",
       "merchant": "Ticketmaster",
       "paymentMethod": "debit card"
@@ -456,7 +456,7 @@
       "date": "2025-01-07",
       "amount": -45.5,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Grocery shopping",
       "merchant": "Whole Foods",
       "paymentMethod": "credit card"
@@ -466,7 +466,7 @@
       "date": "2025-01-07",
       "amount": -15.99,
       "type": "expense",
-      "category": "entertainment",
+      "category": "Entertainment",
       "description": "Netflix subscription",
       "merchant": "Netflix",
       "paymentMethod": "credit card"
@@ -476,7 +476,7 @@
       "date": "2025-01-08",
       "amount": 420,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -504,7 +504,7 @@
       "date": "2025-02-08",
       "amount": -145,
       "type": "expense",
-      "category": "utilities",
+      "category": "Utilities",
       "description": "Electric bill",
       "merchant": "City Power & Light",
       "paymentMethod": "auto-pay"
@@ -514,7 +514,7 @@
       "date": "2025-02-10",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "February rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -524,7 +524,7 @@
       "date": "2025-02-15",
       "amount": 450,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -543,7 +543,7 @@
       "date": "2025-03-10",
       "amount": -125,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Grocery shopping",
       "merchant": "Whole Foods",
       "paymentMethod": "debit card"
@@ -553,7 +553,7 @@
       "date": "2025-03-15",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "March rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -563,7 +563,7 @@
       "date": "2025-03-20",
       "amount": 465,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -582,7 +582,7 @@
       "date": "2025-04-08",
       "amount": -95,
       "type": "expense",
-      "category": "entertainment",
+      "category": "Entertainment",
       "description": "Concert tickets",
       "merchant": "Ticketmaster",
       "paymentMethod": "credit card"
@@ -592,7 +592,7 @@
       "date": "2025-04-12",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "April rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -602,7 +602,7 @@
       "date": "2025-04-18",
       "amount": 470,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -621,7 +621,7 @@
       "date": "2025-05-10",
       "amount": -165,
       "type": "expense",
-      "category": "utilities",
+      "category": "Utilities",
       "description": "Electric bill",
       "merchant": "City Power & Light",
       "paymentMethod": "auto-pay"
@@ -631,7 +631,7 @@
       "date": "2025-05-15",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "May rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -641,7 +641,7 @@
       "date": "2025-05-22",
       "amount": 485,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -660,7 +660,7 @@
       "date": "2025-06-10",
       "amount": -140,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Grocery shopping",
       "merchant": "Trader Joe's",
       "paymentMethod": "credit card"
@@ -670,7 +670,7 @@
       "date": "2025-06-14",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "June rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -680,7 +680,7 @@
       "date": "2025-06-20",
       "amount": 490,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -699,7 +699,7 @@
       "date": "2025-07-08",
       "amount": -185,
       "type": "expense",
-      "category": "utilities",
+      "category": "Utilities",
       "description": "Electric bill (AC usage)",
       "merchant": "City Power & Light",
       "paymentMethod": "auto-pay"
@@ -709,7 +709,7 @@
       "date": "2025-07-12",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "July rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -719,7 +719,7 @@
       "date": "2025-07-18",
       "amount": 495,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -738,7 +738,7 @@
       "date": "2025-08-10",
       "amount": -220,
       "type": "expense",
-      "category": "shopping",
+      "category": "Shopping",
       "description": "Back to school supplies",
       "merchant": "Target",
       "paymentMethod": "debit card"
@@ -748,7 +748,7 @@
       "date": "2025-08-14",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "August rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -758,7 +758,7 @@
       "date": "2025-08-21",
       "amount": 500,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -777,7 +777,7 @@
       "date": "2025-09-08",
       "amount": -155,
       "type": "expense",
-      "category": "utilities",
+      "category": "Utilities",
       "description": "Electric bill",
       "merchant": "City Power & Light",
       "paymentMethod": "auto-pay"
@@ -787,7 +787,7 @@
       "date": "2025-09-13",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "September rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -797,7 +797,7 @@
       "date": "2025-09-19",
       "amount": 505,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -816,7 +816,7 @@
       "date": "2025-10-10",
       "amount": -175,
       "type": "expense",
-      "category": "shopping",
+      "category": "Shopping",
       "description": "Halloween decorations",
       "merchant": "Party City",
       "paymentMethod": "credit card"
@@ -826,7 +826,7 @@
       "date": "2025-10-14",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "October rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -836,7 +836,7 @@
       "date": "2025-10-20",
       "amount": 510,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -855,7 +855,7 @@
       "date": "2025-11-05",
       "amount": -135,
       "type": "expense",
-      "category": "food",
+      "category": "Food",
       "description": "Grocery shopping",
       "merchant": "Whole Foods",
       "paymentMethod": "debit card"
@@ -865,7 +865,7 @@
       "date": "2025-11-08",
       "amount": -480,
       "type": "expense",
-      "category": "rent",
+      "category": "Rent",
       "description": "November rent payment",
       "merchant": "Property Management Co.",
       "paymentMethod": "bank transfer"
@@ -875,7 +875,7 @@
       "date": "2025-11-10",
       "amount": 515,
       "type": "income",
-      "category": "salary",
+      "category": "Salary",
       "description": "Monthly salary",
       "merchant": "Tech Corp Inc.",
       "paymentMethod": "direct deposit"
@@ -886,7 +886,7 @@
       "id": 1,
       "name": "Grocery & Dining",
       "categories": [
-        "food"
+        "Food"
       ],
       "amount": 600,
       "startMonth": "2025-01",
@@ -901,8 +901,8 @@
       "id": 2,
       "name": "Fun & Leisure",
       "categories": [
-        "entertainment",
-        "shopping"
+        "Entertainment",
+        "Shopping"
       ],
       "amount": 400,
       "startMonth": "2025-01",
@@ -912,37 +912,6 @@
       "isActive": true,
       "createdAt": "2025-01-01T00:00:00Z",
       "updatedAt": "2025-01-01T00:00:00Z"
-    },
-    {
-      "id": 3,
-      "name": "Fixed Expenses",
-      "categories": [
-        "rent",
-        "utilities"
-      ],
-      "amount": 650,
-      "startMonth": "2025-11",
-      "recurring": false,
-      "rollover": false,
-      "alertThreshold": 90,
-      "isActive": true,
-      "createdAt": "2025-01-01T00:00:00Z",
-      "updatedAt": "2025-01-01T00:00:00Z"
-    },
-    {
-      "name": "Updated Test Budget",
-      "categories": [
-        "Shopping",
-        "Transportation"
-      ],
-      "amount": 700,
-      "startMonth": "2025-11",
-      "recurring": true,
-      "rollover": false,
-      "alertThreshold": 80,
-      "isActive": true,
-      "updatedAt": "2025-11-15T04:51:50.584Z",
-      "id": 4
     },
     {
       "name": "Another Test Budget",

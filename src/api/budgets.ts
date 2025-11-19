@@ -45,7 +45,10 @@ export const createBudget = async (budgetData: CreateUpdateBudget) => {
     return (await res.json()) as Budget;
 };
 
-export const updateBudget = async (id: number, budgetData: CreateUpdateBudget) => {
+export const updateBudget = async (
+    id: number,
+    budgetData: CreateUpdateBudget
+) => {
     const url = `${API_URL}/budgets/${id}`;
     const res = await fetch(url, {
         method: 'PUT',
@@ -61,4 +64,15 @@ export const updateBudget = async (id: number, budgetData: CreateUpdateBudget) =
     if (!res.ok) throw new Error('Failed to update budget');
 
     return (await res.json()) as Budget;
+};
+
+export const deleteBudget = async (id: number) => {
+    const url = `${API_URL}/budgets/${id}`;
+    const res = await fetch(url, {
+        method: 'DELETE',
+    });
+
+    if (!res.ok) throw new Error('Failed to delete budget');
+
+    return await res.json();
 };
