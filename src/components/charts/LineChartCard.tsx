@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import LineChart from '@/components/charts/LineChart';
 import ChartControls from '@/components/charts/ChartControls';
 import { ChartData, ChartOptions } from 'chart.js';
-import { Skeleton } from '@/components/ui/skeleton';
 
 type ChartCardProps = {
     title: string;
@@ -41,17 +40,13 @@ const LineChartCard = ({
                 </div>
             </CardHeader>
             <CardContent className="h-full">
-                {data ? (
-                    <div className="w-full h-full min-h-[350px]">
-                        <LineChart
-                            ref={chartRef}
-                            datasets={data}
-                            options={options}
-                        />
-                    </div>
-                ) : (
-                    <Skeleton className="w-full h-full min-h-[350px] rounded-lg" />
-                )}
+                <div className="w-full h-full min-h-[350px]">
+                    <LineChart
+                        ref={chartRef}
+                        datasets={data}
+                        options={options}
+                    />
+                </div>
             </CardContent>
         </Card>
     );

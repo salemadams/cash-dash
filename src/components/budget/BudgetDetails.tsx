@@ -1,7 +1,5 @@
 import { Budget } from '@/types/budget';
-import { Button } from '../ui/button';
 import {
-    FaEdit,
     FaDollarSign,
     FaCalendarAlt,
     FaRedo,

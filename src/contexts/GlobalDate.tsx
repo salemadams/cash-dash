@@ -17,7 +17,6 @@ type GlobalDateState = {
     setEndDate: (date: Date) => void;
     setDateRange: (startDate: Date, endDate: Date) => void;
     setInterval: (interval: Interval) => void;
-    clearErrors: () => void;
 };
 
 const date = new Date();
@@ -46,7 +45,6 @@ const initialState: GlobalDateState = {
     setEndDate: () => null,
     setDateRange: () => null,
     setInterval: () => null,
-    clearErrors: () => null,
 };
 
 const GlobalDateContext = createContext<GlobalDateState>(initialState);
@@ -151,10 +149,6 @@ export function GlobalDateProvider({ children }: GlobalDateProviderProps) {
         setInterval: (interval: Interval) => {
             localStorage.setItem('interval', interval.toString());
             setIntervalState(interval);
-        },
-        clearErrors: () => {
-            setStartDateError(null);
-            setEndDateError(null);
         },
     };
 
