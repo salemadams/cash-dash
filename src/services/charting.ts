@@ -17,6 +17,66 @@ export const formatLineChartData = (
     }));
 
     // Get unique dates for labels
+    const labels = getUniqueLabels(startDate, endDate, interval);
+
+    // Get unique transaction types
+    const types = getUniqueTypes(sortedData, (t) => t.type);
+
+    // Create a dataset for each transaction type
+    const datasets = createDataSets(labels, types, sortedData, interval);
+
+    return {
+        labels,
+        datasets,
+    };
+};
+
+function getUniqueTypes<T>(
+    sortedData: Transaction[],
+    mapFn: (t: Transaction) => T
+): T[] {
+    return Array.from(new Set(sortedData.map(mapFn)));
+}
+
+function createDataSets<T>(
+    labels: string[],
+    types: T[],
+    sortedData: Transaction[],
+    interval: Interval
+) {
+    return types.map((type) => {
+        // For each date label, find the corresponding transaction or use 0
+        const dataPoints = labels.map((date: string) => {
+            const dateToMs = new Date(date).getTime();
+            const transactions = sortedData.filter((t: Transaction) => {
+                return (
+                    Number(t.date) >= dateToMs - interval &&
+                    Number(t.date) < dateToMs &&
+                    (t.type as unknown) === type
+                );
+            });
+            if (transactions.length > 0) {
+                const total = transactions.reduce(
+                    (acc, transaction: Transaction) => {
+                        return acc + Math.abs(transaction.amount);
+                    },
+                    0
+                );
+                return total;
+            }
+            return 0;
+        });
+
+        return {
+            label: capitalize(String(type)),
+            data: dataPoints,
+            fill: false,
+            borderColor: getBorderColorByType(String(type)),
+        };
+    });
+}
+
+function getUniqueLabels(startDate: Date, endDate: Date, interval: Interval) {
     const labels: string[] = [];
     let current = new Date(startDate);
 
@@ -48,46 +108,8 @@ export const formatLineChartData = (
             break;
         }
     }
-
-    // Get unique transaction types
-    const types = Array.from(new Set(sortedData.map((t) => t.type)));
-
-    // Create a dataset for each transaction type
-    const datasets = types.map((type) => {
-        // For each date label, find the corresponding transaction or use 0
-        const dataPoints = labels.map((date) => {
-            const dateToMs = new Date(date).getTime();
-            const transactions = sortedData.filter((t) => {
-                return (
-                    t.date >= dateToMs - interval &&
-                    t.date < dateToMs &&
-                    t.type === type
-                );
-            });
-            if (transactions.length > 0) {
-                const total = transactions.reduce((acc, transaction) => {
-                    return acc + Math.abs(transaction.amount);
-                }, 0);
-                return total;
-            }
-            return 0;
-        });
-
-        return {
-            label: capitalize(type),
-            data: dataPoints,
-            fill: false,
-            borderColor: getBorderColorByType(type),
-        };
-    });
-
-    // Slice labels post aggregation
-
-    return {
-        labels,
-        datasets,
-    };
-};
+    return labels;
+}
 
 function getBorderColorByType(type: string) {
     switch (type) {
