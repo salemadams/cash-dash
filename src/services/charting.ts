@@ -246,13 +246,20 @@ export const calculateSummaryMetrics = (
 
     const netChange = totalIncome - totalExpense - totalSavings;
     const savingsRate = totalIncome > 0 ? (totalSavings / totalIncome) * 100 : 0;
+    const expenseRate = totalIncome > 0 ? (totalExpense / totalIncome) * 100 : 0;
 
     return [
         {
-            label: 'Savings Rate',
-            value: savingsRate,
-            format: 'percentage',
-            trend: savingsRate >= 20 ? 'up' : savingsRate >= 10 ? 'neutral' : 'down',
+            label: 'Total Income',
+            value: totalIncome,
+            format: 'currency',
+            trend: totalIncome > 0 ? 'up' : 'neutral',
+        },
+        {
+            label: 'Total Expenses',
+            value: totalExpense,
+            format: 'currency',
+            trend: expenseRate <= 70 ? 'up' : expenseRate <= 90 ? 'neutral' : 'down',
         },
         {
             label: 'Net Change',
@@ -265,6 +272,18 @@ export const calculateSummaryMetrics = (
             value: totalSavings,
             format: 'currency',
             trend: totalSavings > 0 ? 'up' : 'neutral',
+        },
+        {
+            label: 'Savings Rate',
+            value: savingsRate,
+            format: 'percentage',
+            trend: savingsRate >= 20 ? 'up' : savingsRate >= 10 ? 'neutral' : 'down',
+        },
+        {
+            label: 'Expense Ratio',
+            value: expenseRate,
+            format: 'percentage',
+            trend: expenseRate <= 70 ? 'up' : expenseRate <= 90 ? 'neutral' : 'down',
         },
     ];
 };

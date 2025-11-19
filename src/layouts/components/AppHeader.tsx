@@ -118,25 +118,29 @@ const AppHeader = () => {
                     activeRoute?.url === '/' ||
                     activeRoute?.url === '/analytics') && (
                     <>
-                        <Button
-                            variant="outline"
-                            onClick={() => handleDateRangeClick(3)}
-                        >
-                            3 Months
-                        </Button>
-                        <Button
-                            variant="outline"
-                            onClick={() => handleDateRangeClick(6)}
-                        >
-                            6 Months
-                        </Button>
-                        <Button
-                            variant="outline"
-                            onClick={() => handleDateRangeClick(12)}
-                        >
-                            1 Year
-                        </Button>
+                        {/* Desktop: individual buttons */}
+                        <div className="hidden md:flex gap-2">
+                            <Button
+                                variant="outline"
+                                onClick={() => handleDateRangeClick(3)}
+                            >
+                                3 Months
+                            </Button>
+                            <Button
+                                variant="outline"
+                                onClick={() => handleDateRangeClick(6)}
+                            >
+                                6 Months
+                            </Button>
+                            <Button
+                                variant="outline"
+                                onClick={() => handleDateRangeClick(12)}
+                            >
+                                1 Year
+                            </Button>
+                        </div>
 
+                        {/* Mobile: dropdown for date range options */}
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button
@@ -144,13 +148,38 @@ const AppHeader = () => {
                                     className="gap-2"
                                 >
                                     <Calendar className="h-4 w-4" />
-                                    Custom Range
+                                    <span className="hidden md:inline">Custom Range</span>
+                                    <span className="md:hidden">Date Range</span>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                                 className="space-y-3 pt-2"
                                 align="end"
                             >
+                                {/* Quick select options (visible on mobile) */}
+                                <div className="md:hidden space-y-1 pb-2 border-b">
+                                    <Button
+                                        variant="ghost"
+                                        className="w-full justify-start"
+                                        onClick={() => handleDateRangeClick(3)}
+                                    >
+                                        3 Months
+                                    </Button>
+                                    <Button
+                                        variant="ghost"
+                                        className="w-full justify-start"
+                                        onClick={() => handleDateRangeClick(6)}
+                                    >
+                                        6 Months
+                                    </Button>
+                                    <Button
+                                        variant="ghost"
+                                        className="w-full justify-start"
+                                        onClick={() => handleDateRangeClick(12)}
+                                    >
+                                        1 Year
+                                    </Button>
+                                </div>
                                 <div>
                                     <GlobalDateSelector
                                         label="Start Date"

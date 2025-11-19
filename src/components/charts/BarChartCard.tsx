@@ -47,12 +47,15 @@ const BarChartCard = ({
             },
             y: {
                 ticks: {
-                    callback: (value) =>
-                        !horizontal
-                            ? `$${Number(value).toLocaleString('en-US', {
-                                  maximumFractionDigits: 0,
-                              })}`
-                            : value,
+                    callback: function (value) {
+                        if (!horizontal) {
+                            return `$${Number(value).toLocaleString('en-US', {
+                                maximumFractionDigits: 0,
+                            })}`;
+                        }
+                        // For horizontal bars, just return the label
+                        return this.getLabelForValue(value as number);
+                    },
                 },
             },
         },

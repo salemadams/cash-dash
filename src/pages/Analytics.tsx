@@ -147,9 +147,9 @@ const AnalyticsPage = () => {
 
     return (
         <div className="flex flex-col gap-4 h-full p-5">
-            {/* Top row: 3/4 and 1/4 split */}
-            <div className="flex gap-4 flex-1">
-                <div className="w-3/4 h-full">
+            {/* Top row: single column on mobile, 3/4 and 1/4 split on desktop */}
+            <div className="flex flex-col lg:flex-row gap-4 flex-1">
+                <div className="w-full lg:w-3/4 h-full min-h-[300px]">
                     {lineChartData ? (
                         <LineChartCard
                             title="Expense Spending Trends"
@@ -174,7 +174,7 @@ const AnalyticsPage = () => {
                         </div>
                     )}
                 </div>
-                <div className="w-1/4">
+                <div className="w-full lg:w-1/4">
                     {summaryMetrics ? (
                         <SummaryCard
                             title="Financial Summary"
@@ -189,9 +189,9 @@ const AnalyticsPage = () => {
                 </div>
             </div>
 
-            {/* Bottom row: 50/50 split */}
-            <div className="flex gap-4 flex-1">
-                <div className="w-1/2">
+            {/* Bottom row: single column on mobile, 50/50 split on desktop */}
+            <div className="flex flex-col lg:flex-row gap-4 flex-1">
+                <div className="w-full lg:w-1/2 min-h-[300px]">
                     {doughnutChartData ? (
                         <DoughnutChartCard
                             title="Expense Breakdown"
@@ -204,7 +204,7 @@ const AnalyticsPage = () => {
                         </div>
                     )}
                 </div>
-                <div className="w-1/2">
+                <div className="w-full lg:w-1/2 min-h-[300px]">
                     {barChartData ? (
                         <BarChartCard
                             title="Top Spending Categories"
