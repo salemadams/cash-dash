@@ -4,6 +4,12 @@ import LineChartCard from '@/components/charts/LineChartCard';
 import DoughnutChartCard from '@/components/charts/DoughnutChartCard';
 import BarChartCard from '@/components/charts/BarChartCard';
 import SummaryCard from '@/components/charts/SummaryCard';
+import {
+    ChartCardSkeleton,
+    SummaryCardSkeleton,
+    DoughnutChartSkeleton,
+    BarChartSkeleton,
+} from '@/components/charts/skeletons';
 import { Interval } from '@/constants/interval';
 import { useGlobalDate } from '@/contexts/GlobalDate';
 import { USDollar } from '@/lib/format';
@@ -169,9 +175,7 @@ const AnalyticsPage = () => {
                             onToggleDataset={toggleDataset}
                         />
                     ) : (
-                        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 h-full flex items-center justify-center">
-                            <span>Loading...</span>
-                        </div>
+                        <ChartCardSkeleton />
                     )}
                 </div>
                 <div className="w-full lg:w-1/4">
@@ -182,9 +186,7 @@ const AnalyticsPage = () => {
                             metrics={summaryMetrics}
                         />
                     ) : (
-                        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 h-full flex items-center justify-center">
-                            <span>Loading...</span>
-                        </div>
+                        <SummaryCardSkeleton />
                     )}
                 </div>
             </div>
@@ -199,9 +201,7 @@ const AnalyticsPage = () => {
                             data={doughnutChartData}
                         />
                     ) : (
-                        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 h-full flex items-center justify-center">
-                            <span>Loading...</span>
-                        </div>
+                        <DoughnutChartSkeleton />
                     )}
                 </div>
                 <div className="w-full lg:w-1/2 min-h-[300px]">
@@ -213,9 +213,7 @@ const AnalyticsPage = () => {
                             horizontal={true}
                         />
                     ) : (
-                        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 h-full flex items-center justify-center">
-                            <span>Loading...</span>
-                        </div>
+                        <BarChartSkeleton />
                     )}
                 </div>
             </div>

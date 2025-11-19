@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import TransactionTypeFilter from '@/components/transactions/TransactionTypeFilter';
 import { filterTransactions, calculateTransactionTotals } from '@/services/transactions';
+import { TransactionsTableSkeleton } from '@/components/charts/skeletons';
 
 const filterOptions = [
     { type: TransactionType.All, label: 'All', color: 'purple' as const },
@@ -106,7 +107,7 @@ const TransactionsPage = () => {
                     enablePagination={true}
                 />
             ) : (
-                <div>Loading...</div>
+                <TransactionsTableSkeleton />
             )}
         </div>
     );

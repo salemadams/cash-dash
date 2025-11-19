@@ -14,6 +14,10 @@ import { useGlobalDate } from '@/contexts/GlobalDate';
 import { Link } from 'react-router-dom';
 import LineChartCard from '@/components/charts/LineChartCard';
 import { useChartZoom } from '@/components/charts/hooks/useChartZoom';
+import {
+    ChartCardSkeleton,
+    TransactionsTableSkeleton,
+} from '@/components/charts/skeletons';
 
 const DashboardPage = () => {
     const globalDate = useGlobalDate();
@@ -135,7 +139,7 @@ const DashboardPage = () => {
                     onToggleDataset={toggleDataset}
                 />
             ) : (
-                <span>Loading...</span>
+                <ChartCardSkeleton />
             )}
             <Card className="w-full flex-2 card-hover">
                 <CardHeader>
@@ -161,7 +165,7 @@ const DashboardPage = () => {
                     {recentTransactionsData ? (
                         <RecentTransactions data={recentTransactionsData} />
                     ) : (
-                        <div>Loading...</div>
+                        <TransactionsTableSkeleton />
                     )}
                 </CardContent>
             </Card>
