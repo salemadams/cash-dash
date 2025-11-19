@@ -8,15 +8,15 @@ import {
 import { Filter } from 'lucide-react';
 
 type ChartControlsProps = {
-    onResetZoom: () => void;
     visibleDatasets: Record<string, boolean>;
     onToggleDataset: (label: string) => void;
+    onResetZoom?: () => void;
 };
 
 const ChartControls = ({
-    onResetZoom,
     visibleDatasets,
     onToggleDataset,
+    onResetZoom,
 }: ChartControlsProps) => {
     return (
         <div className="flex gap-2">

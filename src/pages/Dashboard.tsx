@@ -116,20 +116,26 @@ const DashboardPage = () => {
     return (
         <div className="flex flex-col min-h-full p-5 gap-6">
             <TransactionCards />
-            <ChartCard
-                title="Monthly Spending Trends"
-                subtitle={`Last ${data?.labels?.length ?? 0} ${
-                    Interval[globalDate.interval]
-                }${
-                    data?.labels?.length && data.labels.length > 1 ? 's' : ''
-                } Overview`}
-                chartRef={chartRef}
-                data={data}
-                options={options}
-                visibleDatasets={visibleDatasets}
-                onResetZoom={handleResetZoom}
-                onToggleDataset={toggleDataset}
-            />
+            {data ? (
+                <ChartCard
+                    title="Monthly Spending Trends"
+                    subtitle={`Last ${data?.labels?.length ?? 0} ${
+                        Interval[globalDate.interval]
+                    }${
+                        data?.labels?.length && data.labels.length > 1
+                            ? 's'
+                            : ''
+                    } Overview`}
+                    chartRef={chartRef}
+                    data={data}
+                    options={options}
+                    visibleDatasets={visibleDatasets}
+                    onResetZoom={handleResetZoom}
+                    onToggleDataset={toggleDataset}
+                />
+            ) : (
+                <span>Loading...</span>
+            )}
             <Card className="w-full flex-2 card-hover">
                 <CardHeader>
                     <div className="flex justify-between items-start">

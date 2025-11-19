@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import LineChart from '@/components/charts/LineChart';
 import ChartControls from '@/components/charts/ChartControls';
-import { ChartOptions } from 'chart.js';
+import { ChartData, ChartOptions } from 'chart.js';
 
 type ChartCardProps = {
     title: string;
@@ -10,7 +10,7 @@ type ChartCardProps = {
     data: ChartData<'line'>;
     options: ChartOptions<'line'>;
     visibleDatasets: Record<string, boolean>;
-    onResetZoom: () => void;
+    onResetZoom?: () => void;
     onToggleDataset: (label: string) => void;
 };
 
@@ -33,7 +33,7 @@ const ChartCard = ({
                         <p className="text-gray-500">{subtitle}</p>
                     </div>
                     <ChartControls
-                        onResetZoom={onResetZoom}
+                        onResetZoom={onResetZoom ? onResetZoom : () => {}}
                         visibleDatasets={visibleDatasets}
                         onToggleDataset={onToggleDataset}
                     />
