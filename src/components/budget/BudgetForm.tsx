@@ -82,7 +82,13 @@ const BudgetForm = ({
                             <FormLabel>Categories</FormLabel>
                             <FormControl>
                                 <MultiSelect
-                                    options={categoryOptions}
+                                    options={categoryOptions.filter(
+                                        (cat) =>
+                                            cat.label !==
+                                                TransactionCategory.Freelance &&
+                                            cat.label !==
+                                                TransactionCategory.Salary
+                                    )}
                                     selected={field.value}
                                     onChange={field.onChange}
                                     placeholder="Select categories..."

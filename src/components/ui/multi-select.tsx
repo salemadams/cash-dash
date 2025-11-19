@@ -121,9 +121,9 @@ export function MultiSelect({
                                     >
                                         <div
                                             className={cn(
-                                                'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                                                'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary bg-background',
                                                 isSelected
-                                                    ? 'bg-primary text-primary-foreground'
+                                                    ? 'text-primary'
                                                     : 'opacity-50 [&_svg]:invisible'
                                             )}
                                         >
