@@ -27,7 +27,6 @@ import { useMemo } from 'react';
 const AnalyticsPage = () => {
     const globalDate = useGlobalDate();
 
-    // Query with select for line chart (compatible with zoom caching)
     const { data: lineChartData } = useQuery({
         queryKey: [
             'transactions',
@@ -51,7 +50,6 @@ const AnalyticsPage = () => {
             ),
     });
 
-    // Separate query for raw data (for other charts)
     const { data: rawData } = useQuery({
         queryKey: [
             'transactions-raw',
@@ -67,7 +65,6 @@ const AnalyticsPage = () => {
             ),
     });
 
-    // Format data for other chart types (memoized)
     const doughnutChartData = useMemo(
         () => (rawData ? formatDoughnutChartData(rawData) : undefined),
         [rawData]

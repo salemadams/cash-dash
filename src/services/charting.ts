@@ -5,6 +5,9 @@ import { Interval } from '@/constants/interval';
 import { TransactionType } from '@/constants/transactions';
 import { SummaryMetric } from '@/components/charts/SummaryCard';
 
+/**
+ * Formats transaction data into Chart.js line chart format with datasets grouped by type/category
+ */
 export const formatLineChartData = (
     data: Transaction[],
     startDate: Date,
@@ -12,7 +15,6 @@ export const formatLineChartData = (
     interval: Interval,
     typeAggregator: keyof Transaction
 ): ChartData<'line'> => {
-    // Server already filtered and sorted data by date ascending
     const sortedData = data.map((t) => ({
         ...t,
         date: new Date(t.date).getTime(),
@@ -20,7 +22,7 @@ export const formatLineChartData = (
 
     const mapFn = (t: Transaction) => {
         const value = t[typeAggregator];
-        // Ignore Income and Savings when aggregating by category
+        // Ignore Income and Savings when aggregating by category since they don't have meaningful categories
         if (
             typeAggregator === 'category' &&
             (t.type === TransactionType.Income ||
@@ -32,13 +34,8 @@ export const formatLineChartData = (
         return value;
     };
 
-    // Get unique dates for labels
     const labels = getUniqueLabels(startDate, endDate, interval);
-
-    // Get unique transaction types
     const types = getUniqueTypes(sortedData, mapFn);
-
-    // Create a dataset for each transaction type
     const datasets = createDataSets(labels, types, sortedData, interval, mapFn);
 
     return {
@@ -47,6 +44,9 @@ export const formatLineChartData = (
     };
 };
 
+/**
+ * Extracts unique values from transactions using a mapping function
+ */
 function getUniqueTypes<T>(
     sortedData: Transaction[],
     mapFn: (t: Transaction) => T | undefined
@@ -56,6 +56,9 @@ function getUniqueTypes<T>(
     );
 }
 
+/**
+ * Creates Chart.js datasets for each transaction type with aggregated amounts per interval
+ */
 function createDataSets<T>(
     labels: string[],
     types: T[],
@@ -71,7 +74,7 @@ function createDataSets<T>(
                 return (
                     Number(t.date) >= dateToMs - interval &&
                     Number(t.date) < dateToMs &&
-                    mapFn(t) === type // <-- generic comparison
+                    mapFn(t) === type
                 );
             });
 
@@ -93,6 +96,9 @@ function createDataSets<T>(
     });
 }
 
+/**
+ * Generates date labels for chart x-axis based on interval between start and end dates
+ */
 function getUniqueLabels(startDate: Date, endDate: Date, interval: Interval) {
     const labels: string[] = [];
     let current = new Date(startDate);
@@ -100,25 +106,19 @@ function getUniqueLabels(startDate: Date, endDate: Date, interval: Interval) {
     while (current.getTime() <= endDate.getTime()) {
         labels.push(current.toLocaleDateString());
 
-        // Increment based on interval type
         if (interval === Interval.Month) {
-            // Use proper month arithmetic
             current = new Date(
                 current.getFullYear(),
                 current.getMonth() + 1,
                 current.getDate()
             );
         } else {
-            // For Day/Week, add milliseconds
             current = new Date(current.getTime() + interval);
         }
 
-        // If the next increment would exactly equal endDate, we're done
-        // If it would exceed endDate, add endDate as final label for leftover time
         if (current.getTime() > endDate.getTime()) {
             const lastLabel = labels[labels.length - 1];
             const endDateLabel = endDate.toLocaleDateString();
-            // Only add endDate if it's different from the last label
             if (lastLabel !== endDateLabel) {
                 labels.push(endDateLabel);
             }
@@ -133,6 +133,9 @@ const SPECIAL_COLORS: Record<string, string> = {
     savings: '#155dfc',
 };
 
+/**
+ * Returns a color for a category, using predefined colors for special types or generating one
+ */
 function getColorForCategory(type: string): string {
     const key = type.toLowerCase();
 
@@ -143,6 +146,9 @@ function getColorForCategory(type: string): string {
     return generateColorFromString(key);
 }
 
+/**
+ * Generates a consistent HSL color from a string using hash
+ */
 function generateColorFromString(str: string): string {
     let hash = 0;
 
@@ -157,13 +163,14 @@ function generateColorFromString(str: string): string {
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
+/**
+ * Formats expense transactions into Chart.js doughnut chart format grouped by category
+ */
 export const formatDoughnutChartData = (
     data: Transaction[]
 ): ChartData<'doughnut'> => {
-    // Filter for expenses only
     const expenses = data.filter((t) => t.type === TransactionType.Expense);
 
-    // Group by category
     const categoryTotals: Record<string, number> = {};
     expenses.forEach((t) => {
         const category = t.category;
@@ -191,14 +198,15 @@ export const formatDoughnutChartData = (
     };
 };
 
+/**
+ * Formats expense transactions into Chart.js bar chart format with top categories by amount
+ */
 export const formatBarChartData = (
     data: Transaction[],
     limit: number = 6
 ): ChartData<'bar'> => {
-    // Filter for expenses only
     const expenses = data.filter((t) => t.type === TransactionType.Expense);
 
-    // Group by category
     const categoryTotals: Record<string, number> = {};
     expenses.forEach((t) => {
         const category = t.category;
@@ -208,7 +216,6 @@ export const formatBarChartData = (
         categoryTotals[category] += Math.abs(t.amount);
     });
 
-    // Sort by amount descending and limit
     const sorted = Object.entries(categoryTotals)
         .sort(([, a], [, b]) => b - a)
         .slice(0, limit);
@@ -229,6 +236,9 @@ export const formatBarChartData = (
     };
 };
 
+/**
+ * Calculates financial summary metrics including totals, rates, and trends from transactions
+ */
 export const calculateSummaryMetrics = (
     data: Transaction[]
 ): SummaryMetric[] => {

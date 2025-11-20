@@ -3,6 +3,9 @@ import type { Transaction } from '@/types/transaction';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+/**
+ * Fetches transactions from the API with optional date range and pagination filters
+ */
 export const getAllTransactions = async (
     startDate?: Date,
     endDate?: Date,

@@ -6,6 +6,9 @@ export interface FormDialogContextType {
 
 export const FormDialogContext = createContext<FormDialogContextType | null>(null);
 
+/**
+ * Hook for accessing form dialog context to control dialog state
+ */
 export const useFormDialog = () => {
     const context = useContext(FormDialogContext);
     if (!context) {

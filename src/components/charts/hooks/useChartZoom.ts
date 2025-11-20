@@ -2,6 +2,9 @@ import { useRef, useState, useEffect } from 'react';
 import { useGlobalDate } from '@/contexts/GlobalDate';
 import { useQueryClient } from '@tanstack/react-query';
 
+/**
+ * Hook for managing chart zoom state and syncing with global date context
+ */
 export const useChartZoom = (data: any) => {
     const globalDate = useGlobalDate();
     const queryClient = useQueryClient();

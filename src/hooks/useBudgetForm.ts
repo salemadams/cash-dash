@@ -27,6 +27,9 @@ type UseBudgetFormProps = {
     onSuccess?: () => void;
 };
 
+/**
+ * Hook for managing budget form state, validation, and create/update mutations
+ */
 export function useBudgetForm({
     mode,
     initialData,

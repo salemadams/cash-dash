@@ -19,13 +19,11 @@ const BudgetPage = () => {
         queryFn: () => getBudgetTransactions(currentMonth),
     });
 
-    // Filter and calculate budget totals
     const activeBudgets = useMemo(
         () => budgets?.filter((b) => b.isActive) || [],
         [budgets]
     );
 
-    // Split budgets into recurring and one-time
     const recurringBudgets = useMemo(
         () => activeBudgets.filter((b) => b.recurring),
         [activeBudgets]

@@ -53,7 +53,6 @@ const BarChartCard = ({
                                 maximumFractionDigits: 0,
                             })}`;
                         }
-                        // For horizontal bars, just return the label
                         return this.getLabelForValue(value as number);
                     },
                 },

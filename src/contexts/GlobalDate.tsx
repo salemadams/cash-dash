@@ -90,7 +90,6 @@ export function GlobalDateProvider({ children }: GlobalDateProviderProps) {
             }
             setStartDateError(null);
 
-            // Calculate previous interval (same duration, shifted back)
             const duration = endDate.getTime() - newStartDate.getTime();
             const newPrevEndDate = newStartDate;
             const newPrevStartDate = new Date(newStartDate.getTime() - duration);
@@ -110,7 +109,6 @@ export function GlobalDateProvider({ children }: GlobalDateProviderProps) {
             }
             setEndDateError(null);
 
-            // Calculate previous interval (same duration, shifted back)
             const duration = newEndDate.getTime() - startDate.getTime();
             const newPrevEndDate = startDate;
             const newPrevStartDate = new Date(startDate.getTime() - duration);
@@ -131,7 +129,6 @@ export function GlobalDateProvider({ children }: GlobalDateProviderProps) {
             setStartDateError(null);
             setEndDateError(null);
 
-            // Calculate previous interval (same duration, shifted back)
             const duration = newEndDate.getTime() - newStartDate.getTime();
             const newPrevEndDate = newStartDate;
             const newPrevStartDate = new Date(newStartDate.getTime() - duration);

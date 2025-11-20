@@ -3,6 +3,9 @@ import { Transaction } from '@/types/transaction';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+/**
+ * Fetches all budgets from the API, optionally filtered by month
+ */
 export const getAllBudgets = async (month?: string) => {
     const params = new URLSearchParams();
 
@@ -16,6 +19,9 @@ export const getAllBudgets = async (month?: string) => {
     return (await res.json()) as Budget[];
 };
 
+/**
+ * Fetches transactions grouped by budget ID for a specific month
+ */
 export const getBudgetTransactions = async (month: string) => {
     const params = new URLSearchParams({ month });
     const url = `${API_URL}/budgets/transactions?${params}`;
@@ -26,6 +32,9 @@ export const getBudgetTransactions = async (month: string) => {
     return (await res.json()) as Record<string, Transaction[]>;
 };
 
+/**
+ * Creates a new budget with the provided data
+ */
 export const createBudget = async (budgetData: CreateUpdateBudget) => {
     const url = `${API_URL}/budgets`;
     const res = await fetch(url, {
@@ -45,6 +54,9 @@ export const createBudget = async (budgetData: CreateUpdateBudget) => {
     return (await res.json()) as Budget;
 };
 
+/**
+ * Updates an existing budget by ID with the provided data
+ */
 export const updateBudget = async (
     id: number,
     budgetData: CreateUpdateBudget
@@ -66,6 +78,9 @@ export const updateBudget = async (
     return (await res.json()) as Budget;
 };
 
+/**
+ * Deletes a budget by ID
+ */
 export const deleteBudget = async (id: number) => {
     const url = `${API_URL}/budgets/${id}`;
     const res = await fetch(url, {

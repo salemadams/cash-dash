@@ -46,7 +46,6 @@ export function DateSelector({
     const [month, setMonth] = React.useState<Date | undefined>(date);
     const [value, setValue] = React.useState(formatDate(date));
 
-    // Sync local state when initialDate prop changes
     React.useEffect(() => {
         setDate(initialDate);
         setMonth(initialDate);
